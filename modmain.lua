@@ -1,171 +1,109 @@
-local _G = GLOBAL
-
-local justlist =
-{
-    "dragonflyfurnace",
-    "deerclopseyeball_sentryward",
-    "mushroom_light",
-    "mushroom_light2",
-    "lunarthrall_plant",
-    "eyeturret",
-    "eyeturret_item",
-    "lightning_rod",
-    "firesuppressor"
+local G = GLOBAL
+local T = { -- circle(s) of prefab
+  deerclopseyeball_sentryward = { -- Ice Crystaleyezer
+    { RADIUS = 35, COLOR = { 0, 0, 255, 0 } },
+  },
+  dragonflyfurnace = { -- Scaled Furnace
+    { RADIUS = 9.5, COLOR = { 255, 0, 0, 0 } },
+  },
+  eyeturret = { -- Houndius Shootius (Build)
+    { RADIUS = 18, COLOR = { 255, 0, 255, 0 } },
+  },
+  firesuppressor = { -- Ice Flingomatic
+    { RADIUS = 15, COLOR = { 255, 255, 255, 0 } },
+  },
+  lightning_rod = { -- Lightning Rod
+    { RADIUS = 40, COLOR = { 255, 255, 0, 0 } },
+  },
+  lunarthrall_plant = { -- Deadly Brightshade
+    { RADIUS = 12, COLOR = { 255, 255, 0, 0 } },
+    { RADIUS = 30, COLOR = { 0, 255, 0, 0 } },
+  },
+  mushroom_light = { -- Mushlight
+    { RADIUS = 11.5, COLOR = { 0, 255, 255, 0 } },
+  },
+  mushroom_light2 = { -- Glowcap
+    { RADIUS = 10.7, COLOR = { 0, 255, 255, 0 } },
+  },
 }
+T.eyeturret_item = T.eyeturret -- Houndius Shootius (Dropped)
+T.dug_sapling_moon = T.lunarthrall_plant -- Sapling (Moon) (Dropped)
+T.sapling_moon = T.lunarthrall_plant -- Sapling (Moon) (Planted)
 
-local LUT =
-{
-    dragonflyfurnace            = { {scale = 1.233  , color = {255,   0,   0}} },
-    deerclopseyeball_sentryward = { {scale = 1.82127, color = {  0,   0, 255}} },
-    mushroom_light              = { {scale = 1.2655 , color = {  0, 255, 255}} },
-    mushroom_light2             = { {scale = 1.2655 , color = {  0, 255, 255}} },
-    lunarthrall_plant           = { {scale = 1.3863 , color = {255, 255,   0}},
-                                    {scale = 2.192  , color = {  0, 255,   0}} },
-    eyeturret                   = { {scale = 1.698  , color = {255, 0  , 255}} },
-    eyeturret_item              = { {scale = 1.698  , color = {255, 0  , 255}} },
-    lightning_rod               = { {scale = 2.531  , color = {255, 255,   0}} },
-    firesuppressor              = { {scale = 1.549  , color = {255, 255, 255}} },
-    default                     = { {scale = 1.0    , color = {  0,   0,   0}} },
+PLACER = { -- deploy helpers
+  'dragonflyfurnace',
+  'dug_sapling_moon',
+  'eyeturret_item',
+  'lightning_rod',
+  'mushroom_light',
+  'mushroom_light2',
 }
+for index, prefab in pairs(PLACER) do
+  T[prefab .. '_placer'] = T[prefab] -- refer to the same circle(s)
+  PLACER[index] = prefab .. '_placer' -- will add deploy helpers
+end
 
 local all_circles = {}
-local toggleRange = false -- Default state is false
 
-local function Inlist(sth, thelist)
-    for i,v in ipairs(thelist) do
-        if sth == v then
-            return true
-        end
+local function CreateCircle(inst, radius, color) -- Klei's function c_shworadius(), consolecommands.lua:L2017
+  local circle = G.CreateEntity()
+  circle.entity:SetParent(inst.entity)
+  local tf = circle.entity:AddTransform()
+  local as = circle.entity:AddAnimState()
+
+  local s = math.sqrt(1.385 * 1.385 / 12 * radius) -- credit: NoMu, 2914336761/scripts/prefabs/circular_placement.lua:L367
+  local x, y, z = inst.Transform:GetScale() -- credit: Huxi, 3161117403/scripts/prefabs/hrange.lua:L19
+  tf:SetScale(s / x, s / y, s / z) -- fight against parent's scale, be absolute.
+  as:SetAddColour(G.unpack(color))
+
+  circle.entity:SetCanSleep(false)
+  circle.persists = false
+  circle:AddTag('CLASSIFIED')
+  circle:AddTag('NOCLICK')
+  as:SetBank('firefighter_placement')
+  as:SetBuild('firefighter_placement')
+  as:PlayAnimation('idle')
+  as:SetLightOverride(1)
+  as:SetOrientation(G.ANIM_ORIENTATION.OnGround)
+  as:SetLayer(G.LAYER_BACKGROUND)
+  as:SetSortOrder(1)
+
+  return circle
+end
+
+local function ToggleRangeIndicator(inst)
+  if inst.circles then -- circles already created, remove.
+    for _, v in ipairs(inst.circles) do
+      if v:IsValid() then v:Remove() end
     end
-    return false
+    inst.circles = nil
+    return
+  end
+  inst.circles = {} -- no circles yet, create.
+  for _, V in pairs(T[inst.prefab]) do
+    local circle = CreateCircle(inst, V.RADIUS, V.COLOR)
+    table.insert(inst.circles, circle)
+    table.insert(all_circles, circle)
+  end
 end
 
-local function MakeC(sth, radius, color)
-    local C = _G.CreateEntity()
-    local tf = C.entity:AddTransform()
-    local as = C.entity:AddAnimState()
-    as:SetAddColour(color[1], color[2], color[3], 0)
-    tf:SetScale(radius, radius, radius)
-
-    as:SetBank("firefighter_placement")
-    as:SetBuild("firefighter_placement")
-    as:PlayAnimation("idle")
-    as:SetOrientation(_G.ANIM_ORIENTATION.OnGround)
-    as:SetLayer(_G.LAYER_BACKGROUND)
-    as:SetSortOrder(3)
-    C.persists = false
-
-    C.entity:SetParent(sth.entity)
-    C:AddTag("NOCLICK")
-    return C
+for _, prefab in ipairs(PLACER) do -- add deploy helper
+  AddPrefabPostInit(prefab, ToggleRangeIndicator)
 end
 
-local function ShowRange(sth)
-    if toggleRange then return end -- Exit function if toggleRange is true
-    if sth.circles then
-        for _,v in ipairs(sth.circles) do
-            v:Remove()
-        end
-        sth.circles = nil
-    else
-        local prefab = sth.prefab
-        if not Inlist(prefab, justlist) then
-            prefab = prefab:gsub("_placer$", "") -- remove "_placer" suffix if present
-        end
-        sth.circles = {}
-        for i,v in ipairs(LUT[prefab] or {}) do
-            local circle = MakeC(sth, v.scale, v.color)
-            table.insert(sth.circles, circle)
-            table.insert(all_circles, circle)
-        end
-    end
-end
+G.TheInput:AddMouseButtonHandler(function(button, down)
+  if button == G.MOUSEBUTTON_MIDDLE and down then
+    local entity = G.TheInput:GetWorldEntityUnderMouse()
+    if entity and T[entity.prefab] then ToggleRangeIndicator(entity) end
+  end
+end)
 
-local function RemoveAllCircles()
-    for _,circle in ipairs(all_circles) do
-        if circle.remove_task then
-            circle.remove_task:Cancel()
-        end
-        circle:Remove()
-    end
-    all_circles = {}
-end
-
-local function ClearTaggedObjects()
-    for _,circle in ipairs(all_circles) do
-        if circle:IsValid() then
-            circle:Remove()
-        end
+local key_clear = GetModConfigData('key_clear')
+G.TheInput:AddKeyHandler(function(key, down)
+  if key == key_clear and down then
+    for _, c in ipairs(all_circles) do
+      if c:IsValid() then c:Remove() end
     end
     all_circles = {}
-end
-
-local key_toggle = GetModConfigData("key_toggle")
-local key_clear = GetModConfigData("key_clear")
-
-local function OnKeyPress(key, down)
-    if down then
-        if key == key_toggle then
-            toggleRange = not toggleRange
-            if toggleRange then
-                RemoveAllCircles()
-            end
-        elseif key == key_clear then
-            ClearTaggedObjects()
-        end
-    end
-end
-
-_G.TheInput:AddKeyHandler(OnKeyPress)
-
-local controller = _G.require "components/playercontroller"
-local OnRightClick_old = controller.OnRightClick
-function controller:OnRightClick(down, ...)
-    if (not down) and self:UsingMouse() and self:IsEnabled() and not _G.TheInput:GetHUDEntityUnderMouse() then
-        local item = _G.TheInput:GetWorldEntityUnderMouse()
-        if item then
-            if Inlist(item.prefab, justlist) then
-                ShowRange(item)
-            end
-        end
-    end
-    return OnRightClick_old(self, down, ...)
-end
-
-local function IceFlingOnRemove(inst)
-    local pos = _G.Point(inst.Transform:GetWorldPosition())
-    local range_indicators = _G.TheSim:FindEntities(pos.x,pos.y,pos.z, 2, {"range_indicator"})
-    for i,v in ipairs(range_indicators) do
-        if v:IsValid() then
-            v:Remove()
-        end
-    end
-end
-
-local function IceFlingOnShow(inst)
-    local pos = _G.Point(inst.Transform:GetWorldPosition())
-    local range_indicators_client = TheSim:FindEntities(pos.x,pos.y,pos.z, 2, {"range_indicator"})
-    if #range_indicators_client < 1 then
-        local range = _G.SpawnPrefab("range_indicator")
-        range.Transform:SetPosition(pos.x, pos.y, pos.z)
-    end
-end
-
-local function IceFlingPostInit(inst)
-    inst:ListenForEvent("onremove", IceFlingOnRemove)
-end
-
-local function IceFlingPlacerPostInit(inst)
-    if not _G.TheNet:IsDedicated() then
-        if not inst.components.deployhelper then
-            inst:AddComponent("deployhelper")
-            inst.components.deployhelper.onenablehelper = OnEnableHelper
-        end
-    end
-    ShowRange(inst)
-end
-
-for i,v in ipairs(justlist) do
-    AddPrefabPostInit(v, IceFlingPostInit)
-    AddPrefabPostInit(v .. "_placer", IceFlingPlacerPostInit)
-end
+  end
+end)

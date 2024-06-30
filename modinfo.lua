@@ -1,4 +1,12 @@
-name = "Crystaleyezer/Furnace/Mushlight/Brightshade Range/Ice Flingomatic"
+name = 'Range Indicator'
+author = 'TakaoInari, adai1198, (TW)Eric'
+version = '0.1.0'
+api_version = 10
+all_clients_require_mod = false
+client_only_mod = true
+dst_compatible = true
+icon_atlas = 'modicon.xml'
+icon = 'modicon.tex'
 description = [[
 1.Click the following Entities to activate the range indicator.Reclick them to cancel the range instantly, press H to cancel all range indicators, or press G to stop the range indicators from working.
 You can modify the key in modinfo.(ASCII code)
@@ -46,38 +54,15 @@ Code Optimization:adai1198 (TW)Eric
 -----------------------------------
 ]]
 
-configuration_options =
-{
-    {
-        name = "key_toggle",
-        label = "Stop Toggle Range Key",
-        options =   {
-                        --{description = "<you want the key name>", data = <you want the key ASCII code>}
-                        {description = "F5", data = 286}, -- ASCII code for 'g'
-                        {description = "B", data = 98}, -- ASCII code for 'b'
-                        -- Add more keys as needed
-                    },
-        --default = <you want the key ASCII code>,
-        default = 286,
+configuration_options = {
+  {
+    name = 'key_clear',
+    label = 'Clear Tagged Range Key',
+    options = {
+      { description = 'F5', data = 286 }, -- ASCII code for 'h'
+      { description = 'N', data = 110 }, -- ASCII code for 'n'
+      -- Add more keys as needed
     },
-    {
-        name = "key_clear",
-        label = "Clear Tagged Range Key",
-        options =   {
-                        {description = "H", data = 104}, -- ASCII code for 'h'
-                        {description = "N", data = 110}, -- ASCII code for 'n'
-                        -- Add more keys as needed
-                    },
-        default = 104,
-    },
+    default = 286,
+  },
 }
-
-author = "TakaoInari, adai1198, (TW)Eric"
-version = "0.1.0"
-forumthread = "/"
-api_version = 10
-icon_atlas = "modicon.xml"
-icon = "modicon.tex"
-all_clients_require_mod = false
-client_only_mod = true
-dst_compatible = true
