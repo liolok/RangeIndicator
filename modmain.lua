@@ -1,29 +1,42 @@
 local G = GLOBAL
+
+-- Colors
+-- stylua: ignore start
+local BLACK   = { 0, 0, 0, 1 }
+local BLUE    = { 0, 0, 1, 1 }
+local GREEN   = { 0, 1, 0, 1 }
+local CYAN    = { 0, 1, 1, 1 }
+local RED     = { 1, 0, 0, 1 }
+local PINK    = { 1, 0, 1, 1 }
+local YELLOW  = { 1, 1, 0, 1 }
+local WHITE   = { 1, 1, 1, 1 }
+-- stylua: ignore end
+
 local T = { -- circle(s) of prefab
   deerclopseyeball_sentryward = { -- Ice Crystaleyezer
-    { RADIUS = 35, COLOR = { 0, 0, 255, 0 } },
+    { RADIUS = 35, COLOR = BLUE },
   },
   dragonflyfurnace = { -- Scaled Furnace
-    { RADIUS = 9.5, COLOR = { 255, 0, 0, 0 } },
+    { RADIUS = 9.5, COLOR = RED },
   },
   eyeturret = { -- Houndius Shootius (Build)
-    { RADIUS = 18, COLOR = { 255, 0, 255, 0 } },
+    { RADIUS = 18, COLOR = PINK },
   },
   firesuppressor = { -- Ice Flingomatic
-    { RADIUS = 15, COLOR = { 255, 255, 255, 0 } },
+    { RADIUS = 15, COLOR = WHITE },
   },
   lightning_rod = { -- Lightning Rod
-    { RADIUS = 40, COLOR = { 255, 255, 0, 0 } },
+    { RADIUS = 40, COLOR = YELLOW },
   },
   lunarthrall_plant = { -- Deadly Brightshade
-    { RADIUS = 12, COLOR = { 255, 255, 0, 0 } },
-    { RADIUS = 30, COLOR = { 0, 255, 0, 0 } },
+    { RADIUS = 12, COLOR = YELLOW },
+    { RADIUS = 30, COLOR = GREEN },
   },
   mushroom_light = { -- Mushlight
-    { RADIUS = 11.5, COLOR = { 0, 255, 255, 0 } },
+    { RADIUS = 11.5, COLOR = CYAN },
   },
   mushroom_light2 = { -- Glowcap
-    { RADIUS = 10.7, COLOR = { 0, 255, 255, 0 } },
+    { RADIUS = 10.7, COLOR = CYAN },
   },
 }
 T.eyeturret_item = T.eyeturret -- Houndius Shootius (Dropped)
@@ -54,7 +67,10 @@ local function CreateCircle(inst, radius, color) -- Klei's function c_shworadius
   local s = math.sqrt(1.385 * 1.385 / 12 * radius) -- credit: NoMu, 2914336761/scripts/prefabs/circular_placement.lua:L367
   local x, y, z = inst.Transform:GetScale() -- credit: Huxi, 3161117403/scripts/prefabs/hrange.lua:L19
   tf:SetScale(s / x, s / y, s / z) -- fight against parent's scale, be absolute.
+
+  -- credit: CarlZalph, https://forums.kleientertainment.com/forums/topic/69594-solved-how-to-make-character-glow-a-certain-color/#comment-804165
   as:SetAddColour(G.unpack(color))
+  as:SetMultColour(G.unpack(color)) -- erase original color
 
   circle.entity:SetCanSleep(false)
   circle.persists = false
