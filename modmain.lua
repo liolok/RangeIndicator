@@ -13,22 +13,6 @@ local WHITE   = { 1, 1, 1, 1 }
 -- stylua: ignore end
 
 local CIRCLE = { -- circle(s) of prefab
-  book_birds = { 3, 10 },
-  book_brimstone = { 3, 15 }, -- The End is Nigh! generates 16 consecutive Lightning strikes
-  book_fire = { 16 }, -- Pyrokinetics Explained extinguishes all burning or smoldering objects
-  book_fish = { 13 }, -- The Angler's Survival Guide summons Ocean Fish, 10 + 3 from Klei's prefabs/books.lua:L534-L586
-  book_gardening = { 30 },
-  book_horticulture = { 30 },
-  book_horticulture_upgraded = { 30 },
-  book_light = { 3 },
-  book_light_upgraded = { 3 },
-  book_rain = { 4 },
-  book_research_station = { 16 },
-  book_silviculture = { 30 },
-  book_sleep = { 30 }, -- Sleepytime Stories
-  book_temperature = { 16 },
-  book_tentacles = { 3, 8 }, -- On Tentacles
-  book_web = { 8 },
   carnivalgame_wheelspin_station = { 4 }, -- Cuckoo Spinwheel blocks birds
   deerclopseyeball_sentryward = { -- Ice Crystaleyezer
     { RADIUS = 3.5, COLOR = CYAN }, -- freeze
@@ -39,9 +23,7 @@ local CIRCLE = { -- circle(s) of prefab
   dragonflyfurnace = { { RADIUS = 9.5, COLOR = RED } }, -- Scaled Furnace
   eyeturret = { { RADIUS = 18, COLOR = PINK } }, -- Houndius Shootius (Build)
   firesuppressor = { 15 }, -- Ice Flingomatic
-  gunpowder = { { RADIUS = 3, COLOR = RED } }, -- Gunpowder
   lava_pond = { { RADIUS = 10, COLOR = RED } }, -- Magma
-  leif_idol = { 10 }, -- Treeguard Idol
   lightning_rod = { { RADIUS = 40, COLOR = YELLOW } }, -- Lightning Rod
   lunarthrall_plant = { -- Deadly Brightshade
     { RADIUS = 12, COLOR = YELLOW }, -- aggro
@@ -58,8 +40,6 @@ local CIRCLE = { -- circle(s) of prefab
   oceantreenut = { 22 }, -- Knobbly Tree Nut
   oceantree_pillar = { 22 }, -- Above-Average Tree Trunk
   winch = { 22 }, -- Pinchin' Winch
-  panflute = { 15 }, -- Pan Flute
-  phonograph = { { RADIUS = 8, COLOR = GREEN } }, -- Gramophone
   singingshell_octave3 = { 2 },
   singingshell_octave4 = { 2 },
   singingshell_octave5 = { 2 },
@@ -69,18 +49,57 @@ local CIRCLE = { -- circle(s) of prefab
     { RADIUS = 1.5, COLOR = RED }, -- attack
     { RADIUS = 4, COLOR = YELLOW }, -- block birds
   },
-  voidcloth_umbrella = { 16 }, -- Umbralla
   watertree_pillar = { { RADIUS = 28, COLOR = GREEN } }, -- Great Tree Trunk
 }
 CIRCLE.sapling_moon = CIRCLE.lunarthrall_plant -- Sapling (Moon) (Planted)
 
-local show_range_on_hover = {
-  gunpowder = true,
-  leif_idol = true,
-  panflute = true,
-  phonograph = true,
-  voidcloth_umbrella = true,
+local CIRCLE_BOOK = { --Wickerbottom's Books prefab
+  book_birds = { 3, 10 },
+  book_brimstone = { 3, 15 }, -- The End is Nigh! generates 16 consecutive Lightning strikes
+  book_fire = { 16 }, -- Pyrokinetics Explained extinguishes all burning or smoldering objects
+  book_fish = { 13 }, -- The Angler's Survival Guide summons Ocean Fish, 10 + 3 from Klei's prefabs/books.lua:L534-L586
+  book_gardening = { 30 },
+  book_horticulture = { 30 },
+  book_horticulture_upgraded = { 30 },
+  book_light = { 3 },
+  book_light_upgraded = { 3 },
+  book_rain = { 4 },
+  book_research_station = { 16 },
+  book_silviculture = { 30 },
+  book_sleep = { 30 }, -- Sleepytime Stories
+  book_temperature = { 16 },
+  book_tentacles = { 3, 8 }, -- On Tentacles
+  book_web = { 8 },
 }
+
+if GetModConfigData('enable_books') then 
+  for k, v in pairs(CIRCLE_BOOK) do
+    CIRCLE[k] = v
+  end
+end
+
+local CIRCLE_ITEM = {
+  gunpowder = { { RADIUS = 3, COLOR = RED } }, -- Gunpowder
+  leif_idol = { 10 }, -- Treeguard Idol
+  panflute = { 15 }, -- Pan Flute
+  phonograph = { { RADIUS = 8, COLOR = GREEN } }, -- Gramophone
+  voidcloth_umbrella = { 16 }, -- Umbralla
+}
+
+if GetModConfigData('enable_books') then 
+  for k, v in pairs(CIRCLE_ITEM) do
+    CIRCLE[k] = v
+  end
+end
+
+local show_range_on_hover = {
+  gunpowder = GetModConfigData('enable_items'),
+  leif_idol = GetModConfigData('enable_items'),
+  panflute = GetModConfigData('enable_items'),
+  phonograph = GetModConfigData('enable_items'),
+  voidcloth_umbrella = GetModConfigData('enable_items'),
+}
+
 for prefab, _ in pairs(CIRCLE) do
   if prefab:find('^book') or prefab:find('^sing') then show_range_on_hover[prefab] = true end
 end

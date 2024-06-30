@@ -84,7 +84,7 @@ configuration_options = {
     default = 'KEY_F6',
     name = 'pause_key',
   },  
-
+--]]
   { name = 'Show Item Feature Indicator', options = { { description = '', data = 0 } }, default = 0 },
   {
     label = "Wickerbottom's Books",
@@ -101,5 +101,5 @@ configuration_options = {
     default = true,
     name = 'enable_items',
   },
---]]
+
 }
