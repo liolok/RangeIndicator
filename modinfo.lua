@@ -55,16 +55,51 @@ configuration_options = {
   { name = 'Quick Clear', options = { { description = '', data = 0 } }, default = 0 },
   {
     label = 'Enable',
-    hover = 'Do you wanna bind a key to clear all the circles?',
+    hover = 'Do you wanna bind a key to clear all the indicator?',
     options = { { description = 'Yes', data = true }, { description = 'No', data = false } },
     default = true,
     name = 'enable_clear',
   },
   {
     label = 'Keybind',
-    hover = 'Key to clear all the circles',
+    hover = 'Key to clear all the indicator',
     options = keys,
     default = 'KEY_F5',
     name = 'clear_key',
   },
+
+--[[
+  { name = 'Quick Pause To Toggle', options = { { description = '', data = 0 } }, default = 0 },
+  {
+    label = 'Enable',
+    hover = 'Do you wanna bind a key to pause all the indicator?',
+    options = { { description = 'Yes', data = true }, { description = 'No', data = false } },
+    default = true,
+    name = 'enable_pause',
+  },
+  {
+    label = 'Keybind',
+    hover = 'Key to pause to toggle all the indicator',
+    options = keys,
+    default = 'KEY_F6',
+    name = 'pause_key',
+  },  
+
+  { name = 'Show Item Feature Indicator', options = { { description = '', data = 0 } }, default = 0 },
+  {
+    label = "Wickerbottom's Books",
+    hover = "Do you wanna show the indicator of Wickerbottom's books?",
+    options = { { description = 'Yes', data = true }, { description = 'No', data = false } },
+    default = true,
+    name = 'enable_books',
+  },
+
+  {
+    label = 'Other Items',
+    hover = 'Do you wanna show the indicator of items? \nSuch as Gunpower, Panflute, Treeguard idol, Pan flute...',
+    options = { { description = 'Yes', data = true }, { description = 'No', data = false } },
+    default = true,
+    name = 'enable_items',
+  },
+--]]
 }
