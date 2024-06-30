@@ -16,7 +16,7 @@ local CIRCLE = { -- circle(s) of prefab
   book_birds = { 3, 10 },
   book_brimstone = { 3, 15 }, -- The End is Nigh! generates 16 consecutive Lightning strikes
   book_fire = { 16 }, -- Pyrokinetics Explained extinguishes all burning or smoldering objects
-  book_fish = { 13 }, -- The Angler's Survival Guide summons a school of Ocean Fish that can appear in the ocean type | 10 + 3 from Klei's prefabs/books.lua:L534-L586
+  book_fish = { 13 }, -- The Angler's Survival Guide summons Ocean Fish, 10 + 3 from Klei's prefabs/books.lua:L534-L586
   book_gardening = { 30 },
   book_horticulture = { 30 },
   book_horticulture_upgraded = { 30 },
@@ -29,6 +29,7 @@ local CIRCLE = { -- circle(s) of prefab
   book_temperature = { 16 },
   book_tentacles = { 3, 8 }, -- On Tentacles
   book_web = { 8 },
+  carnivalgame_wheelspin_station = { 4 }, -- Cuckoo Spinwheel blocks birds
   deerclopseyeball_sentryward = { -- Ice Crystaleyezer
     { RADIUS = 3.5, COLOR = CYAN }, -- freeze
     { RADIUS = 5, COLOR = WHITE }, -- generate Mini Glacier (min)
@@ -37,7 +38,6 @@ local CIRCLE = { -- circle(s) of prefab
   },
   dragonflyfurnace = { { RADIUS = 9.5, COLOR = RED } }, -- Scaled Furnace
   eyeturret = { { RADIUS = 18, COLOR = PINK } }, -- Houndius Shootius (Build)
-  eyeturret_item = { { RADIUS = 18, COLOR = PINK } }, -- Houndius Shootius (Dropped)
   firesuppressor = { 15 }, -- Ice Flingomatic
   gunpowder = { { RADIUS = 3, COLOR = RED } }, -- Gunpowder
   lava_pond = { { RADIUS = 10, COLOR = RED } }, -- Magma
@@ -65,10 +65,13 @@ local CIRCLE = { -- circle(s) of prefab
   singingshell_octave5 = { 2 },
   support_pillar = { { RADIUS = 40, COLOR = YELLOW } }, -- Support Pillar
   support_pillar_dreadstone = { { RADIUS = 40, COLOR = YELLOW } }, -- Dreadstone Pillar
+  trap_starfish = { -- Anenemy (Planted)
+    { RADIUS = 1.5, COLOR = RED }, -- attack
+    { RADIUS = 4, COLOR = YELLOW }, -- block birds
+  },
   voidcloth_umbrella = { 16 }, -- Umbralla
   watertree_pillar = { { RADIUS = 28, COLOR = GREEN } }, -- Great Tree Trunk
 }
-CIRCLE.dug_sapling_moon = CIRCLE.lunarthrall_plant -- Sapling (Moon) (Dropped)
 CIRCLE.sapling_moon = CIRCLE.lunarthrall_plant -- Sapling (Moon) (Planted)
 
 local show_range_on_hover = {
@@ -82,21 +85,29 @@ for prefab, _ in pairs(CIRCLE) do
   if prefab:find('^book') or prefab:find('^sing') then show_range_on_hover[prefab] = true end
 end
 
-local deploy_helpers = {
-  'dragonflyfurnace',
-  'dug_sapling_moon',
-  'eyeturret_item',
-  'lightning_rod',
-  'mushroom_light',
-  'mushroom_light2',
-  'winch',
+local placers = {
+  'carnivalgame_wheelspin_kit', -- Cuckoo Spinwheel Kit
+  'dragonflyfurnace', -- Scaled Furnace
+  'dug_sapling_moon', -- Sapling (Moon) (Dropped)
+  'dug_trap_starfish', -- Anenemy Trap (Dropped)
+  'eyeturret_item', -- Houndius Shootius (Dropped)
+  'lightning_rod', -- Lightning Rod
+  'mushroom_light', -- Mushlight
+  'mushroom_light2', -- Glowcap
+  'winch', -- Pinchin' Winch
 }
-for index, prefab in pairs(deploy_helpers) do
-  CIRCLE[prefab .. '_placer'] = CIRCLE[prefab] -- refer to the same circle(s)
-  deploy_helpers[index] = prefab .. '_placer'
+for index, prefab in pairs(placers) do
+  local original_prefab = prefab:gsub('^dug_', ''):gsub('_item$', ''):gsub('_kit$', '_station')
+  if CIRCLE[original_prefab] then
+    local placer = prefab .. '_placer'
+    CIRCLE[placer] = CIRCLE[original_prefab] -- refer to the same circle(s)
+    placers[index] = placer
+  else
+    placers[index] = nil
+  end
 end
 
-local all_circles = {} -- track all the circles we create
+local all_circles = {} -- track all the circles we create, for quick clear.
 
 local function CreateCircle(inst, radius, color) -- Klei's function c_shworadius(), consolecommands.lua:L2017
   local circle = G.CreateEntity()
@@ -138,7 +149,6 @@ local function ShowRangeIndicator(inst, prefab)
     elseif type(C) == 'table' then -- both radius and custom color
       circle = CreateCircle(inst, C.RADIUS, C.COLOR)
     end
-    if not circle then return end
     table.insert(inst.circles, circle)
     table.insert(all_circles, circle)
   end
@@ -157,7 +167,7 @@ local function ToggleRangeIndicator(inst)
   fn(inst)
 end
 
-for _, prefab in ipairs(deploy_helpers) do
+for _, prefab in ipairs(placers) do
   AddPrefabPostInit(prefab, ShowRangeIndicator)
 end
 
