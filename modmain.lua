@@ -12,51 +12,91 @@ local YELLOW  = { 1, 1, 0, 1 }
 local WHITE   = { 1, 1, 1, 1 }
 -- stylua: ignore end
 
-local T = { -- circle(s) of prefab
+local CIRCLE = { -- circle(s) of prefab
+  book_birds = { 3, 10 },
+  book_brimstone = { 3, 15 }, -- The End is Nigh! generates 16 consecutive Lightning strikes
+  book_fire = { 16 }, -- Pyrokinetics Explained extinguishes all burning or smoldering objects
+  book_fish = { 13 }, -- The Angler's Survival Guide summons a school of Ocean Fish that can appear in the ocean type | 10 + 3 from Klei's prefabs/books.lua:L534-L586
+  book_gardening = { 30 },
+  book_horticulture = { 30 },
+  book_horticulture_upgraded = { 30 },
+  book_light = { 3 },
+  book_light_upgraded = { 3 },
+  book_rain = { 4 },
+  book_research_station = { 16 },
+  book_silviculture = { 30 },
+  book_sleep = { 30 }, -- Sleepytime Stories
+  book_temperature = { 16 },
+  book_tentacles = { 3, 8 }, -- On Tentacles
+  book_web = { 8 },
   deerclopseyeball_sentryward = { -- Ice Crystaleyezer
-    { RADIUS = 35, COLOR = BLUE },
+    { RADIUS = 3.5, COLOR = CYAN }, -- freeze
+    { RADIUS = 5, COLOR = WHITE }, -- generate Mini Glacier (min)
+    { RADIUS = 12, COLOR = WHITE }, -- generate Mini Glacier (max)
+    { RADIUS = 35, COLOR = BLUE }, -- cold
   },
-  dragonflyfurnace = { -- Scaled Furnace
-    { RADIUS = 9.5, COLOR = RED },
-  },
-  eyeturret = { -- Houndius Shootius (Build)
-    { RADIUS = 18, COLOR = PINK },
-  },
-  firesuppressor = { -- Ice Flingomatic
-    { RADIUS = 15, COLOR = WHITE },
-  },
-  lightning_rod = { -- Lightning Rod
-    { RADIUS = 40, COLOR = YELLOW },
-  },
+  dragonflyfurnace = { { RADIUS = 9.5, COLOR = RED } }, -- Scaled Furnace
+  eyeturret = { { RADIUS = 18, COLOR = PINK } }, -- Houndius Shootius (Build)
+  eyeturret_item = { { RADIUS = 18, COLOR = PINK } }, -- Houndius Shootius (Dropped)
+  firesuppressor = { 15 }, -- Ice Flingomatic
+  gunpowder = { { RADIUS = 3, COLOR = RED } }, -- Gunpowder
+  lava_pond = { { RADIUS = 10, COLOR = RED } }, -- Magma
+  leif_idol = { 10 }, -- Treeguard Idol
+  lightning_rod = { { RADIUS = 40, COLOR = YELLOW } }, -- Lightning Rod
   lunarthrall_plant = { -- Deadly Brightshade
-    { RADIUS = 12, COLOR = YELLOW },
-    { RADIUS = 30, COLOR = GREEN },
+    { RADIUS = 12, COLOR = YELLOW }, -- aggro
+    { RADIUS = 30, COLOR = GREEN }, -- protect infection
   },
-  mushroom_light = { -- Mushlight
-    { RADIUS = 11.5, COLOR = CYAN },
-  },
-  mushroom_light2 = { -- Glowcap
-    { RADIUS = 10.7, COLOR = CYAN },
-  },
+  moon_altar = { 20 }, -- Celestial Altar
+  moon_altar_astral = { 20 }, -- Celestial Sanctum
+  moon_altar_cosmic = { 20 }, -- Celestial Tribute
+  moon_fissure = { 20 }, -- Celestial Fissure
+  moonbase = { 8 }, -- Moon Stone
+  mushroom_light = { { RADIUS = 11.5, COLOR = CYAN } }, -- Mushlight
+  mushroom_light2 = { { RADIUS = 10.7, COLOR = CYAN } }, -- Glowcap
+  oceantree = { 22 }, -- Knobbly Tree
+  oceantreenut = { 22 }, -- Knobbly Tree Nut
+  oceantree_pillar = { 22 }, -- Above-Average Tree Trunk
+  winch = { 22 }, -- Pinchin' Winch
+  panflute = { 15 }, -- Pan Flute
+  phonograph = { { RADIUS = 8, COLOR = GREEN } }, -- Gramophone
+  singingshell_octave3 = { 2 },
+  singingshell_octave4 = { 2 },
+  singingshell_octave5 = { 2 },
+  support_pillar = { { RADIUS = 40, COLOR = YELLOW } }, -- Support Pillar
+  support_pillar_dreadstone = { { RADIUS = 40, COLOR = YELLOW } }, -- Dreadstone Pillar
+  voidcloth_umbrella = { 16 }, -- Umbralla
+  watertree_pillar = { { RADIUS = 28, COLOR = GREEN } }, -- Great Tree Trunk
 }
-T.eyeturret_item = T.eyeturret -- Houndius Shootius (Dropped)
-T.dug_sapling_moon = T.lunarthrall_plant -- Sapling (Moon) (Dropped)
-T.sapling_moon = T.lunarthrall_plant -- Sapling (Moon) (Planted)
+CIRCLE.dug_sapling_moon = CIRCLE.lunarthrall_plant -- Sapling (Moon) (Dropped)
+CIRCLE.sapling_moon = CIRCLE.lunarthrall_plant -- Sapling (Moon) (Planted)
 
-PLACER = { -- deploy helpers
+local show_range_on_hover = {
+  gunpowder = true,
+  leif_idol = true,
+  panflute = true,
+  phonograph = true,
+  voidcloth_umbrella = true,
+}
+for prefab, _ in pairs(CIRCLE) do
+  if prefab:find('^book') or prefab:find('^sing') then show_range_on_hover[prefab] = true end
+end
+
+local deploy_helpers = {
   'dragonflyfurnace',
   'dug_sapling_moon',
   'eyeturret_item',
   'lightning_rod',
   'mushroom_light',
   'mushroom_light2',
+  'winch',
 }
-for index, prefab in pairs(PLACER) do
-  T[prefab .. '_placer'] = T[prefab] -- refer to the same circle(s)
-  PLACER[index] = prefab .. '_placer' -- will add deploy helpers
+for index, prefab in pairs(deploy_helpers) do
+  CIRCLE[prefab .. '_placer'] = CIRCLE[prefab] -- refer to the same circle(s)
+  deploy_helpers[index] = prefab .. '_placer'
 end
 
-local all_circles = {}
+local all_circles = {} -- track all the circles we create
 
 local function CreateCircle(inst, radius, color) -- Klei's function c_shworadius(), consolecommands.lua:L2017
   local circle = G.CreateEntity()
@@ -70,7 +110,7 @@ local function CreateCircle(inst, radius, color) -- Klei's function c_shworadius
 
   -- credit: CarlZalph, https://forums.kleientertainment.com/forums/topic/69594-solved-how-to-make-character-glow-a-certain-color/#comment-804165
   as:SetAddColour(G.unpack(color))
-  as:SetMultColour(G.unpack(color)) -- erase original color
+  as:SetMultColour(G.unpack(color)) -- try to erase original color
 
   circle.entity:SetCanSleep(false)
   circle.persists = false
@@ -87,30 +127,62 @@ local function CreateCircle(inst, radius, color) -- Klei's function c_shworadius
   return circle
 end
 
-local function ToggleRangeIndicator(inst)
-  if inst.circles then -- circles already created, remove.
-    for _, v in ipairs(inst.circles) do
-      if v:IsValid() then v:Remove() end
+local function ShowRangeIndicator(inst, prefab)
+  if not CIRCLE[prefab or inst.prefab] then return end
+  if inst.circles and #inst.circles > 0 then return end
+  inst.circles = {}
+  for _, C in pairs(CIRCLE[prefab or inst.prefab]) do
+    local circle = nil
+    if type(C) == 'number' then -- only radius, use white as fallback
+      circle = CreateCircle(inst, C, WHITE)
+    elseif type(C) == 'table' then -- both radius and custom color
+      circle = CreateCircle(inst, C.RADIUS, C.COLOR)
     end
-    inst.circles = nil
-    return
-  end
-  inst.circles = {} -- no circles yet, create.
-  for _, V in pairs(T[inst.prefab]) do
-    local circle = CreateCircle(inst, V.RADIUS, V.COLOR)
+    if not circle then return end
     table.insert(inst.circles, circle)
     table.insert(all_circles, circle)
   end
 end
 
-for _, prefab in ipairs(PLACER) do -- add deploy helper
-  AddPrefabPostInit(prefab, ToggleRangeIndicator)
+local function HideRangeIndicator(inst)
+  if not inst.circles then return end
+  for _, v in ipairs(inst.circles) do
+    if v:IsValid() then v:Remove() end
+  end
+  inst.circles = nil
 end
+
+local function ToggleRangeIndicator(inst)
+  local fn = inst.circles and HideRangeIndicator or ShowRangeIndicator
+  fn(inst)
+end
+
+for _, prefab in ipairs(deploy_helpers) do
+  AddPrefabPostInit(prefab, ShowRangeIndicator)
+end
+
+AddClassPostConstruct('widgets/hoverer', function(self)
+  if not self.text then return end
+  local OldSetString = self.text.SetString
+  local OldHide = self.text.Hide
+
+  self.text.SetString = function(text, str, ...)
+    local e = G.TheInput:GetHUDEntityUnderMouse()
+    local prefab = e and e.widget and e.widget.parent and e.widget.parent.item and e.widget.parent.item.prefab or nil
+    if prefab and show_range_on_hover[prefab] then ShowRangeIndicator(G.ThePlayer, prefab) end
+    return OldSetString(text, str, ...)
+  end
+
+  self.text.Hide = function(...)
+    HideRangeIndicator(G.ThePlayer)
+    return OldHide(...)
+  end
+end)
 
 G.TheInput:AddMouseButtonHandler(function(button, down)
   if button == G.MOUSEBUTTON_MIDDLE and down then
     local entity = G.TheInput:GetWorldEntityUnderMouse()
-    if entity and T[entity.prefab] then ToggleRangeIndicator(entity) end
+    if entity and CIRCLE[entity.prefab] then ToggleRangeIndicator(entity) end
   end
 end)
 
