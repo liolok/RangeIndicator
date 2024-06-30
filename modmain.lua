@@ -180,18 +180,18 @@ AddClassPostConstruct('widgets/hoverer', function(self)
 end)
 
 G.TheInput:AddMouseButtonHandler(function(button, down)
-  if button == G.MOUSEBUTTON_MIDDLE and down then
-    local entity = G.TheInput:GetWorldEntityUnderMouse()
-    if entity and CIRCLE[entity.prefab] then ToggleRangeIndicator(entity) end
-  end
+  local modifier = GetModConfigData('modifier_key')
+  if modifier and not G.TheInput:IsKeyDown(G.rawget(G, modifier)) then return end
+  if not (button == G.rawget(G, GetModConfigData('mouse_button')) and down) then return end
+  local entity = G.TheInput:GetWorldEntityUnderMouse()
+  if entity and CIRCLE[entity.prefab] then ToggleRangeIndicator(entity) end
 end)
 
-local key_clear = GetModConfigData('key_clear')
 G.TheInput:AddKeyHandler(function(key, down)
-  if key == key_clear and down then
-    for _, c in ipairs(all_circles) do
-      if c:IsValid() then c:Remove() end
-    end
-    all_circles = {}
+  if not GetModConfigData('enable_clear') then return end
+  if not (key == G.rawget(G, GetModConfigData('clear_key')) and down) then return end
+  for _, c in ipairs(all_circles) do
+    if c:IsValid() then c:Remove() end
   end
+  all_circles = {}
 end)

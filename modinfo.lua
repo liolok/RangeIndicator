@@ -1,68 +1,70 @@
 name = 'Range Indicator'
-author = 'TakaoInari, adai1198, (TW)Eric'
-version = '0.1.0'
+description = 'Show ranges by clicking, deploying or hovering.'
+author = 'liolok'
+version = '2024.06.30.1'
 api_version = 10
-all_clients_require_mod = false
-client_only_mod = true
 dst_compatible = true
-icon_atlas = 'modicon.xml'
+client_only_mod = true
+all_clients_require_mod = false
 icon = 'modicon.tex'
-description = [[
-1.Click the following Entities to activate the range indicator.Reclick them to cancel the range instantly, press H to cancel all range indicators, or press G to stop the range indicators from working.
-You can modify the key in modinfo.(ASCII code)
-Scaled Furnace:Red
-Ice Crystaleyezer:Blue
-Mushlight:Cyan
-BrightShade Aggro range:Yellow
-BrightShade Parasite Immune range:Green
-Houndius Shootius:Pink
-Lighting Rod:Yellow
-Ice Flingomatic:White
+icon_atlas = 'modicon.xml'
 
-This mod is mainly used for making constant temperature base.
-When Ice Crystaleyezer and Scaled Furnace range overlap, the temperature will keep between 1-69.
-
-2.Indicate range while building furnace and mushlight.
-
-Code refer to WorkShopID:2575190872
-Code Original Author:冰汽
-Code Optimization:adai1198 (TW)Eric
------------------------------------
-
-1、點選下列物件會顯示其所涵蓋的範圍。再次點擊取消範圍，按下H取消全部範圍或者按下G暫停顯示範圍。
-可以在modinfo修改你要的按鍵(使用ASCII碼)
-
-龍鱗爐:紅色
-冰眼塔:藍色
-蘑菇燈:青色
-亮茄仇恨範圍:黃色
-亮茄不寄生範圍:綠色
-眼球塔:粉紅色
-避雷針:黃色
-雪球發射機:白色
-
-2、建造龍林爐、蘑菇燈時顯示範圍
-
-第二部分程式碼由友人adai1198編寫
-
-本mod主要用於建造恆溫住所，二者互相覆蓋到的範圍會無視季節維持恆溫
-
-
-此Mod程式碼參照工作坊ID:2575190872
-程式碼來源:冰汽
-程式碼優化:adai1198 (TW)Eric
------------------------------------
-]]
+-- stylua: ignore
+local keys = {
+  'Escape', 'F1', 'F2', 'F3', 'F4', 'F5', 'F6', 'F7', 'F8', 'F9', 'F10', 'F11', 'F12', 'Print', 'ScrolLock', 'Pause',
+  'Tilde', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', 'Minus', 'Equals', 'Backspace',
+  'Tab', 'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', 'LeftBracket', 'RightBracket', 'Backslash',
+  'CapsLock', 'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'Semicolon', 'Enter',
+  'LShift', 'Z', 'X', 'C', 'V', 'B', 'N', 'M', 'Period', 'Slash', 'RShift', 'LCtrl', 'LAlt', 'Space', 'RAlt', 'RCtrl',
+  'Insert', 'Delete', 'Home', 'End', 'PageUp', 'PageDown', 'Up', 'Down', 'Left', 'Right',
+  'Keypad 0', 'Keypad 1', 'Keypad 2', 'Keypad 3', 'Keypad 4', 'Keypad 5', 'Keypad 6', 'Keypad 7', 'Keypad 8', 'Keypad 9',
+  'Keypad Divide', 'Keypad Multiply', 'Keypad Minus', 'Keypad Plus', 'Keypad Enter', 'Keypad Equals',
+}
+for i = 1, #keys do
+  keys[i] = { description = keys[i], data = 'KEY_' .. keys[i]:gsub('Keypad ', 'KP_'):upper() }
+end
 
 configuration_options = {
   {
-    name = 'key_clear',
-    label = 'Clear Tagged Range Key',
-    options = {
-      { description = 'F5', data = 286 }, -- ASCII code for 'h'
-      { description = 'N', data = 110 }, -- ASCII code for 'n'
-      -- Add more keys as needed
+    label = 'Mouse Button',
+    hover = 'Which button do you wanna use to toggle indicator?',
+    options = { -- emoji code from Klei's strings.lua:L12661
+      { description = '\238\132\128', data = 'MOUSEBUTTON_LEFT', hover = 'Left Mouse Button' },
+      { description = '\238\132\130', data = 'MOUSEBUTTON_MIDDLE', hover = 'Middle Mouse Button' },
+      { description = '\238\132\129', data = 'MOUSEBUTTON_RIGHT', hover = 'Right Mouse Button' },
     },
-    default = 286,
+    default = 'MOUSEBUTTON_MIDDLE',
+    name = 'mouse_button',
+  },
+  {
+    label = 'Modifier Key',
+    hover = "Bind a key to toggle indicator only when it's pressed.",
+    options = {
+      { description = 'None', data = false },
+      { description = 'Left Alt', data = 'KEY_LALT' },
+      { description = 'Right Alt', data = 'KEY_RALT' },
+      { description = 'Left Ctrl', data = 'KEY_LCTRL' },
+      { description = 'Right Ctrl', data = 'KEY_RCTRL' },
+      { description = 'Left Shift', data = 'KEY_LSHIFT' },
+      { description = 'Right Shift', data = 'KEY_RSHIFT' },
+    },
+    default = false,
+    name = 'modifier_key',
+  },
+
+  { name = 'Quick Clear', options = { { description = '', data = 0 } }, default = 0 },
+  {
+    label = 'Enable',
+    hover = 'Do you wanna bind a key to clear all the circles?',
+    options = { { description = 'Yes', data = true }, { description = 'No', data = false } },
+    default = true,
+    name = 'enable_clear',
+  },
+  {
+    label = 'Keybind',
+    hover = 'Key to clear all the circles',
+    options = keys,
+    default = 'KEY_F5',
+    name = 'clear_key',
   },
 }
