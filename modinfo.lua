@@ -62,7 +62,7 @@ configuration_options = {
   },
   {
     label = 'Keybind',
-    hover = 'Key to clear all the indicator',
+    hover = 'Key to clear all the indicators',
     options = keys,
     default = 'KEY_F5',
     name = 'clear_key',
@@ -83,23 +83,28 @@ configuration_options = {
     options = keys,
     default = 'KEY_F6',
     name = 'pause_key',
-  },  
+  },
 --]]
-  { name = 'Show Item Feature Indicator', options = { { description = '', data = 0 } }, default = 0 },
+  { name = 'Show on Hover', options = { { description = '', data = 0 } }, default = 0 },
   {
-    label = "Wickerbottom's Books",
-    hover = "Do you wanna show the indicator of Wickerbottom's books?",
+    label = 'Enable',
+    hover = 'Do you wanna show *any* indicator when hovering inventory items?',
     options = { { description = 'Yes', data = true }, { description = 'No', data = false } },
     default = true,
-    name = 'enable_books',
+    name = 'enable_hover',
   },
-
   {
-    label = 'Other Items',
-    hover = 'Do you wanna show the indicator of items? \nSuch as Gunpower, Panflute, Treeguard idol, Pan flute...',
+    label = 'Books',
+    hover = 'Do you wanna show the indicator of Wickerbottom books?',
     options = { { description = 'Yes', data = true }, { description = 'No', data = false } },
     default = true,
-    name = 'enable_items',
+    name = 'hover_books',
   },
-
+  {
+    label = 'Other',
+    hover = 'Do you wanna show the indicator of other items?\nSuch as Gunpowder, Pan Flute, Treeguard Idol...',
+    options = { { description = 'Yes', data = true }, { description = 'No', data = false } },
+    default = true,
+    name = 'hover_other',
+  },
 }

@@ -12,7 +12,7 @@ local YELLOW  = { 1, 1, 0, 1 }
 local WHITE   = { 1, 1, 1, 1 }
 -- stylua: ignore end
 
-local CIRCLE = { -- circle(s) of prefab
+local CIRCLE_CLICK = { -- circle(s) of clicked entity prefab
   carnivalgame_wheelspin_station = { 4 }, -- Cuckoo Spinwheel blocks birds
   deerclopseyeball_sentryward = { -- Ice Crystaleyezer
     { RADIUS = 3.5, COLOR = CYAN }, -- freeze
@@ -23,7 +23,9 @@ local CIRCLE = { -- circle(s) of prefab
   dragonflyfurnace = { { RADIUS = 9.5, COLOR = RED } }, -- Scaled Furnace
   eyeturret = { { RADIUS = 18, COLOR = PINK } }, -- Houndius Shootius (Build)
   firesuppressor = { 15 }, -- Ice Flingomatic
+  gunpowder = { { RADIUS = 3, COLOR = RED } }, -- Gunpowder
   lava_pond = { { RADIUS = 10, COLOR = RED } }, -- Magma
+  leif_idol = { 10 }, -- Treeguard Idol
   lightning_rod = { { RADIUS = 40, COLOR = YELLOW } }, -- Lightning Rod
   lunarthrall_plant = { -- Deadly Brightshade
     { RADIUS = 12, COLOR = YELLOW }, -- aggro
@@ -39,10 +41,12 @@ local CIRCLE = { -- circle(s) of prefab
   oceantree = { 22 }, -- Knobbly Tree
   oceantreenut = { 22 }, -- Knobbly Tree Nut
   oceantree_pillar = { 22 }, -- Above-Average Tree Trunk
+  phonograph = { { RADIUS = 8, COLOR = GREEN } }, -- Gramophone
+  singingshell_octave3 = { 2 }, -- Shell Bell (Baritone)
+  singingshell_octave4 = { 2 }, -- Shell Bell (Alto)
+  singingshell_octave5 = { 2 }, -- Shell Bell (Soprano)
+  voidcloth_umbrella = { 16 }, -- Umbralla
   winch = { 22 }, -- Pinchin' Winch
-  singingshell_octave3 = { 2 },
-  singingshell_octave4 = { 2 },
-  singingshell_octave5 = { 2 },
   support_pillar = { { RADIUS = 40, COLOR = YELLOW } }, -- Support Pillar
   support_pillar_dreadstone = { { RADIUS = 40, COLOR = YELLOW } }, -- Dreadstone Pillar
   trap_starfish = { -- Anenemy (Planted)
@@ -51,9 +55,10 @@ local CIRCLE = { -- circle(s) of prefab
   },
   watertree_pillar = { { RADIUS = 28, COLOR = GREEN } }, -- Great Tree Trunk
 }
-CIRCLE.sapling_moon = CIRCLE.lunarthrall_plant -- Sapling (Moon) (Planted)
+CIRCLE_CLICK.sapling_moon = CIRCLE_CLICK.lunarthrall_plant -- Sapling (Moon) (Planted)
 
-local CIRCLE_BOOK = { --Wickerbottom's Books prefab
+local CIRCLE_HOVER = {} -- circle(s) of hovered inventory item prefab
+local CIRCLE_BOOK = { -- circle(s) of Wickerbottom books prefab
   book_birds = { 3, 10 },
   book_brimstone = { 3, 15 }, -- The End is Nigh! generates 16 consecutive Lightning strikes
   book_fire = { 16 }, -- Pyrokinetics Explained extinguishes all burning or smoldering objects
@@ -71,38 +76,18 @@ local CIRCLE_BOOK = { --Wickerbottom's Books prefab
   book_tentacles = { 3, 8 }, -- On Tentacles
   book_web = { 8 },
 }
-
-if GetModConfigData('enable_books') then 
-  for k, v in pairs(CIRCLE_BOOK) do
-    CIRCLE[k] = v
-  end
-end
-
-local CIRCLE_ITEM = {
-  gunpowder = { { RADIUS = 3, COLOR = RED } }, -- Gunpowder
-  leif_idol = { 10 }, -- Treeguard Idol
+local CIRCLE_MISC = { -- circle(s) of other miscellaneous items prefab
   panflute = { 15 }, -- Pan Flute
-  phonograph = { { RADIUS = 8, COLOR = GREEN } }, -- Gramophone
-  voidcloth_umbrella = { 16 }, -- Umbralla
 }
-
-if GetModConfigData('enable_books') then 
-  for k, v in pairs(CIRCLE_ITEM) do
-    CIRCLE[k] = v
-  end
-end
-
-local show_range_on_hover = {
-  gunpowder = GetModConfigData('enable_items'),
-  leif_idol = GetModConfigData('enable_items'),
-  panflute = GetModConfigData('enable_items'),
-  phonograph = GetModConfigData('enable_items'),
-  voidcloth_umbrella = GetModConfigData('enable_items'),
+local PREFAB_MISC = {
+  'gunpowder', -- Gunpowder
+  'leif_idol', -- Treeguard Idol
+  'phonograph', -- Gramophone
+  'singingshell_octave3', -- Shell Bell (Baritone)
+  'singingshell_octave4', -- Shell Bell (Alto)
+  'singingshell_octave5',-- Shell Bell (Soprano)
+  'voidcloth_umbrella', -- Umbralla
 }
-
-for prefab, _ in pairs(CIRCLE) do
-  if prefab:find('^book') or prefab:find('^sing') then show_range_on_hover[prefab] = true end
-end
 
 local placers = {
   'carnivalgame_wheelspin_kit', -- Cuckoo Spinwheel Kit
@@ -117,9 +102,9 @@ local placers = {
 }
 for index, prefab in pairs(placers) do
   local original_prefab = prefab:gsub('^dug_', ''):gsub('_item$', ''):gsub('_kit$', '_station')
-  if CIRCLE[original_prefab] then
+  if CIRCLE_CLICK[original_prefab] then
     local placer = prefab .. '_placer'
-    CIRCLE[placer] = CIRCLE[original_prefab] -- refer to the same circle(s)
+    CIRCLE_CLICK[placer] = CIRCLE_CLICK[original_prefab] -- refer to the same circle(s)
     placers[index] = placer
   else
     placers[index] = nil
@@ -158,15 +143,17 @@ local function CreateCircle(inst, radius, color) -- Klei's function c_shworadius
 end
 
 local function ShowRangeIndicator(inst, prefab)
-  if not CIRCLE[prefab or inst.prefab] then return end
-  if inst.circles and #inst.circles > 0 then return end
+  if inst.circles then return end -- circle(s) already created
+  prefab = prefab or inst.prefab
+  local circle_data = CIRCLE_CLICK[prefab] or CIRCLE_HOVER[prefab] or nil
+  if not circle_data then return end
   inst.circles = {}
-  for _, C in pairs(CIRCLE[prefab or inst.prefab]) do
+  for _, data in pairs(circle_data) do
     local circle = nil
-    if type(C) == 'number' then -- only radius, use white as fallback
-      circle = CreateCircle(inst, C, WHITE)
-    elseif type(C) == 'table' then -- both radius and custom color
-      circle = CreateCircle(inst, C.RADIUS, C.COLOR)
+    if type(data) == 'number' then -- only radius, use white as fallback
+      circle = CreateCircle(inst, data, WHITE)
+    elseif type(data) == 'table' then -- both radius and custom color
+      circle = CreateCircle(inst, data.RADIUS, data.COLOR)
     end
     table.insert(inst.circles, circle)
     table.insert(all_circles, circle)
@@ -174,7 +161,7 @@ local function ShowRangeIndicator(inst, prefab)
 end
 
 local function HideRangeIndicator(inst)
-  if not inst.circles then return end
+  if not inst.circles then return end -- circle(s) not created yet
   for _, v in ipairs(inst.circles) do
     if v:IsValid() then v:Remove() end
   end
@@ -190,30 +177,12 @@ for _, prefab in ipairs(placers) do
   AddPrefabPostInit(prefab, ShowRangeIndicator)
 end
 
-AddClassPostConstruct('widgets/hoverer', function(self)
-  if not self.text then return end
-  local OldSetString = self.text.SetString
-  local OldHide = self.text.Hide
-
-  self.text.SetString = function(text, str, ...)
-    local e = G.TheInput:GetHUDEntityUnderMouse()
-    local prefab = e and e.widget and e.widget.parent and e.widget.parent.item and e.widget.parent.item.prefab or nil
-    if prefab and show_range_on_hover[prefab] then ShowRangeIndicator(G.ThePlayer, prefab) end
-    return OldSetString(text, str, ...)
-  end
-
-  self.text.Hide = function(...)
-    HideRangeIndicator(G.ThePlayer)
-    return OldHide(...)
-  end
-end)
-
 G.TheInput:AddMouseButtonHandler(function(button, down)
   local modifier = GetModConfigData('modifier_key')
   if modifier and not G.TheInput:IsKeyDown(G.rawget(G, modifier)) then return end
   if not (button == G.rawget(G, GetModConfigData('mouse_button')) and down) then return end
   local entity = G.TheInput:GetWorldEntityUnderMouse()
-  if entity and CIRCLE[entity.prefab] then ToggleRangeIndicator(entity) end
+  if entity and CIRCLE_CLICK[entity.prefab] then ToggleRangeIndicator(entity) end
 end)
 
 G.TheInput:AddKeyHandler(function(key, down)
@@ -224,3 +193,38 @@ G.TheInput:AddKeyHandler(function(key, down)
   end
   all_circles = {}
 end)
+
+if GetModConfigData('enable_hover') then
+  if GetModConfigData('hover_books') then
+    for prefab, circle in pairs(CIRCLE_BOOK) do
+      CIRCLE_HOVER[prefab] = circle
+    end
+  end
+  if GetModConfigData('hover_other') then
+    for prefab, circle in pairs(CIRCLE_MISC) do
+      CIRCLE_HOVER[prefab] = circle
+    end
+    for _, prefab in ipairs(PREFAB_MISC) do
+      CIRCLE_HOVER[prefab] = CIRCLE_CLICK[prefab] or nil
+    end
+  end
+
+  AddClassPostConstruct('widgets/hoverer', function(self)
+    if not self.text then return end
+    local OldSetString = self.text.SetString
+    local OldHide = self.text.Hide
+
+    self.text.SetString = function(text, str, ...)
+      HideRangeIndicator(G.ThePlayer)
+      local e = G.TheInput:GetHUDEntityUnderMouse()
+      local prefab = e and e.widget and e.widget.parent and e.widget.parent.item and e.widget.parent.item.prefab or nil
+      if prefab and CIRCLE_HOVER[prefab] then ShowRangeIndicator(G.ThePlayer, prefab) end
+      return OldSetString(text, str, ...)
+    end
+
+    self.text.Hide = function(...)
+      HideRangeIndicator(G.ThePlayer)
+      return OldHide(...)
+    end
+  end)
+end
