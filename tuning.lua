@@ -100,7 +100,7 @@ local hover = {} -- circle(s) of hovered inventory item prefab
 
 -- TODO: check these ranges
 local book = { -- circle(s) of Wickerbottom books prefab
-  book_birds = { 3, 10 },
+  book_birds = { 3, 11.5 },
   book_brimstone = { 3, 15 }, -- The End is Nigh! generates 16 consecutive Lightning strikes
   book_fire = { 16 }, -- Pyrokinetics Explained extinguishes all burning or smoldering objects
   book_fish = { 13 }, -- The Angler's Survival Guide summons Ocean Fish, 10 + 3 from Klei's prefabs/books.lua:L534-L586
@@ -114,8 +114,8 @@ local book = { -- circle(s) of Wickerbottom books prefab
   book_silviculture = { 30 },
   book_sleep = { 30 }, -- Sleepytime Stories
   book_temperature = { 16 },
-  book_tentacles = { 3, 8 }, -- On Tentacles
-  book_web = { 8 },
+  book_tentacles = { 3, 8.6 }, -- On Tentacles
+  book_web = { 5.5 },
 }
 
 local misc = { -- circle(s) of other miscellaneous items prefab
