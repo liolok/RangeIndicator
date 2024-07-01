@@ -2,16 +2,15 @@ modimport('tuning')
 local G = GLOBAL
 local T = TUNING.RANGE_INDICATOR
 
-local function CreateCircle(inst, radius, color) -- Klei's function c_shworadius(), consolecommands.lua:L2017
+local function CreateCircle(inst, radius, color) -- Klei's function CreatePlacerRing(), prefabs/winona_catapult.lua:L270
   local circle = G.CreateEntity()
-  circle.is_range_indicator = true
   circle.entity:SetParent(inst.entity)
   local tf = circle.entity:AddTransform()
   local as = circle.entity:AddAnimState()
 
-  local s = math.sqrt(1.385 * 1.385 / 12 * radius) -- credit: NoMu, 2914336761/scripts/prefabs/circular_placement.lua:L367
   local x, y, z = inst.Transform:GetScale() -- credit: Huxi, 3161117403/scripts/prefabs/hrange.lua:L19
-  tf:SetScale(s / x, s / y, s / z) -- fight against parent's scale, be absolute.
+  tf:SetScale(1 / x, 1 / y, 1 / z) -- fight against parent's scale, be absolute.
+  as:SetScale(radius / 9.7, radius / 9.7) -- scale by catapult texture size
 
   -- credit: CarlZalph, https://forums.kleientertainment.com/forums/topic/69594-solved-how-to-make-character-glow-a-certain-color/#comment-804165
   as:SetAddColour(G.unpack(color))
@@ -21,9 +20,11 @@ local function CreateCircle(inst, radius, color) -- Klei's function c_shworadius
   circle.persists = false
   circle:AddTag('CLASSIFIED')
   circle:AddTag('NOCLICK')
-  as:SetBank('firefighter_placement')
-  as:SetBuild('firefighter_placement')
+  circle:AddTag('RANGE_INDICATOR')
+  as:SetBank('winona_catapult_placement')
+  as:SetBuild('winona_catapult_placement')
   as:PlayAnimation('idle')
+  as:Hide('inner')
   as:SetLightOverride(1)
   as:SetOrientation(G.ANIM_ORIENTATION.OnGround)
   as:SetLayer(G.LAYER_BACKGROUND)
@@ -72,10 +73,10 @@ if GetModConfigData('enable_batch') then
   G.TheInput:AddKeyHandler(function(key, down)
     if not (key == G.rawget(G, GetModConfigData('batch_key')) and down) then return end
     local x, y, z = G.ThePlayer.Transform:GetWorldPosition()
-    local entities = G.TheSim:FindEntities(x, y, z, 80, { 'CLASSIFIED', 'NOCLICK' })
+    local entities = G.TheSim:FindEntities(x, y, z, 80, { 'CLASSIFIED', 'NOCLICK', 'RANGE_INDICATOR' })
     local clear = false
     for _, e in ipairs(entities) do
-      if e.is_range_indicator and e:IsValid() then
+      if e:IsValid() then
         clear = true
         local parent = e.entity:GetParent()
         if parent and parent.circles then parent.circles = nil end
