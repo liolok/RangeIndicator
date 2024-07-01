@@ -44,17 +44,17 @@ local click = { -- circle(s) of clicked entity prefab
   singingshell_octave3 = { 2 }, -- Shell Bell (Baritone)
   singingshell_octave4 = { 2 }, -- Shell Bell (Alto)
   singingshell_octave5 = { 2 }, -- Shell Bell (Soprano)
-  voidcloth_umbrella = { 16 }, -- Umbralla
-  winch = { 22 }, -- Pinchin' Winch
   support_pillar = { { radius = 40, color = YELLOW } }, -- Support Pillar
   support_pillar_dreadstone = { { radius = 40, color = YELLOW } }, -- Dreadstone Pillar
   trap_starfish = { -- Anenemy (Planted)
     { radius = 1.5, color = RED }, -- attack
     { radius = 4, color = YELLOW }, -- block birds
   },
+  voidcloth_umbrella = { 16 }, -- Umbralla
   watertree_pillar = { { radius = 28, color = GREEN } }, -- Great Tree Trunk
+  winch = { 22 }, -- Pinchin' Winch
 }
-click.sapling_moon = click.lunarthrall_plant -- Sapling (Moon) (Planted)
+click.sapling_moon = click.lunarthrall_plant -- Lunar Sapling (Planted)
 
 for prefab, value in pairs(click) do
   data[prefab] = value
@@ -74,7 +74,7 @@ batch_show_tags = { -- for search entities
 local prefab_placer = {
   'carnivalgame_wheelspin_kit', -- Cuckoo Spinwheel (Item)
   'dragonflyfurnace', -- Scaled Furnace
-  'dug_sapling_moon', -- Sapling (Moon) (Item)
+  'dug_sapling_moon', -- Lunar Sapling (Item)
   'dug_trap_starfish', -- Anenemy Trap (Item)
   'eyeturret_item', -- Houndius Shootius (Item)
   'lightning_rod', -- Lightning Rod
