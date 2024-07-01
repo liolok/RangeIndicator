@@ -1,6 +1,6 @@
 name = 'Range Indicator'
 description = 'Show ranges by clicking, deploying or hovering.'
-author = 'liolok'
+author = 'liolok, (TW)Eric'
 version = '2024.06.30.1'
 api_version = 10
 dst_compatible = true
@@ -52,39 +52,22 @@ configuration_options = {
     name = 'modifier_key',
   },
 
-  { name = 'Quick Clear', options = { { description = '', data = 0 } }, default = 0 },
+  { name = 'Quick Toggle', options = { { description = '', data = 0 } }, default = 0 },
   {
     label = 'Enable',
-    hover = 'Do you wanna bind a key to clear all the indicator?',
+    hover = 'Do you wanna bind a key to toggle most of the indicators?',
     options = { { description = 'Yes', data = true }, { description = 'No', data = false } },
     default = true,
-    name = 'enable_clear',
+    name = 'enable_batch',
   },
   {
     label = 'Keybind',
-    hover = 'Key to clear all the indicators',
+    hover = 'Key to toggle most of the indicators',
     options = keys,
     default = 'KEY_F5',
-    name = 'clear_key',
+    name = 'batch_key',
   },
 
---[[
-  { name = 'Quick Pause To Toggle', options = { { description = '', data = 0 } }, default = 0 },
-  {
-    label = 'Enable',
-    hover = 'Do you wanna bind a key to pause all the indicator?',
-    options = { { description = 'Yes', data = true }, { description = 'No', data = false } },
-    default = true,
-    name = 'enable_pause',
-  },
-  {
-    label = 'Keybind',
-    hover = 'Key to pause to toggle all the indicator',
-    options = keys,
-    default = 'KEY_F6',
-    name = 'pause_key',
-  },
---]]
   { name = 'Show on Hover', options = { { description = '', data = 0 } }, default = 0 },
   {
     label = 'Enable',
