@@ -1,6 +1,6 @@
 name = 'Range Indicator'
 description = 'Show ranges by clicking, deploying or hovering.'
-author = 'liolok, (TW)Eric'
+author = 'takaoinari, adai1198, (TW)Eric, liolok'
 version = '2024.06.30.1'
 api_version = 10
 dst_compatible = true

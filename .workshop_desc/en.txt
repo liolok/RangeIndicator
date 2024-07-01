@@ -52,8 +52,8 @@ Show ranges by clicking, deploying or hovering.
 [*]Umbralla
 [/list]
 
-[h2]Credits[/h2]
-冰汽、呼吸、adai1198、takaoinari、(TW)Eric
+[h2]Contributors[/h2]
+冰汽, Huxi, takaoinari, adai1198, (TW)Eric, liolok
 
 [hr][/hr]
 
