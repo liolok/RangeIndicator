@@ -1,6 +1,3 @@
-name = 'Range Indicator'
-description = 'Show ranges by clicking, deploying or hovering.'
-author = 'takaoinari, adai1198, (TW)Eric, liolok'
 version = '2024.07.02.2'
 api_version = 10
 dst_compatible = true
@@ -8,6 +5,74 @@ client_only_mod = true
 all_clients_require_mod = false
 icon = 'modicon.tex'
 icon_atlas = 'modicon.xml'
+
+local S = {
+  NAME = { 'Range Indicator', zh = '范围显示', zht = '範圍顯示' },
+  AUTHOR = {
+    'takaoinari, adai1198, (TW)Eric, liolok',
+    zh = 'takaoinari、adai1198、(TW)Eric、李皓奇',
+    zht = 'takaoinari、adai1198、(TW)Eric、李皓奇',
+  },
+  DESCRIPTION = {
+    'Show ranges by clicking, deploying or hovering.',
+    zh = '通过点击、部署、光标覆盖来显示各种范围。',
+    zht = '透過點擊、部署、遊標覆蓋來顯示各種範圍。',
+  },
+  MOUSE_BUTTON = { 'Mouse Button', zh = '鼠标按键', zht = '滑鼠按鍵' },
+  MOUSE_BUTTON_DETAIL = {
+    'Which button do you wanna use to toggle indicator?',
+    zh = '点击哪个按键切换范围显示？',
+    zht = '點擊哪個按鍵切換範圍顯示？',
+  },
+  LEFT_MOUSE_BUTTON = { 'Left Mouse Button', zh = '鼠标左键', zht = '滑鼠左鍵' },
+  MIDDLE_MOUSE_BUTTON = { 'Middle Mouse Button', zh = '鼠标中键', zht = '滑鼠中鍵' },
+  RIGHT_MOUSE_BUTTON = { 'Right Mouse Button', zh = '鼠标右键', zht = '滑鼠右鍵' },
+  MODIFIER_KEY = { 'Modifier Key', zh = '修饰键', zh = '修飾鍵' },
+  MODIFIRE_KEY_DETAIL = {
+    "Bind a key to toggle indicator only when it's pressed.",
+    zh = '绑定一个按键，只有按住时才可以点击切换显示。',
+    zht = '綁定一個按鍵，只有按住時才可以點選切換顯示。',
+  },
+  NONE = { 'none', zh = '无', zht = '無' },
+  QUICK_TOGGLE = { 'Quick Toggle', zh = '快速切换', zht = '快速切換' },
+  QUICK_TOGGLE_DETAIL = {
+    'Do you wanna bind a key to toggle most of the indicators?',
+    zh = '是否绑定切换大部分范围显示的按键',
+    zht = '是否綁定切換大部分範圍顯示的按鍵',
+  },
+  ENABLE = { 'Enable', zh = '启用', zht = '啟用' },
+  YES = { 'Yes', zh = '是', zht = '是' },
+  NO = { 'No', zh = '否', zht = '否' },
+  KEYBIND = { 'Keybind', zh = '按键绑定', zht = '按鍵綁定' },
+  KEYBIND_DETAIL = {
+    'Key to toggle most of the indicators',
+    zh = '切换大部分范围显示的按键',
+    zht = '切換大部分範圍顯示的按鍵',
+  },
+  HOVER = { 'Hover', zh = '光标覆盖', zht = '遊標覆蓋' },
+  HOVER_DETAIL = {
+    'Do you wanna show *any* indicator when hovering inventory items?',
+    zh = '光标覆盖于格子物品上方时，是否显示*任何*范围？',
+    zht = '當遊標覆蓋於格子物品上方時，是否顯示*任何*範圍？',
+  },
+  BOOKS = { 'Books', zh = '书籍', zht = '書籍' },
+  BOOKS_DETAIL = {
+    'Do you wanna show the indicator of Wickerbottom books?',
+    zh = '是否显示薇克巴顿书籍的范围？',
+    zht = '是否顯示薇克巴頓書籍的範圍',
+  },
+  OTHER = { 'Other', zh = '其它', zht = '其它' },
+  OTHER_DETAIL = {
+    'Do you wanna show the indicator of other items?\nSuch as Gunpowder, Pan Flute, Treeguard Idol...',
+    zh = '是否显示其它物品的范围？\n比如火药、排箫、树精雕像……',
+    zht = '是否顯示其它物品的範圍？ \n如火藥、排簫、樹精雕像…',
+  },
+}
+local T = ChooseTranslationTable
+
+name = T(S.NAME)
+author = T(S.AUTHOR)
+description = T(S.DESCRIPTION)
 
 -- stylua: ignore
 local keys = {
@@ -26,19 +91,19 @@ end
 
 configuration_options = {
   {
-    label = 'Mouse Button',
-    hover = 'Which button do you wanna use to toggle indicator?',
+    label = T(S.MOUSE_BUTTON),
+    hover = T(S.MOUSE_BUTTON_DETAIL),
     options = { -- emoji code from Klei's strings.lua:L12661
-      { description = '\238\132\128', data = 'MOUSEBUTTON_LEFT', hover = 'Left Mouse Button' },
-      { description = '\238\132\130', data = 'MOUSEBUTTON_MIDDLE', hover = 'Middle Mouse Button' },
-      { description = '\238\132\129', data = 'MOUSEBUTTON_RIGHT', hover = 'Right Mouse Button' },
+      { description = '\238\132\128', data = 'MOUSEBUTTON_LEFT', hover = T(S.LEFT_MOUSE_BUTTON) },
+      { description = '\238\132\130', data = 'MOUSEBUTTON_MIDDLE', hover = T(S.MIDDLE_MOUSE_BUTTON) },
+      { description = '\238\132\129', data = 'MOUSEBUTTON_RIGHT', hover = T(S.RIGHT_MOUSE_BUTTON) },
     },
     default = 'MOUSEBUTTON_MIDDLE',
     name = 'mouse_button',
   },
   {
-    label = 'Modifier Key',
-    hover = "Bind a key to toggle indicator only when it's pressed.",
+    label = T(S.MODIFIER_KEY),
+    hover = T(S.MODIFIRE_KEY_DETAIL),
     options = {
       { description = 'None', data = false },
       { description = 'Left Alt', data = 'KEY_LALT' },
@@ -52,41 +117,41 @@ configuration_options = {
     name = 'modifier_key',
   },
 
-  { name = 'Quick Toggle', options = { { description = '', data = 0 } }, default = 0 },
+  { name = T(S.QUICK_TOGGLE), options = { { description = '', data = 0 } }, default = 0 },
   {
-    label = 'Enable',
-    hover = 'Do you wanna bind a key to toggle most of the indicators?',
-    options = { { description = 'Yes', data = true }, { description = 'No', data = false } },
+    label = T(S.ENABLE),
+    hover = T(S.QUICK_TOGGLE_DETAIL),
+    options = { { description = T(S.YES), data = true }, { description = T(S.NO), data = false } },
     default = true,
     name = 'enable_batch',
   },
   {
-    label = 'Keybind',
-    hover = 'Key to toggle most of the indicators',
+    label = T(S.KEYBIND),
+    hover = T(S.KEYBIND_DETAIL),
     options = keys,
     default = 'KEY_F5',
     name = 'batch_key',
   },
 
-  { name = 'Show on Hover', options = { { description = '', data = 0 } }, default = 0 },
+  { name = T(S.HOVER), options = { { description = '', data = 0 } }, default = 0 },
   {
-    label = 'Enable',
-    hover = 'Do you wanna show *any* indicator when hovering inventory items?',
-    options = { { description = 'Yes', data = true }, { description = 'No', data = false } },
+    label = T(S.ENABLE),
+    hover = T(S.HOVER_DETAIL),
+    options = { { description = T(S.YES), data = true }, { description = T(S.NO), data = false } },
     default = true,
     name = 'enable_hover',
   },
   {
-    label = 'Books',
-    hover = 'Do you wanna show the indicator of Wickerbottom books?',
-    options = { { description = 'Yes', data = true }, { description = 'No', data = false } },
+    label = T(S.BOOKS),
+    hover = T(S.BOOKS_DETAIL),
+    options = { { description = T(S.YES), data = true }, { description = T(S.NO), data = false } },
     default = true,
     name = 'hover_books',
   },
   {
-    label = 'Other',
-    hover = 'Do you wanna show the indicator of other items?\nSuch as Gunpowder, Pan Flute, Treeguard Idol...',
-    options = { { description = 'Yes', data = true }, { description = 'No', data = false } },
+    label = T(S.OTHER),
+    hover = T(S.OTHER_DETAIL),
+    options = { { description = T(S.YES), data = true }, { description = T(S.NO), data = false } },
     default = true,
     name = 'hover_other',
   },
