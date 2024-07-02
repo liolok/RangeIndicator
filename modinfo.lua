@@ -27,7 +27,7 @@ local S = {
   LEFT_MOUSE_BUTTON = { 'Left Mouse Button', zh = '鼠标左键', zht = '滑鼠左鍵' },
   MIDDLE_MOUSE_BUTTON = { 'Middle Mouse Button', zh = '鼠标中键', zht = '滑鼠中鍵' },
   RIGHT_MOUSE_BUTTON = { 'Right Mouse Button', zh = '鼠标右键', zht = '滑鼠右鍵' },
-  MODIFIER_KEY = { 'Modifier Key', zh = '修饰键', zht = '修飾鍵' },
+  MODIFIER_KEY = { 'Modifier Key', zh = '组合键', zht = '組合鍵' },
   MODIFIRE_KEY_DETAIL = {
     "Bind a key to toggle indicator only when it's pressed.",
     zh = '绑定一个按键，只有按住时才可以点击切换显示。',
