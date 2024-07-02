@@ -27,7 +27,7 @@ local S = {
   LEFT_MOUSE_BUTTON = { 'Left Mouse Button', zh = '鼠标左键', zht = '滑鼠左鍵' },
   MIDDLE_MOUSE_BUTTON = { 'Middle Mouse Button', zh = '鼠标中键', zht = '滑鼠中鍵' },
   RIGHT_MOUSE_BUTTON = { 'Right Mouse Button', zh = '鼠标右键', zht = '滑鼠右鍵' },
-  MODIFIER_KEY = { 'Modifier Key', zh = '修饰键', zh = '修飾鍵' },
+  MODIFIER_KEY = { 'Modifier Key', zh = '修饰键', zh = '自訂按鍵' },
   MODIFIRE_KEY_DETAIL = {
     "Bind a key to toggle indicator only when it's pressed.",
     zh = '绑定一个按键，只有按住时才可以点击切换显示。',
@@ -59,13 +59,13 @@ local S = {
   BOOKS_DETAIL = {
     'Do you wanna show the indicator of Wickerbottom books?',
     zh = '是否显示薇克巴顿书籍的范围？',
-    zht = '是否顯示薇克巴頓書籍的範圍',
+    zht = '是否顯示阿嬤(圖書館管理員)書籍的範圍',
   },
   OTHER = { 'Other', zh = '其它', zht = '其它' },
   OTHER_DETAIL = {
     'Do you wanna show the indicator of other items?\nSuch as Gunpowder, Pan Flute, Treeguard Idol...',
     zh = '是否显示其它物品的范围？\n比如火药、排箫、树精雕像……',
-    zht = '是否顯示其它物品的範圍？ \n如火藥、排簫、樹精雕像…',
+    zht = '是否顯示其它物品的範圍？ \n如火藥、排簫、樹人雕像…',
   },
 }
 local T = ChooseTranslationTable
