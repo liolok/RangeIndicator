@@ -53,6 +53,10 @@ local click = { -- circle(s) of clicked entity prefab
   voidcloth_umbrella = { 16 }, -- Umbralla
   watertree_pillar = { { radius = 28, color = GREEN } }, -- Great Tree Trunk
   winch = { 22 }, -- Pinchin' Winch
+  winona_catapult = { -- Winona's Catapult
+    { radius = 6, color = RED }, -- attack (min)
+    { radius = 15, color = RED }, -- attack (max)
+  },
 }
 click.sapling_moon = click.lunarthrall_plant -- Lunar Sapling (Planted)
 
