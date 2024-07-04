@@ -88,6 +88,9 @@ for i = 1, #keys do
   keys[i] = { description = keys[i], data = 'KEY_' .. keys[i]:gsub('Keypad ', 'KP_'):upper() }
 end
 
+local function h(title) return { name = title, options = { { description = '', data = 0 } }, default = 0 } end -- header
+local booleans = { { description = T(S.YES), data = true }, { description = T(S.NO), data = false } } -- "Yes" or "No"
+
 configuration_options = {
   {
     label = T(S.MOUSE_BUTTON),
@@ -134,26 +137,8 @@ configuration_options = {
     name = 'batch_key',
   },
 
-  { name = T(S.HOVER), options = { { description = '', data = 0 } }, default = 0 },
-  {
-    label = T(S.ENABLE),
-    hover = T(S.HOVER_DETAIL),
-    options = { { description = T(S.YES), data = true }, { description = T(S.NO), data = false } },
-    default = true,
-    name = 'enable_hover',
-  },
-  {
-    label = T(S.BOOKS),
-    hover = T(S.BOOKS_DETAIL),
-    options = { { description = T(S.YES), data = true }, { description = T(S.NO), data = false } },
-    default = true,
-    name = 'hover_books',
-  },
-  {
-    label = T(S.OTHER),
-    hover = T(S.OTHER_DETAIL),
-    options = { { description = T(S.YES), data = true }, { description = T(S.NO), data = false } },
-    default = true,
-    name = 'hover_other',
-  },
+  h(T(S.HOVER)),
+  { label = T(S.ENABLE), hover = T(S.HOVER_DETAIL), options = booleans, default = true, name = 'enable_hover' },
+  { label = T(S.BOOKS), hover = T(S.BOOKS_DETAIL), options = booleans, default = true, name = 'hover_books' },
+  { label = T(S.OTHER), hover = T(S.OTHER_DETAIL), options = booleans, default = true, name = 'hover_other' },
 }
