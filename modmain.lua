@@ -1,3 +1,4 @@
+modimport('keybind')
 modimport('tuning')
 local G = GLOBAL
 local T = TUNING.RANGE_INDICATOR
