@@ -1,4 +1,4 @@
-version = '2024.07.02.5'
+version = '2024.07.04.1'
 api_version = 10
 dst_compatible = true
 client_only_mod = true
