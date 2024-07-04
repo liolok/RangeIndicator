@@ -58,7 +58,11 @@ local click = { -- circle(s) of clicked entity prefab
     { radius = 15, color = RED }, -- attack (max)
   },
 }
-click.sapling_moon = click.lunarthrall_plant -- Lunar Sapling (Planted)
+
+-- Support these for range after infected by Deadly Brightshade
+click.grass = click.lunarthrall_plant -- Grass
+click.sapling = click.lunarthrall_plant -- Sapling
+click.sapling_moon = click.lunarthrall_plant -- Lunar Sapling
 
 for prefab, value in pairs(click) do
   data[prefab] = value
@@ -80,7 +84,6 @@ batch_show_tags = { -- for search entities
 local prefab_placer = {
   'carnivalgame_wheelspin_kit', -- Cuckoo Spinwheel (Item)
   'dragonflyfurnace', -- Scaled Furnace
-  'dug_sapling_moon', -- Lunar Sapling (Item)
   'dug_trap_starfish', -- Anenemy Trap (Item)
   'eyeturret_item', -- Houndius Shootius (Item)
   'lightning_rod', -- Lightning Rod
