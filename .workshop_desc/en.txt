@@ -2,10 +2,12 @@ Show ranges by clicking, deploying or hovering.
 
 [h2]Features[/h2]
 [list]
-[*]By default, use middle mouse button to click object to show/hide its range.\n(Change to left/right/side button and/or bind modifier key if any conflict.)
-[*]By default, press F5 to quickly hide all indicators nearby, and show most of them.\n(This key binding could be disabled.)
+[*]By default, use middle mouse button to click object to show/hide its range.
+(Change to left/right/side button and/or bind modifier key if any conflict.)
+[*]By default, press F5 to quickly hide all indicators nearby, and show most of them.
 [*]Show range when deploy (build/plant)
-[*]Show range when inventory item hovered by cursor.\n(This feature could be partially/completely disabled.)
+[*]Show range when inventory item hovered by cursor.
+(This feature could be partially/completely disabled.)
 [/list]
 
 [h2]Compatibility[/h2]
