@@ -21,42 +21,56 @@ local S = {
   YES = { 'Yes', zh = '是', zht = '是' },
   NO = { 'No', zh = '否', zht = '否' },
   CLICK = { 'Click', zh = '点击', zht = '點擊' },
-  MODIFIER_KEY = { 'Modifier Key', zh = '组合键', zht = '組合鍵' },
-  MODIFIRE_KEY_DETAIL = {
-    "Bind a key to toggle indicator only when it's pressed.",
-    zh = '绑定一个按键，只有按住时才可以点击切换显示。',
-    zht = '綁定一個按鍵，只有按住時才可以點擊切換顯示。',
+  MODIFIER_KEY = {
+    'Modifier Key',
+    zh = '组合键',
+    zht = '組合鍵',
+    DETAIL = {
+      "Bind a key to toggle indicator only when it's pressed.",
+      zh = '绑定一个按键，只有按住时才可以点击切换显示。',
+      zht = '綁定一個按鍵，只有按住時才可以點擊切換顯示。',
+    },
   },
-  MOUSE_BUTTON = { 'Mouse Button', zh = '鼠标按键', zht = '滑鼠按鍵' },
-  MOUSE_BUTTON_DETAIL = {
-    'Which button do you wanna use to toggle indicator?',
-    zh = '点击哪个按键切换范围显示？',
-    zht = '點擊哪個按鍵切換範圍顯示？',
+  MOUSE_BUTTON = {
+    'Mouse Button',
+    zh = '鼠标按键',
+    zht = '滑鼠按鍵',
+    DETAIL = {
+      'Which button do you wanna use to toggle indicator?',
+      zh = '点击哪个按键切换范围显示？',
+      zht = '點擊哪個按鍵切換範圍顯示？',
+    },
   },
-  QUICK_TOGGLE = { 'Quick Toggle', zh = '快速切换', zht = '快速切換' },
-  QUICK_TOGGLE_DETAIL = {
-    'Bind a key to toggle most of the indicators?',
-    zh = '绑定切换大部分范围显示的按键',
-    zht = '綁定切換大部分範圍顯示的按鍵',
+  QUICK_TOGGLE = {
+    'Quick Toggle',
+    zh = '快速切换',
+    zht = '快速切換',
+    DETAIL = {
+      'Bind a key to toggle most of the indicators?',
+      zh = '绑定切换大部分范围显示的按键',
+      zht = '綁定切換大部分範圍顯示的按鍵',
+    },
   },
   HOVER = { 'Hover', zh = '光标覆盖', zht = '遊標覆蓋' },
-  ENABLE = { 'Enable', zh = '启用', zht = '啟用' },
-  HOVER_DETAIL = {
-    'Do you wanna show *any* indicator when hovering inventory items?',
-    zh = '光标覆盖于格子物品上方时，是否显示*任何*范围？',
-    zht = '當遊標覆蓋於格子物品上方時，是否顯示*任何*範圍？',
+  BOOKS = {
+    'Books',
+    zh = '书籍',
+    zht = '書籍',
+    DETAIL = {
+      'Do you wanna show the indicator of Wickerbottom books?',
+      zh = '是否显示薇克巴顿书籍的范围？',
+      zht = '是否顯示阿嬤(圖書館管理員)書籍的範圍',
+    },
   },
-  BOOKS = { 'Books', zh = '书籍', zht = '書籍' },
-  BOOKS_DETAIL = {
-    'Do you wanna show the indicator of Wickerbottom books?',
-    zh = '是否显示薇克巴顿书籍的范围？',
-    zht = '是否顯示阿嬤(圖書館管理員)書籍的範圍',
-  },
-  OTHER = { 'Other', zh = '其它', zht = '其它' },
-  OTHER_DETAIL = {
-    'Do you wanna show the indicator of other items?\nSuch as Gunpowder, Pan Flute, Treeguard Idol...',
-    zh = '是否显示其它物品的范围？\n比如火药、排箫、树精雕像……',
-    zht = '是否顯示其它物品的範圍？ \n如火藥、排簫、樹人雕像…',
+  OTHER = {
+    'Other',
+    zh = '其它',
+    zht = '其它',
+    DETAIL = {
+      'Do you wanna show the indicator of other items?\nSuch as Gunpowder, Pan Flute, Treeguard Idol...',
+      zh = '是否显示其它物品的范围？\n比如火药、排箫、树精雕像……',
+      zht = '是否顯示其它物品的範圍？ \n如火藥、排簫、樹人雕像…',
+    },
   },
 }
 local T = ChooseTranslationTable
@@ -88,7 +102,7 @@ configuration_options = {
   h(T(S.CLICK)),
   {
     label = T(S.MODIFIER_KEY),
-    hover = T(S.MODIFIRE_KEY_DETAIL),
+    hover = T(S.MODIFIER_KEY.DETAIL),
     options = keys,
     default = false,
     name = 'modifier_key',
@@ -96,7 +110,7 @@ configuration_options = {
   },
   {
     label = T(S.MOUSE_BUTTON),
-    hover = T(S.MOUSE_BUTTON_DETAIL),
+    hover = T(S.MOUSE_BUTTON.DETAIL),
     options = { -- emoji and keycode from strings.lua
       { description = '\238\132\128', data = 1000 }, -- Left Mouse Button
       { description = '\238\132\129', data = 1001 }, -- Right Mouse Button
@@ -109,7 +123,7 @@ configuration_options = {
   },
   {
     label = T(S.QUICK_TOGGLE),
-    hover = T(S.QUICK_TOGGLE_DETAIL),
+    hover = T(S.QUICK_TOGGLE.DETAIL),
     options = keys,
     default = 'KEY_F5',
     name = 'batch_key',
@@ -117,7 +131,6 @@ configuration_options = {
   },
 
   h(T(S.HOVER)),
-  { label = T(S.ENABLE), hover = T(S.HOVER_DETAIL), options = booleans, default = true, name = 'enable_hover' },
-  { label = T(S.BOOKS), hover = T(S.BOOKS_DETAIL), options = booleans, default = true, name = 'hover_books' },
-  { label = T(S.OTHER), hover = T(S.OTHER_DETAIL), options = booleans, default = true, name = 'hover_other' },
+  { label = T(S.BOOKS), hover = T(S.BOOKS.DETAIL), options = booleans, default = true, name = 'hover_books' },
+  { label = T(S.OTHER), hover = T(S.OTHER.DETAIL), options = booleans, default = true, name = 'hover_other' },
 }

@@ -60,6 +60,8 @@ for prefab, value in pairs(click) do
   data[prefab] = value
 end
 
+-- Feature: Quick Toggle -------------------------------------------------------
+
 batch_show_tags = { -- for search entities
   'eyeturret',
   'lunarthrall_plant',
@@ -132,33 +134,40 @@ local prefab_misc = {
   'voidcloth_umbrella', -- Umbralla
 }
 
-if GetModConfigData('enable_hover') then
-  if GetModConfigData('hover_books') then
-    for prefab, value in pairs(book) do
-      hover[prefab] = value
-    end
+local enable_hover = false
+if GetModConfigData('hover_books') then
+  enable_hover = true
+  for prefab, value in pairs(book) do
+    hover[prefab] = value
   end
-  if GetModConfigData('hover_other') then
-    for prefab, value in pairs(misc) do
-      hover[prefab] = value
-    end
-    for _, prefab in ipairs(prefab_misc) do
-      hover[prefab] = click[prefab] or nil
-    end
+end
+if GetModConfigData('hover_other') then
+  enable_hover = true
+  for prefab, value in pairs(misc) do
+    hover[prefab] = value
   end
+  for _, prefab in ipairs(prefab_misc) do
+    hover[prefab] = click[prefab] or nil
+  end
+end
 
-  for prefab, value in pairs(hover) do
-    data[prefab] = value
-  end
+for prefab, value in pairs(hover) do
+  data[prefab] = value
 end
 
 -- Export ----------------------------------------------------------------------
 
+local function Raw(v) return GLOBAL.rawget(GLOBAL, GetModConfigData(v)) end
+
 GLOBAL.TUNING.RANGE_INDICATOR = { -- create our mod namespace
   DATA = data,
-  CLICK = click,
-  TAGS = batch_show_tags,
-  HOVER = hover,
-  PLACER = prefab_placer,
   DEFAULT_COLOR = WHITE,
+
+  CLICK = { MODIFIER_KEY = Raw('modifier_key'), MOUSE_BUTTON = GetModConfigData('mouse_button'), SUPPORT = click },
+
+  BATCH = { KEY = Raw('batch_key'), TAG = batch_show_tags },
+
+  DEPLOY = { PLACER = prefab_placer },
+
+  HOVER = { ENABLE = enable_hover, SUPPORT = hover },
 }

@@ -1,5 +1,6 @@
-modimport('keybind')
-modimport('tuning')
+modimport('keybind') -- refine key binding UI
+modimport('tuning') -- load data and config
+
 local G = GLOBAL
 local T = TUNING.RANGE_INDICATOR
 
@@ -14,8 +15,8 @@ local function CreateCircle(inst, radius, color) -- Klei's function CreatePlacer
   as:SetScale(radius / 9.7, radius / 9.7) -- scale by catapult texture size
 
   -- credit: CarlZalph, https://forums.kleientertainment.com/forums/topic/69594-solved-how-to-make-character-glow-a-certain-color/#comment-804165
+  as:SetMultColour(G.unpack(color)) -- erase original color
   as:SetAddColour(G.unpack(color))
-  as:SetMultColour(G.unpack(color)) -- try to erase original color
 
   circle.entity:SetCanSleep(false)
   circle.persists = false
@@ -58,55 +59,53 @@ local function ToggleRangeIndicator(inst)
   fn(inst)
 end
 
-for _, prefab in ipairs(T.PLACER) do
-  AddPrefabPostInit(prefab, ShowRangeIndicator)
-end
-
 G.TheInput:AddMouseButtonHandler(function(button, down)
-  local modifier = GetModConfigData('modifier_key')
-  if modifier and not G.TheInput:IsKeyDown(G.rawget(G, modifier)) then return end
-  if not (button == GetModConfigData('mouse_button') and down) then return end
+  local modifier = T.CLICK.MODIFIER_KEY
+  if modifier and not G.TheInput:IsKeyDown(modifier) then return end
+  if not (button == T.CLICK.MOUSE_BUTTON and down) then return end
   local entity = G.TheInput:GetWorldEntityUnderMouse()
-  if entity and T.CLICK[entity.prefab] then ToggleRangeIndicator(entity) end
+  if entity and T.CLICK.SUPPORT[entity.prefab] then ToggleRangeIndicator(entity) end
 end)
 
 G.TheInput:AddKeyHandler(function(key, down)
-  if not (key == G.rawget(G, GetModConfigData('batch_key')) and down) then return end
+  if not (key == T.BATCH.KEY and down) then return end
   local x, y, z = G.ThePlayer.Transform:GetWorldPosition()
   local entities = G.TheSim:FindEntities(x, y, z, 80, { 'CLASSIFIED', 'NOCLICK', 'RANGE_INDICATOR' })
-  local clear = false
+  local cleared = false
   for _, e in ipairs(entities) do
     if e:IsValid() then
-      clear = true
       local parent = e.entity:GetParent()
       if parent and parent.circles then parent.circles = nil end
       e:Remove()
+      cleared = true
     end
   end
-  if clear then return end
-  local entities = G.TheSim:FindEntities(x, y, z, 80, nil, nil, T.TAGS)
+  if cleared then return end
+  local entities = G.TheSim:FindEntities(x, y, z, 80, nil, nil, T.BATCH.TAG)
   for _, e in ipairs(entities) do
-    if T.CLICK[e.prefab] then ShowRangeIndicator(e) end
+    if T.CLICK.SUPPORT[e.prefab] then ShowRangeIndicator(e) end
   end
 end)
 
-if GetModConfigData('enable_hover') then
-  AddClassPostConstruct('widgets/hoverer', function(self)
-    if not self.text then return end
-    local OldSetString = self.text.SetString
-    local OldHide = self.text.Hide
-
-    self.text.SetString = function(text, str, ...)
-      HideRangeIndicator(G.ThePlayer)
-      local e = G.TheInput:GetHUDEntityUnderMouse()
-      local prefab = e and e.widget and e.widget.parent and e.widget.parent.item and e.widget.parent.item.prefab or nil
-      if prefab and T.HOVER[prefab] then ShowRangeIndicator(G.ThePlayer, prefab) end
-      return OldSetString(text, str, ...)
-    end
-
-    self.text.Hide = function(...)
-      HideRangeIndicator(G.ThePlayer)
-      return OldHide(...)
-    end
-  end)
+for _, prefab in ipairs(T.DEPLOY.PLACER) do
+  AddPrefabPostInit(prefab, ShowRangeIndicator)
 end
+
+AddClassPostConstruct('widgets/hoverer', function(self)
+  if not (self.text and T.HOVER.ENABLE) then return end
+
+  local OldSetString = self.text.SetString
+  self.text.SetString = function(text, str, ...)
+    HideRangeIndicator(G.ThePlayer)
+    local e = G.TheInput:GetHUDEntityUnderMouse()
+    local prefab = e and e.widget and e.widget.parent and e.widget.parent.item and e.widget.parent.item.prefab or nil
+    if prefab and T.HOVER.SUPPORT[prefab] then ShowRangeIndicator(G.ThePlayer, prefab) end
+    return OldSetString(text, str, ...)
+  end
+
+  local OldHide = self.text.Hide
+  self.text.Hide = function(...)
+    HideRangeIndicator(G.ThePlayer)
+    return OldHide(...)
+  end
+end)
