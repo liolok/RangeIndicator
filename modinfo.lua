@@ -24,9 +24,6 @@ local S = {
     zh = '点击哪个按键切换范围显示？',
     zht = '點擊哪個按鍵切換範圍顯示？',
   },
-  LEFT_MOUSE_BUTTON = { 'Left Mouse Button', zh = '鼠标左键', zht = '滑鼠左鍵' },
-  MIDDLE_MOUSE_BUTTON = { 'Middle Mouse Button', zh = '鼠标中键', zht = '滑鼠中鍵' },
-  RIGHT_MOUSE_BUTTON = { 'Right Mouse Button', zh = '鼠标右键', zht = '滑鼠右鍵' },
   MODIFIER_KEY = { 'Modifier Key', zh = '组合键', zht = '組合鍵' },
   MODIFIRE_KEY_DETAIL = {
     "Bind a key to toggle indicator only when it's pressed.",
@@ -95,12 +92,14 @@ configuration_options = {
   {
     label = T(S.MOUSE_BUTTON),
     hover = T(S.MOUSE_BUTTON_DETAIL),
-    options = { -- emoji code from Klei's strings.lua:L12661
-      { description = '\238\132\128', data = 'MOUSEBUTTON_LEFT', hover = T(S.LEFT_MOUSE_BUTTON) },
-      { description = '\238\132\130', data = 'MOUSEBUTTON_MIDDLE', hover = T(S.MIDDLE_MOUSE_BUTTON) },
-      { description = '\238\132\129', data = 'MOUSEBUTTON_RIGHT', hover = T(S.RIGHT_MOUSE_BUTTON) },
+    options = { -- emoji and keycode from strings.lua
+      { description = '\238\132\128', data = 1000 }, -- Left Mouse Button
+      { description = '\238\132\129', data = 1001 }, -- Right Mouse Button
+      { description = '\238\132\130', data = 1002 }, -- Middle Mouse Button
+      { description = '\238\132\131', data = 1005 }, -- Mouse Button 4
+      { description = '\238\132\132', data = 1006 }, -- Mouse Button 5
     },
-    default = 'MOUSEBUTTON_MIDDLE',
+    default = 1002,
     name = 'mouse_button',
   },
   {

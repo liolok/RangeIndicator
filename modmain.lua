@@ -64,7 +64,7 @@ end
 G.TheInput:AddMouseButtonHandler(function(button, down)
   local modifier = GetModConfigData('modifier_key')
   if modifier and not G.TheInput:IsKeyDown(G.rawget(G, modifier)) then return end
-  if not (button == G.rawget(G, GetModConfigData('mouse_button')) and down) then return end
+  if not (button == GetModConfigData('mouse_button') and down) then return end
   local entity = G.TheInput:GetWorldEntityUnderMouse()
   if entity and T.CLICK[entity.prefab] then ToggleRangeIndicator(entity) end
 end)
