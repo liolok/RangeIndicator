@@ -70,27 +70,25 @@ G.TheInput:AddMouseButtonHandler(function(button, down)
   if entity and T.CLICK[entity.prefab] then ToggleRangeIndicator(entity) end
 end)
 
-if GetModConfigData('enable_batch') then
-  G.TheInput:AddKeyHandler(function(key, down)
-    if not (key == G.rawget(G, GetModConfigData('batch_key')) and down) then return end
-    local x, y, z = G.ThePlayer.Transform:GetWorldPosition()
-    local entities = G.TheSim:FindEntities(x, y, z, 80, { 'CLASSIFIED', 'NOCLICK', 'RANGE_INDICATOR' })
-    local clear = false
-    for _, e in ipairs(entities) do
-      if e:IsValid() then
-        clear = true
-        local parent = e.entity:GetParent()
-        if parent and parent.circles then parent.circles = nil end
-        e:Remove()
-      end
+G.TheInput:AddKeyHandler(function(key, down)
+  if not (key == G.rawget(G, GetModConfigData('batch_key')) and down) then return end
+  local x, y, z = G.ThePlayer.Transform:GetWorldPosition()
+  local entities = G.TheSim:FindEntities(x, y, z, 80, { 'CLASSIFIED', 'NOCLICK', 'RANGE_INDICATOR' })
+  local clear = false
+  for _, e in ipairs(entities) do
+    if e:IsValid() then
+      clear = true
+      local parent = e.entity:GetParent()
+      if parent and parent.circles then parent.circles = nil end
+      e:Remove()
     end
-    if clear then return end
-    local entities = G.TheSim:FindEntities(x, y, z, 80, nil, nil, T.TAGS)
-    for _, e in ipairs(entities) do
-      if T.CLICK[e.prefab] then ShowRangeIndicator(e) end
-    end
-  end)
-end
+  end
+  if clear then return end
+  local entities = G.TheSim:FindEntities(x, y, z, 80, nil, nil, T.TAGS)
+  for _, e in ipairs(entities) do
+    if T.CLICK[e.prefab] then ShowRangeIndicator(e) end
+  end
+end)
 
 if GetModConfigData('enable_hover') then
   AddClassPostConstruct('widgets/hoverer', function(self)
