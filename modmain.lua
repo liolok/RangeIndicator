@@ -82,7 +82,7 @@ G.TheInput:AddKeyHandler(function(key, down)
   if cleared then return end
   local entities = G.TheSim:FindEntities(x, y, z, 80, nil, nil, T.BATCH.TAG)
   for _, e in ipairs(entities) do
-    if T.CLICK.SUPPORT[e.prefab] then ShowRangeIndicator(e) end
+    ShowRangeIndicator(e)
   end
 end)
 
