@@ -68,7 +68,7 @@ G.TheInput:AddMouseButtonHandler(function(button, down)
 end)
 
 G.TheInput:AddKeyHandler(function(key, down)
-  if not (key == T.BATCH.KEY and down) then return end
+  if not (G.ThePlayer and key == T.BATCH.KEY and down) then return end
   local x, y, z = G.ThePlayer.Transform:GetWorldPosition()
   local entities = G.TheSim:FindEntities(x, y, z, 80, { 'CLASSIFIED', 'NOCLICK', 'RANGE_INDICATOR' })
   local cleared = false
