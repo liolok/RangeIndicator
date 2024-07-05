@@ -9,10 +9,18 @@ local WHITE = { 1, 1, 1, 1 }
 
 local data = {} -- circle(s) of all possible prefab
 
+local function R(...) -- for providing only radius of circle(s)
+  local arguments, circles = {...}, {}
+  for _, arg in ipairs(arguments) do
+    table.insert(circles, { radius = arg, color = WHITE }) -- default color: white
+  end
+  return circles
+end
+
 -- Feature: Click --------------------------------------------------------------
 
 local click = { -- circle(s) of clicked entity prefab
-  carnivalgame_wheelspin_station = { 4 }, -- Cuckoo Spinwheel blocks birds
+  carnivalgame_wheelspin_station = R(4), -- Cuckoo Spinwheel blocks birds
   deerclopseyeball_sentryward = { -- Ice Crystaleyezer
     { radius = 3.5, color = CYAN }, -- freeze
     { radius = 5, color = WHITE }, -- generate Mini Glacier (min)
@@ -21,38 +29,38 @@ local click = { -- circle(s) of clicked entity prefab
   },
   dragonflyfurnace = { { radius = 9.5, color = RED } }, -- Scaled Furnace
   eyeturret = { { radius = 18, color = PINK } }, -- Houndius Shootius (Build)
-  firesuppressor = { 15 }, -- Ice Flingomatic
+  firesuppressor = R(15), -- Ice Flingomatic
   gunpowder = { { radius = 3, color = RED } }, -- Gunpowder
   lava_pond = { { radius = 10, color = RED } }, -- Magma
-  leif_idol = { 10 }, -- Treeguard Idol
+  leif_idol = R(10), -- Treeguard Idol
   lightning_rod = { { radius = 40, color = YELLOW } }, -- Lightning Rod
   lunarthrall_plant = { -- Deadly Brightshade
     { radius = 12, color = YELLOW }, -- aggro
     { radius = 30, color = GREEN }, -- protect infection
   },
-  moon_altar = { 20 }, -- Celestial Altar
-  moon_altar_astral = { 20 }, -- Celestial Sanctum
-  moon_altar_cosmic = { 20 }, -- Celestial Tribute
-  moon_fissure = { 20 }, -- Celestial Fissure
-  moonbase = { 8 }, -- Moon Stone
+  moon_altar = R(20), -- Celestial Altar
+  moon_altar_astral = R(20), -- Celestial Sanctum
+  moon_altar_cosmic = R(20), -- Celestial Tribute
+  moon_fissure = R(20), -- Celestial Fissure
+  moonbase = R(8), -- Moon Stone
   mushroom_light = { { radius = 11.5, color = CYAN } }, -- Mushlight
   mushroom_light2 = { { radius = 10.7, color = CYAN } }, -- Glowcap
-  oceantree = { 22 }, -- Knobbly Tree
-  oceantreenut = { 22 }, -- Knobbly Tree Nut
-  oceantree_pillar = { 22 }, -- Above-Average Tree Trunk
+  oceantree = R(22), -- Knobbly Tree
+  oceantreenut = R(22), -- Knobbly Tree Nut
+  oceantree_pillar = R(22), -- Above-Average Tree Trunk
   phonograph = { { radius = 8, color = GREEN } }, -- Gramophone
-  singingshell_octave3 = { 2 }, -- Shell Bell (Baritone)
-  singingshell_octave4 = { 2 }, -- Shell Bell (Alto)
-  singingshell_octave5 = { 2 }, -- Shell Bell (Soprano)
+  singingshell_octave3 = R(2), -- Shell Bell (Baritone)
+  singingshell_octave4 = R(2), -- Shell Bell (Alto)
+  singingshell_octave5 = R(2), -- Shell Bell (Soprano)
   support_pillar = { { radius = 40, color = YELLOW } }, -- Support Pillar
   support_pillar_dreadstone = { { radius = 40, color = YELLOW } }, -- Dreadstone Pillar
   trap_starfish = { -- Anenemy (Planted)
     { radius = 1.5, color = RED }, -- attack
     { radius = 4, color = YELLOW }, -- block birds
   },
-  voidcloth_umbrella = { 16 }, -- Umbralla
+  voidcloth_umbrella = R(16), -- Umbralla
   watertree_pillar = { { radius = 28, color = GREEN } }, -- Great Tree Trunk
-  winch = { 22 }, -- Pinchin' Winch
+  winch = R(22), -- Pinchin' Winch
   winona_catapult = { -- Winona's Catapult
     { radius = 6, color = RED }, -- attack (min)
     { radius = 15, color = RED }, -- attack (max)
@@ -109,26 +117,26 @@ local hover = {} -- circle(s) of hovered inventory item prefab
 
 -- TODO: check these ranges
 local book = { -- circle(s) of Wickerbottom books prefab
-  book_birds = { 3, 11.5 },
-  book_brimstone = { 3, 15 }, -- The End is Nigh! generates 16 consecutive Lightning strikes
-  book_fire = { 16 }, -- Pyrokinetics Explained extinguishes all burning or smoldering objects
-  book_fish = { 13 }, -- The Angler's Survival Guide summons Ocean Fish, 10 + 3 from Klei's prefabs/books.lua:L534-L586
-  book_gardening = { 30 },
-  book_horticulture = { 30 },
-  book_horticulture_upgraded = { 30 },
-  book_light = { 3 },
-  book_light_upgraded = { 3 },
-  book_rain = { 4 },
-  book_research_station = { 16 },
-  book_silviculture = { 30 },
-  book_sleep = { 30 }, -- Sleepytime Stories
-  book_temperature = { 16 },
-  book_tentacles = { 3, 8.6 }, -- On Tentacles
-  book_web = { 5.5 },
+  book_birds = R(3, 11.5),
+  book_brimstone = R(3, 15), -- The End is Nigh! generates 16 consecutive Lightning strikes
+  book_fire = R(16), -- Pyrokinetics Explained extinguishes all burning or smoldering objects
+  book_fish = R(13), -- The Angler's Survival Guide summons Ocean Fish, 10 + 3 from Klei's prefabs/books.lua:L534-L586
+  book_gardening = R(30),
+  book_horticulture = R(30),
+  book_horticulture_upgraded = R(30),
+  book_light = R(3),
+  book_light_upgraded = R(3),
+  book_rain = R(4),
+  book_research_station = R(16),
+  book_silviculture = R(30),
+  book_sleep = R(30), -- Sleepytime Stories
+  book_temperature = R(16),
+  book_tentacles = R(3, 8.6), -- On Tentacles
+  book_web = R(5.5),
 }
 
 local misc = { -- circle(s) of other miscellaneous items prefab
-  panflute = { 15 }, -- Pan Flute
+  panflute = R(15), -- Pan Flute
 }
 
 local prefab_misc = {
@@ -168,8 +176,6 @@ local function Raw(v) return GLOBAL.rawget(GLOBAL, GetModConfigData(v)) end
 
 GLOBAL.TUNING.RANGE_INDICATOR = { -- create our mod namespace
   DATA = data,
-  DEFAULT_COLOR = WHITE,
-
   CLICK = { MODIFIER_KEY = Raw('modifier_key'), MOUSE_BUTTON = GetModConfigData('mouse_button'), SUPPORT = click },
   BATCH = { KEY = Raw('batch_key'), TAG = batch_show_tags },
   DEPLOY = { PLACER = prefab_placer },

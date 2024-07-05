@@ -36,13 +36,12 @@ local function CreateCircle(inst, radius, color) -- CreatePlacerRing(), prefabs/
 end
 
 local function ShowRangeIndicator(inst, prefab)
+  local data = T.DATA[prefab or inst.prefab]
+  if not data then return end -- prefab not supported
   if inst.circles then return end -- circle(s) already created
   inst.circles = {}
-  for _, data in pairs(T.DATA[prefab or inst.prefab] or {}) do
-    local radius = type(data) == 'table' and data.radius or data
-    local color = type(data) == 'table' and data.color or T.DEFAULT_COLOR
-    local circle = CreateCircle(inst, radius, color)
-    table.insert(inst.circles, circle)
+  for _, v in pairs(data) do
+    table.insert(inst.circles, CreateCircle(inst, v.radius, v.color))
   end
 end
 
