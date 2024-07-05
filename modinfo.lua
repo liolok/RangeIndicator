@@ -6,7 +6,7 @@ all_clients_require_mod = false
 icon = 'modicon.tex'
 icon_atlas = 'modicon.xml'
 
-local S = {
+local S = { -- localized strings
   NAME = { 'Range Indicator', zh = '范围显示', zht = '範圍顯示' },
   AUTHOR = {
     'takaoinari, adai1198, (TW)Eric, liolok',
@@ -20,56 +20,56 @@ local S = {
   },
   YES = { 'Yes', zh = '是', zht = '是' },
   NO = { 'No', zh = '否', zht = '否' },
-  CLICK = { 'Click', zh = '点击', zht = '點擊' },
-  MODIFIER_KEY = {
-    'Modifier Key',
-    zh = '组合键',
-    zht = '組合鍵',
+  CLICK = {
+    'Click Toggle',
+    zh = '点击切换',
+    zht = '點擊切換',
+    MODIFIER_KEY = {
+      'Modifier Key',
+      zh = '组合键',
+      zht = '組合鍵',
+      DETAIL = {
+        'Click to toggle range only when this key pressed.',
+        zh = '按住此按键时才可以点击切换显示',
+        zht = '按住此按鍵時才可點擊切換範圍顯示',
+      },
+    },
+    MOUSE_BUTTON = { 'Mouse Button', zh = '鼠标按键', zht = '滑鼠按鍵' },
+  },
+  BATCH = {
+    'Batch Toggle',
+    zh = '批量切换',
+    zht = '大量切換',
+    KEY = { 'Key', zh = '按键', zht = '按鍵' },
     DETAIL = {
-      "Bind a key to toggle indicator only when it's pressed.",
-      zh = '绑定一个按键，只有按住时才可以点击切换显示。',
-      zht = '綁定一個按鍵，只有按住時才可以點擊切換顯示。',
+      'Hide all ranges / Show many ranges',
+      zh = '隐藏所有范围 / 显示很多范围',
+      zht = '隱藏所有範圍 / 顯示很多範圍',
     },
   },
-  MOUSE_BUTTON = {
-    'Mouse Button',
-    zh = '鼠标按键',
-    zht = '滑鼠按鍵',
-    DETAIL = {
-      'Which button do you wanna use to toggle indicator?',
-      zh = '点击哪个按键切换范围显示？',
-      zht = '點擊哪個按鍵切換範圍顯示？',
+  HOVER = {
+    'Hover Inventory Item',
+    zh = '光标覆盖格子物品',
+    zht = '遊標覆蓋格子物品',
+    BOOKS = {
+      'Books',
+      zh = '书籍',
+      zht = '書籍',
+      DETAIL = {
+        'Show range of Wickerbottom books?',
+        zh = '是否显示薇克巴顿（老奶奶/图书管理员）书籍的范围？',
+        zht = '是否顯示薇克巴頓（阿嬤/圖書館管理員）書籍的範圍？',
+      },
     },
-  },
-  QUICK_TOGGLE = {
-    'Quick Toggle',
-    zh = '快速切换',
-    zht = '快速切換',
-    DETAIL = {
-      'Bind a key to toggle most of the indicators?',
-      zh = '绑定切换大部分范围显示的按键',
-      zht = '綁定切換大部分範圍顯示的按鍵',
-    },
-  },
-  HOVER = { 'Hover', zh = '光标覆盖', zht = '遊標覆蓋' },
-  BOOKS = {
-    'Books',
-    zh = '书籍',
-    zht = '書籍',
-    DETAIL = {
-      'Do you wanna show the indicator of Wickerbottom books?',
-      zh = '是否显示薇克巴顿书籍的范围？',
-      zht = '是否顯示阿嬤(圖書館管理員)書籍的範圍',
-    },
-  },
-  OTHER = {
-    'Other',
-    zh = '其它',
-    zht = '其它',
-    DETAIL = {
-      'Do you wanna show the indicator of other items?\nSuch as Gunpowder, Pan Flute, Treeguard Idol...',
-      zh = '是否显示其它物品的范围？\n比如火药、排箫、树精雕像……',
-      zht = '是否顯示其它物品的範圍？ \n如火藥、排簫、樹人雕像…',
+    OTHER = {
+      'Other',
+      zh = '其它',
+      zht = '其它',
+      DETAIL = {
+        'Show range of other items?\nSuch as Gunpowder, Pan Flute, Treeguard Idol...',
+        zh = '是否显示其它物品的范围？\n比如火药、排箫、树精雕像……',
+        zht = '是否顯示其它物品的範圍？\n如火藥、排簫、樹人雕像…',
+      },
     },
   },
 }
@@ -94,22 +94,21 @@ for i = 1, #keys do
   keys[i] = { description = keys[i], data = 'KEY_' .. keys[i]:gsub('^Num ', 'KP_'):upper() }
 end
 
-local function h(title) return { name = title, options = { { description = '', data = 0 } }, default = 0 } end -- header
-local booleans = { { description = T(S.YES), data = true }, { description = T(S.NO), data = false } } -- "Yes" or "No"
+local function H(title) return { name = T(title), options = { { description = '', data = 0 } }, default = 0 } end -- header
+local BOOL = { { description = T(S.YES), data = true }, { description = T(S.NO), data = false } } -- "Yes" or "No"
 
 configuration_options = {
-  h(T(S.CLICK)),
+  H(S.CLICK),
   {
-    label = T(S.MODIFIER_KEY),
-    hover = T(S.MODIFIER_KEY.DETAIL),
+    label = T(S.CLICK.MODIFIER_KEY),
+    hover = T(S.CLICK.MODIFIER_KEY.DETAIL),
     options = keys,
+    is_keybind = true,
     default = 'KEY_DISABLED',
     name = 'modifier_key',
-    is_keybind = true,
   },
   {
-    label = T(S.MOUSE_BUTTON),
-    hover = T(S.MOUSE_BUTTON.DETAIL),
+    label = T(S.CLICK.MOUSE_BUTTON),
     options = { -- emoji and keycode from strings.lua
       { description = '\238\132\128', data = 1000 }, -- Left Mouse Button
       { description = '\238\132\129', data = 1001 }, -- Right Mouse Button
@@ -120,16 +119,16 @@ configuration_options = {
     default = 1002,
     name = 'mouse_button',
   },
+  H(S.BATCH),
   {
-    label = T(S.QUICK_TOGGLE),
-    hover = T(S.QUICK_TOGGLE.DETAIL),
+    label = T(S.BATCH.KEY),
+    hover = T(S.BATCH.DETAIL),
     options = keys,
+    is_keybind = true,
     default = 'KEY_F5',
     name = 'batch_key',
-    is_keybind = true,
   },
-
-  h(T(S.HOVER)),
-  { label = T(S.BOOKS), hover = T(S.BOOKS.DETAIL), options = booleans, default = true, name = 'hover_books' },
-  { label = T(S.OTHER), hover = T(S.OTHER.DETAIL), options = booleans, default = true, name = 'hover_other' },
+  H(S.HOVER),
+  { label = T(S.HOVER.BOOKS), hover = T(S.HOVER.BOOKS.DETAIL), options = BOOL, default = true, name = 'hover_books' },
+  { label = T(S.HOVER.OTHER), hover = T(S.HOVER.OTHER.DETAIL), options = BOOL, default = true, name = 'hover_other' },
 }
