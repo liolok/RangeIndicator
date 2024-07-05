@@ -10,7 +10,7 @@ local WHITE = { 1, 1, 1, 1 }
 local data = {} -- circle(s) of all possible prefab
 
 local function R(...) -- for providing only radius of circle(s)
-  local arguments, circles = {...}, {}
+  local arguments, circles = { ... }, {}
   for _, arg in ipairs(arguments) do
     table.insert(circles, { radius = arg, color = WHITE }) -- default color: white
   end
