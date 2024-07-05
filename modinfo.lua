@@ -91,8 +91,7 @@ local keys = { -- from STRINGS.UI.CONTROLSSCREEN.INPUTS[1] of strings.lua, need 
   'Num Period', 'Num Divide', 'Num Multiply', 'Num Minus', 'Num Plus', 'Disabled',
 }
 for i = 1, #keys do
-  local key = 'KEY_' .. keys[i]:gsub('Num ', 'KP_'):upper()
-  keys[i] = { description = keys[i], data = (keys[i] ~= 'Disabled') and key or false }
+  keys[i] = { description = keys[i], data = 'KEY_' .. keys[i]:gsub('^Num ', 'KP_'):upper() }
 end
 
 local function h(title) return { name = title, options = { { description = '', data = 0 } }, default = 0 } end -- header
@@ -104,7 +103,7 @@ configuration_options = {
     label = T(S.MODIFIER_KEY),
     hover = T(S.MODIFIER_KEY.DETAIL),
     options = keys,
-    default = false,
+    default = 'KEY_DISABLED',
     name = 'modifier_key',
     is_keybind = true,
   },
