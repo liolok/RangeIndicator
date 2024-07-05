@@ -59,7 +59,7 @@ local click = { -- circle(s) of clicked entity prefab
   },
 }
 
--- Support these for range after infected by Deadly Brightshade
+-- Support these plants for range after infected by Deadly Brightshade
 click.grass = click.lunarthrall_plant -- Grass
 click.sapling = click.lunarthrall_plant -- Sapling
 click.sapling_moon = click.lunarthrall_plant -- Lunar Sapling
@@ -171,10 +171,7 @@ GLOBAL.TUNING.RANGE_INDICATOR = { -- create our mod namespace
   DEFAULT_COLOR = WHITE,
 
   CLICK = { MODIFIER_KEY = Raw('modifier_key'), MOUSE_BUTTON = GetModConfigData('mouse_button'), SUPPORT = click },
-
   BATCH = { KEY = Raw('batch_key'), TAG = batch_show_tags },
-
   DEPLOY = { PLACER = prefab_placer },
-
   HOVER = { ENABLE = enable_hover, SUPPORT = hover },
 }

@@ -4,13 +4,13 @@ modimport('tuning') -- load data and config
 local G = GLOBAL
 local T = TUNING.RANGE_INDICATOR
 
-local function CreateCircle(inst, radius, color) -- Klei's function CreatePlacerRing(), prefabs/winona_catapult.lua:L270
+local function CreateCircle(inst, radius, color) -- CreatePlacerRing(), prefabs/winona_catapult.lua
   local circle = G.CreateEntity()
   circle.entity:SetParent(inst.entity)
   local tf = circle.entity:AddTransform()
   local as = circle.entity:AddAnimState()
 
-  local x, y, z = inst.Transform:GetScale() -- credit: Huxi, 3161117403/scripts/prefabs/hrange.lua:L19
+  local x, y, z = inst.Transform:GetScale() -- credit: Huxi, 3161117403/scripts/prefabs/hrange.lua
   tf:SetScale(1 / x, 1 / y, 1 / z) -- fight against parent's scale, be absolute.
   as:SetScale(radius / 9.7, radius / 9.7) -- scale by catapult texture size
 
