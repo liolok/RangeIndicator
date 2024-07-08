@@ -52,6 +52,7 @@ local click = { -- circle(s) of clicked entity prefab
   singingshell_octave3 = R(2), -- Shell Bell (Baritone)
   singingshell_octave4 = R(2), -- Shell Bell (Alto)
   singingshell_octave5 = R(2), -- Shell Bell (Soprano)
+  storage_robot = R(15), -- W.O.B.O.T.
   support_pillar = { { radius = 40, color = YELLOW } }, -- Support Pillar
   support_pillar_dreadstone = { { radius = 40, color = YELLOW } }, -- Dreadstone Pillar
   trap_starfish = { -- Anenemy (Planted)
@@ -65,6 +66,7 @@ local click = { -- circle(s) of clicked entity prefab
     { radius = 6, color = RED }, -- attack (min)
     { radius = 15, color = RED }, -- attack (max)
   },
+  winona_storage_robot = R(15), -- W.I.N.bot
 }
 
 -- Support these plants for range after infected by Deadly Brightshade
@@ -146,7 +148,9 @@ local prefab_misc = {
   'singingshell_octave3', -- Shell Bell (Baritone)
   'singingshell_octave4', -- Shell Bell (Alto)
   'singingshell_octave5', -- Shell Bell (Soprano)
+  'storage_robot', -- W.O.B.O.T.
   'voidcloth_umbrella', -- Umbralla
+  'winona_storage_robot', -- W.I.N.bot
 }
 
 local enable_hover = false
