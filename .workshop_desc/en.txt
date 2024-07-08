@@ -4,7 +4,7 @@ Show ranges by clicking, deploying or hovering.
 [list]
 [*]By default, use middle mouse button to click object to show/hide its range.
 (Change to left/right/side button and/or bind modifier key if any conflict.)
-[*]By default, press F5 to quickly hide all indicators nearby, and show most of them.
+[*]By default, press F5 to quickly hide all ranges, or show most of them.
 [*]Show range when deploy (build/plant)
 [*]Show range when inventory item hovered by cursor.
 (This feature could be partially/completely disabled.)
@@ -13,29 +13,32 @@ Show ranges by clicking, deploying or hovering.
 [h2]Compatibility[/h2]
 [h3]Click[/h3]
 [list]
-[*]Ice Crystaleyezer: freeze, generate Mini Glacier, cooling
-[*]Scaled Furnace: heating
-[*]Houndius Shootius: attack
+[*]Cuckoo Spinwheel: block birds
+[*]Ice Crystaleyezer: freeze/light, generate Mini Glacier, cold
+[*]Scaled Furnace: heat
+[*]Houndius Shootius
 [*]Ice Flingomatic
-[*]Gunpowder: explosion
-[*]Magma: heating
-[*]Treeguard Idol: summon Treeguards
+[*]Gunpowder
+[*]Magma: heat
+[*]Treeguard Idol
 [*]Lightning Rod
 [*]Deadly Brightshade, Grass, (Lunar) Sapling: Brightshade aggro and protect infection
 [*]Celestial Altar/Sanctum/Tribute/Fissure: max linking distance between two Lunar Altars
-[*]Moon Stone: cooling (with a Moon Caller's Staff)
-[*]Mushlight and Glowcap: max light radius
-[*]Great Tree Trunk, Knobbly Tree and Nut, Above-Average Tree Trunk, Pinchin' Winch: canopy shade
+[*]Moon Stone: cold (with a Moon Caller's Staff)
+[*]Mushlight, Glowcap: max light range
 [*]Gramophone, Shell Bell: tend Farm Plants
-[*]Umbralla: protection (while activated on the ground)
-[*]Support Pillar, Dreadstone Pillar: earthquake pretection
+[*]Polar Light: cold
+[*]Dwarf Star: heat
+[*]W.O.B.O.T. / W.I.N.bot
+[*]Support Pillar, Dreadstone Pillar
 [*]Anenemy: attack, block birds
-[*]Cuckoo Spinwheel: block birds
+[*]Umbralla: protection (while activated on the ground)
+[*]Great Tree Trunk, Above-Average Tree Trunk, Knobbly Tree and Nut, Pinchin' Winch: canopy shade
 [*]Winona's Catapult: min and max attack range
 [/list]
 [h3]Build/Plant[/h3]
 [list]
-[*]Cuckoo Spinwheel Kit
+[*]Cuckoo Spinwheel
 [*]Scaled Furnace
 [*]Anenemy Trap
 [*]Houndius Shootius
@@ -46,11 +49,12 @@ Show ranges by clicking, deploying or hovering.
 [/list]
 [h3]Hover[/h3]
 [list]
-[*]Most of Wickerbottom's books
+[*]Books of Wickerbottom
 [*]Gunpowder
 [*]Treeguard Idol
 [*]Gramophone
 [*]Shell Bell
+[*]W.O.B.O.T.
 [*]Umbralla
 [/list]
 
