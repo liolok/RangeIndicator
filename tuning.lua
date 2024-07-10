@@ -79,6 +79,9 @@ data.winona_catapult = { { radius = 6, color = PINK }, { radius = 15, color = PI
 
 local modifier_key = GLOBAL.rawget(GLOBAL, GetModConfigData('modifier_key'))
 local mouse_button = GetModConfigData('mouse_button')
+if mouse_button == 'MOUSEBUTTON_LEFT' then mouse_button = 1000 end -- to fix backward compatibility
+if mouse_button == 'MOUSEBUTTON_RIGHT' then mouse_button = 1001 end
+if mouse_button == 'MOUSEBUTTON_MIDDLE' then mouse_button = 1002 end
 local can_click = {} -- support for clicked entity prefab
 for prefab, _ in pairs(data) do
   can_click[prefab] = true
