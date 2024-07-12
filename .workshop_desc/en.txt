@@ -26,6 +26,7 @@ Show ranges by clicking, deploying or hovering.
 [*]Celestial Altar/Sanctum/Tribute/Fissure: max linking distance between two Lunar Altars
 [*]Moon Stone: cold (with a Moon Caller's Staff)
 [*]Mushlight, Glowcap: max light range
+[*](Superior) Communal Kelp Dish: make Merms respawn faster
 [*]Gramophone, Shell Bell: tend Farm Plants
 [*]Polar Light: cold
 [*]Dwarf Star: heat

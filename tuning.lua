@@ -47,6 +47,9 @@ data.moonbase = { { radius = 8, color = BLUE } }
 -- Mushlight, Glowcap: max light range
 data.mushroom_light = { { radius = 11.5, color = CYAN } }
 data.mushroom_light2 = { { radius = 10.7, color = CYAN } }
+-- (Superior) Communal Kelp Dish: make Merms respawn faster
+data.offering_pot = { { radius = 7, color = GREEN } }
+data.offering_pot_upgraded = data.offering_pot
 -- Gramophone, Shell Bell: tend Farm Plants
 data.phonograph = { { radius = 8, color = GREEN } }
 data.singingshell_octave3 = { { radius = 2, color = GREEN } }
