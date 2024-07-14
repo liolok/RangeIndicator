@@ -34,6 +34,16 @@ local S = { -- localized strings
       },
     },
     MOUSE_BUTTON = { 'Mouse Button', zh = '鼠标按键', zht = '滑鼠按鍵' },
+    AUTO_HIDE = {
+      'Auto Hide',
+      zh = '自动隐藏',
+      zht = '自動隱藏',
+      MINUTE = {
+        HALF = { 'Half a Minute', zh = '半分钟', zht = '半分鐘' },
+        ONE = { 'One Minute', zh = '一分钟', zht = '一分鐘' },
+        TWO = { 'Two Minutes', zh = '两分钟', zht = '兩分鐘' },
+      },
+    },
   },
   BATCH = {
     'Batch Toggle',
@@ -117,6 +127,17 @@ configuration_options = {
     },
     default = 1002,
     name = 'mouse_button',
+  },
+  {
+    label = T(S.CLICK.AUTO_HIDE),
+    options = {
+      { data = false, description = T(S.NO) },
+      { data = 30, description = T(S.CLICK.AUTO_HIDE.MINUTE.HALF) },
+      { data = 60, description = T(S.CLICK.AUTO_HIDE.MINUTE.ONE) },
+      { data = 120, description = T(S.CLICK.AUTO_HIDE.MINUTE.TWO) },
+    },
+    default = false,
+    name = 'auto_hide',
   },
   H(S.BATCH),
   {

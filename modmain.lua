@@ -62,7 +62,12 @@ G.TheInput:AddMouseButtonHandler(function(button, down)
   if T.CLICK.KEY and not G.TheInput:IsKeyDown(T.CLICK.KEY) then return end
   if not (button == T.CLICK.BUTTON and down) then return end
   local entity = G.TheInput:GetWorldEntityUnderMouse()
-  if entity and T.CLICK.SUPPORT[entity.prefab] then ToggleRangeIndicator(entity) end
+  if entity and T.CLICK.SUPPORT[entity.prefab] then
+    ToggleRangeIndicator(entity)
+    if entity.circles and T.CLICK.AUTO_HIDE then
+      G.ThePlayer:DoTaskInTime(T.CLICK.AUTO_HIDE, function() HideRangeIndicator(entity) end)
+    end
+  end
 end)
 
 G.TheInput:AddKeyHandler(function(key, down)

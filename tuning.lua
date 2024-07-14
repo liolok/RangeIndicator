@@ -89,6 +89,7 @@ local can_click = {} -- support for clicked entity prefab
 for prefab, _ in pairs(data) do
   can_click[prefab] = true
 end
+local auto_hide = GetModConfigData('auto_hide')
 
 -- Feature: Quick Toggle -------------------------------------------------------
 
@@ -175,7 +176,7 @@ end
 
 GLOBAL.TUNING.RANGE_INDICATOR = { -- create our mod namespace
   DATA = data,
-  CLICK = { KEY = modifier_key, BUTTON = mouse_button, SUPPORT = can_click },
+  CLICK = { KEY = modifier_key, BUTTON = mouse_button, SUPPORT = can_click, AUTO_HIDE = auto_hide },
   BATCH = { KEY = batch_key, TAG = batch_show_tags },
   DEPLOY = prefab_placer,
   HOVER = { ENABLE = enable_hover, SUPPORT = can_hover },
