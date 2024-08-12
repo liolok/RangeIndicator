@@ -58,8 +58,10 @@ local function ToggleRangeIndicator(inst)
   fn(inst)
 end
 
+-- Feature: Click --------------------------------------------------------------
+
 G.TheInput:AddMouseButtonHandler(function(button, down)
-  if T.CLICK.KEY and not G.TheInput:IsKeyDown(T.CLICK.KEY) then return end
+  if T.CLICK.KEY and not G.TheInput:IsKeyDown(T.CLICK.KEY) then return end -- modifier key
   if not (button == T.CLICK.BUTTON and down) then return end
   local entity = G.TheInput:GetWorldEntityUnderMouse()
   if entity and T.CLICK.SUPPORT[entity.prefab] then
@@ -70,8 +72,10 @@ G.TheInput:AddMouseButtonHandler(function(button, down)
   end
 end)
 
-G.TheInput:AddKeyHandler(function(key, down)
-  if not (G.ThePlayer and key == T.BATCH.KEY and down) then return end
+-- Feature: Batch Toggle -------------------------------------------------------
+
+local function BatchToggle()
+  if not G.ThePlayer then return end
   local x, y, z = G.ThePlayer.Transform:GetWorldPosition()
   local entities = G.TheSim:FindEntities(x, y, z, 80, { 'CLASSIFIED', 'NOCLICK', 'RANGE_INDICATOR' })
   local cleared = false
@@ -88,11 +92,20 @@ G.TheInput:AddKeyHandler(function(key, down)
   for _, e in ipairs(entities) do
     ShowRangeIndicator(e)
   end
-end)
+end
+local handler = nil
+function KeyBind(_, key)
+  if handler then handler:Remove() end
+  handler = key and G.TheInput:AddKeyDownHandler(key, BatchToggle) or nil
+end
+
+-- Feature: Deploy -------------------------------------------------------------
 
 for _, prefab in ipairs(T.DEPLOY) do
   AddPrefabPostInit(prefab, ShowRangeIndicator)
 end
+
+-- Feature: Hover --------------------------------------------------------------
 
 AddClassPostConstruct('widgets/hoverer', function(self)
   if not (self.text and T.HOVER.ENABLE) then return end

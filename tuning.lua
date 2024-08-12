@@ -80,7 +80,7 @@ data.winona_catapult = { { radius = 6, color = PINK }, { radius = 15, color = PI
 
 -- Feature: Click --------------------------------------------------------------
 
-local modifier_key = GLOBAL.rawget(GLOBAL, GetModConfigData('modifier_key'))
+local modifier_key = GetModConfigData('click_modifier')
 local mouse_button = GetModConfigData('mouse_button')
 if mouse_button == 'MOUSEBUTTON_LEFT' then mouse_button = 1000 end -- to fix backward compatibility
 if mouse_button == 'MOUSEBUTTON_RIGHT' then mouse_button = 1001 end
@@ -91,9 +91,8 @@ for prefab, _ in pairs(data) do
 end
 local auto_hide = GetModConfigData('auto_hide')
 
--- Feature: Quick Toggle -------------------------------------------------------
+-- Feature: Batch Toggle -------------------------------------------------------
 
-local batch_key = GLOBAL.rawget(GLOBAL, GetModConfigData('batch_key'))
 local batch_show_tags = { -- for search entities
   'HASHEATER',
   'eyeturret',
@@ -177,7 +176,7 @@ end
 GLOBAL.TUNING.RANGE_INDICATOR = { -- create our mod namespace
   DATA = data,
   CLICK = { KEY = modifier_key, BUTTON = mouse_button, SUPPORT = can_click, AUTO_HIDE = auto_hide },
-  BATCH = { KEY = batch_key, TAG = batch_show_tags },
+  BATCH = { TAG = batch_show_tags },
   DEPLOY = prefab_placer,
   HOVER = { ENABLE = enable_hover, SUPPORT = can_hover },
 }
