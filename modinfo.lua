@@ -13,9 +13,12 @@ local S = { -- localized strings
     zht = 'takaoinari、adai1198、(TW)Eric、李皓奇',
   },
   DESCRIPTION = {
-    'Show ranges by clicking, deploying or hovering.',
-    zh = '通过点击、部署、光标覆盖来显示各种范围。',
-    zht = '透過點擊、部署、遊標覆蓋來顯示各種範圍。',
+    'Show ranges by clicking, deploying or hovering.\n'
+      .. 'Also support binding Batch Toggle key at bottom of Settings > Controls page.',
+    zh = '通过点击、部署、光标覆盖来显示各种范围。\n'
+      .. '也支持在设置 > 控制页面底部实时调整「批量切换」的键位绑定。',
+    zht = '透過點擊、部署、遊標覆蓋來顯示各種範圍。\n'
+      .. '也支援在設定 > 控制頁面底部即時調整「大量切換」的鍵位綁定。',
   },
   YES = { 'Yes', zh = '是', zht = '是' },
   NO = { 'No', zh = '否', zht = '否' },
