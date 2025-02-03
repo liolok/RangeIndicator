@@ -19,6 +19,7 @@ Show ranges by clicking, deploying or hovering.
 [*]Scaled Furnace: heat
 [*]Houndius Shootius
 [*]Ice Flingomatic
+[*]Flower, Rose, Evil Flower: simplified model of honey production range
 [*]Gunpowder
 [*]Magma: heat
 [*]Treeguard Idol

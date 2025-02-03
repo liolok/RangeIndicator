@@ -24,7 +24,7 @@ data.dragonflyfurnace = { { radius = 9.5, color = RED } }
 data.eyeturret = { { radius = 18, color = PINK } }
 -- Ice Flingomatic
 data.firesuppressor = { { radius = 15, color = WHITE } }
--- Flowers: simplified model of honey production range
+-- Flower, Rose, Evil Flower: simplified model of honey production range
 data.flower = { { radius = 42, color = YELLOW } }
 data.flower_rose = data.flower
 data.flower_evil = data.flower
