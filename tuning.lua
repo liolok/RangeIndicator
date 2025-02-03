@@ -8,8 +8,7 @@ local YELLOW = { 1, 1, 0, 1 }
 local WHITE = { 1, 1, 1, 1 }
 
 local data = {} -- circle(s) of all possible prefab
--- Beebox: simplified model of honey production range
-data.beebox = { { radius = 42, color = YELLOW } }
+
 -- Cuckoo Spinwheel: block birds
 data.carnivalgame_wheelspin_station = { { radius = 4, color = YELLOW } }
 -- Ice Crystaleyezer: freeze/light, generate Mini Glacier, cold
@@ -25,6 +24,10 @@ data.dragonflyfurnace = { { radius = 9.5, color = RED } }
 data.eyeturret = { { radius = 18, color = PINK } }
 -- Ice Flingomatic
 data.firesuppressor = { { radius = 15, color = WHITE } }
+-- Flowers: simplified model of honey production range
+data.flower = { { radius = 42, color = YELLOW } }
+data.flower_rose = data.flower
+data.flower_evil = data.flower
 -- Gunpowder
 data.gunpowder = { { radius = 3, color = PINK } }
 -- Magma: heat
@@ -107,7 +110,6 @@ local batch_show_tags = { -- for search entities
 -- Feature: Deploy -------------------------------------------------------------
 
 local prefab_placer = {
-  'beebox', -- Beebox
   'carnivalgame_wheelspin_kit', -- Cuckoo Spinwheel
   'dragonflyfurnace', -- Scaled Furnace
   'dug_trap_starfish', -- Anenemy Trap
