@@ -98,6 +98,7 @@ for prefab, _ in pairs(data) do
   can_click[prefab] = true
 end
 local auto_hide = GetModConfigData('auto_hide')
+local double_click_speed = GetModConfigData('double_click_speed')
 
 -- Feature: Batch Toggle -------------------------------------------------------
 
@@ -184,7 +185,13 @@ end
 
 GLOBAL.TUNING.RANGE_INDICATOR = { -- create our mod namespace
   DATA = data,
-  CLICK = { KEY = modifier_key, BUTTON = mouse_button, SUPPORT = can_click, AUTO_HIDE = auto_hide },
+  CLICK = {
+    KEY = modifier_key,
+    BUTTON = mouse_button,
+    SUPPORT = can_click,
+    AUTO_HIDE = auto_hide,
+    DOUBLE_CLICK_WAIT = double_click_speed,
+  },
   BATCH = { TAG = batch_show_tags },
   DEPLOY = prefab_placer,
   HOVER = { ENABLE = enable_hover, SUPPORT = can_hover },

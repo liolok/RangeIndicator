@@ -35,7 +35,7 @@ local function CreateCircle(inst, radius, color) -- CreatePlacerRing(), prefabs/
   return circle
 end
 
-local function ShowRangeIndicator(inst, prefab)
+local function CreateCircles(inst, prefab)
   local data = T.DATA[prefab or inst.prefab]
   if not data then return end -- prefab not supported
   if inst.circles then return end -- circle(s) already created
@@ -45,30 +45,59 @@ local function ShowRangeIndicator(inst, prefab)
   end
 end
 
-local function HideRangeIndicator(inst)
+local function RemoveCircles(inst)
   if not inst.circles then return end -- circle(s) not created yet
   for _, v in ipairs(inst.circles) do
     if v:IsValid() then v:Remove() end
   end
   inst.circles = nil
-end
-
-local function ToggleRangeIndicator(inst)
-  local fn = inst.circles and HideRangeIndicator or ShowRangeIndicator
-  fn(inst)
+  if inst.remove_circles_task then
+    inst.remove_circles_task:Cancel()
+    inst.remove_circles_task = nil
+  end
 end
 
 -- Feature: Click --------------------------------------------------------------
 
+local waiting_for_double_click = {}
+
 G.TheInput:AddMouseButtonHandler(function(button, down)
+  if not G.ThePlayer then return end
   if T.CLICK.KEY and not G.TheInput:IsKeyDown(T.CLICK.KEY) then return end -- modifier key
   if not (button == T.CLICK.BUTTON and down) then return end
   local entity = G.TheInput:GetWorldEntityUnderMouse()
-  if entity and T.CLICK.SUPPORT[entity.prefab] then
-    ToggleRangeIndicator(entity)
-    if entity.circles and T.CLICK.AUTO_HIDE then
-      G.ThePlayer:DoTaskInTime(T.CLICK.AUTO_HIDE, function() HideRangeIndicator(entity) end)
+  if not entity then return end
+  local prefab = entity.prefab
+  if not T.CLICK.SUPPORT[prefab] then return end
+  if waiting_for_double_click[prefab] then
+    waiting_for_double_click[prefab] = false
+    local x, y, z = entity.Transform:GetWorldPosition()
+    local entities = G.TheSim:FindEntities(x, y, z, 80, nil, { 'FX', 'NOCLICK', 'DECOR', 'INLIMBO', '_inventoryitem' })
+    for _, e in ipairs(entities) do
+      if e ~= entity and e.prefab == prefab then
+        if entity.circles then
+          CreateCircles(e)
+          if T.CLICK.AUTO_HIDE then
+            e.remove_circles_task = e:DoTaskInTime(T.CLICK.AUTO_HIDE, function() RemoveCircles(e) end)
+          end
+        else
+          RemoveCircles(e)
+        end
+      end
     end
+  else
+    if entity.circles then
+      RemoveCircles(entity)
+    else
+      CreateCircles(entity)
+      if T.CLICK.AUTO_HIDE then
+        entity.remove_circles_task = entity:DoTaskInTime(T.CLICK.AUTO_HIDE, function() RemoveCircles(entity) end)
+      end
+    end
+    waiting_for_double_click[prefab] = G.ThePlayer:DoTaskInTime(
+      T.CLICK.DOUBLE_CLICK_WAIT,
+      function() waiting_for_double_click[prefab] = false end
+    )
   end
 end)
 
@@ -90,7 +119,7 @@ local function BatchToggle()
   if cleared then return end
   local entities = G.TheSim:FindEntities(x, y, z, 80, nil, nil, T.BATCH.TAG)
   for _, e in ipairs(entities) do
-    ShowRangeIndicator(e)
+    CreateCircles(e)
   end
 end
 local handler = nil
@@ -102,7 +131,7 @@ end
 -- Feature: Deploy -------------------------------------------------------------
 
 for _, prefab in ipairs(T.DEPLOY) do
-  AddPrefabPostInit(prefab, ShowRangeIndicator)
+  AddPrefabPostInit(prefab, CreateCircles)
 end
 
 -- Feature: Hover --------------------------------------------------------------
@@ -112,16 +141,16 @@ AddClassPostConstruct('widgets/hoverer', function(self)
 
   local OldSetString = self.text.SetString
   self.text.SetString = function(text, str, ...)
-    HideRangeIndicator(G.ThePlayer)
+    RemoveCircles(G.ThePlayer)
     local e = G.TheInput:GetHUDEntityUnderMouse()
     local prefab = e and e.widget and e.widget.parent and e.widget.parent.item and e.widget.parent.item.prefab or nil
-    if prefab and T.HOVER.SUPPORT[prefab] then ShowRangeIndicator(G.ThePlayer, prefab) end
+    if prefab and T.HOVER.SUPPORT[prefab] then CreateCircles(G.ThePlayer, prefab) end
     return OldSetString(text, str, ...)
   end
 
   local OldHide = self.text.Hide
   self.text.Hide = function(...)
-    HideRangeIndicator(G.ThePlayer)
+    RemoveCircles(G.ThePlayer)
     return OldHide(...)
   end
 end)

@@ -32,8 +32,8 @@ local S = { -- localized strings
       zht = '組合鍵',
       DETAIL = {
         'Click to toggle range only when this key pressed.',
-        zh = '按住此按键时才可以点击切换显示',
-        zht = '按住此按鍵時才可點擊切換範圍顯示',
+        zh = '按住此按键时才可以点击切换范围显示',
+        zht = '按住此按鍵時才可以點擊切換範圍顯示',
       },
     },
     MOUSE_BUTTON = { 'Mouse Button', zh = '鼠标按键', zht = '滑鼠按鍵' },
@@ -45,6 +45,16 @@ local S = { -- localized strings
         HALF = { 'Half a Minute', zh = '半分钟', zht = '半分鐘' },
         ONE = { 'One Minute', zh = '一分钟', zht = '一分鐘' },
         TWO = { 'Two Minutes', zh = '两分钟', zht = '兩分鐘' },
+      },
+    },
+    DOUBLE = {
+      'Double Click Speed',
+      zh = '双击速度',
+      zht = '雙擊速度',
+      DETAIL = {
+        'Double click to toggle ranges of all objects of the same kind.',
+        zh = '双击切换所有同类物体的范围显示',
+        zht = '雙擊切換所有同類物體的範圍顯示',
       },
     },
   },
@@ -151,6 +161,19 @@ configuration_options = {
     },
     default = false,
     name = 'auto_hide',
+  },
+  {
+    label = T(S.CLICK.DOUBLE),
+    hover = T(S.CLICK.DOUBLE.DETAIL),
+    options = {
+      { data = 0.3, description = '0.3s' },
+      { data = 0.4, description = '0.4s' },
+      { data = 0.5, description = '0.5s' },
+      { data = 0.6, description = '0.6s' },
+      { data = 0.7, description = '0.7s' },
+    },
+    default = 0.5,
+    name = 'double_click_speed',
   },
   {
     label = T(S.BATCH),
