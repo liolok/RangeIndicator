@@ -1,4 +1,4 @@
-version = '2024.08.12'
+version = '2025.02.03'
 api_version = 10
 dst_compatible = true
 client_only_mod = true
@@ -82,6 +82,26 @@ local S = { -- localized strings
         zht = '是否顯示其它物品的範圍？\n如火藥、排簫、樹人雕像…',
       },
     },
+    beebox = {
+      'Beebox',
+      zh = '蜂箱',
+      zht = '蜂箱',
+      DETAIL = {
+        'Show range of beebox?',
+        zh = '是否显示蜂箱的范围？',
+        zht = '是否顯示蜂箱的範圍？',
+      },
+    },
+    lightning_rod = {
+      'Lightning rod',
+      zh = '避雷针',
+      zht = '避雷針',
+      DETAIL = {
+        'Show range of lightning rod?',
+        zh = '是否显示避雷针的范围？',
+        zht = '是否顯示蜂箱的範圍？',
+      },
+    },
   },
 }
 local T = ChooseTranslationTable
@@ -162,4 +182,6 @@ configuration_options = {
   H(S.HOVER),
   { label = T(S.HOVER.BOOKS), hover = T(S.HOVER.BOOKS.DETAIL), options = BOOL, default = true, name = 'hover_books' },
   { label = T(S.HOVER.OTHER), hover = T(S.HOVER.OTHER.DETAIL), options = BOOL, default = true, name = 'hover_other' },
+  { label = T(S.HOVER.beebox), hover = T(S.HOVER.beebox.DETAIL), options = BOOL, default = true, name = 'hover_beebox' },
+  { label = T(S.HOVER.lightning_rod), hover = T(S.HOVER.lightning_rod.DETAIL), options = BOOL, default = true, name = 'hover_lightning_rod' },
 }

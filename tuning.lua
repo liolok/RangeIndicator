@@ -30,8 +30,6 @@ data.gunpowder = { { radius = 3, color = PINK } }
 data.lava_pond = { { radius = 10, color = RED } }
 -- Treeguard Idol
 data.leif_idol = { { radius = 10, color = GREEN } }
--- Lightning Rod
-data.lightning_rod = { { radius = 40, color = YELLOW } }
 -- Deadly Brightshade, Grass, (Lunar) Sapling: Brightshade aggro and protect infection
 data.lunarthrall_plant = { { radius = 12, color = PINK }, { radius = 30, color = GREEN } }
 for _, prefab in ipairs({ 'grass', 'sapling', 'sapling_moon' }) do
@@ -77,6 +75,14 @@ for _, prefab in ipairs({ 'oceantree', 'oceantreenut', 'winch' }) do
 end
 -- Winona's Catapult: min and max attack range
 data.winona_catapult = { { radius = 6, color = PINK }, { radius = 15, color = PINK } }
+-- simplified model of honey production range
+if GetModConfigData('hover_beebox') then
+  data.beebox = {{ radius = 42, color = YELLOW }}
+end
+-- Lightning Rod
+if GetModConfigData('hover_lightning_rod') then
+  data.lightning_rod = {{ radius = 40, color = YELLOW }}
+end
 
 -- Feature: Click --------------------------------------------------------------
 
@@ -105,20 +111,31 @@ local batch_show_tags = { -- for search entities
 
 -- Feature: Deploy -------------------------------------------------------------
 
-local prefab_placer = {
+local prefab_placer = {}
+
+for _, prefab in ipairs({
   'carnivalgame_wheelspin_kit', -- Cuckoo Spinwheel
   'dragonflyfurnace', -- Scaled Furnace
   'dug_trap_starfish', -- Anenemy Trap
   'eyeturret_item', -- Houndius Shootius
-  'lightning_rod', -- Lightning Rod
   'mushroom_light', -- Mushlight
   'mushroom_light2', -- Glowcap
   'winch', -- Pinchin' Winch
-}
+  (GetModConfigData('hover_beebox') and 'beebox') or nil, -- Beebox
+  (GetModConfigData('hover_lightning_rod') and 'lightning_rod') or nil -- Lightning rod
+}) do
+  if prefab then
+    table.insert(prefab_placer, prefab)
+  end
+end
+
+-- 轉換 placer 版本
 for index, prefab in ipairs(prefab_placer) do
   local original_prefab = prefab:gsub('^dug_', ''):gsub('_item$', ''):gsub('_kit$', '_station')
-  data[prefab .. '_placer'] = data[original_prefab] -- refer to the same circle(s)
-  prefab_placer[index] = prefab .. '_placer'
+  if data[original_prefab] then
+    data[prefab .. '_placer'] = data[original_prefab] -- refer to the same circle(s)
+    prefab_placer[index] = prefab .. '_placer'
+  end
 end
 
 -- Feature: Hover --------------------------------------------------------------
