@@ -1,4 +1,4 @@
-version = '2025.02.03.2'
+version = '2025.02.03.3'
 api_version = 10
 dst_compatible = true
 client_only_mod = true
@@ -14,11 +14,11 @@ local S = { -- localized strings
   },
   DESCRIPTION = {
     'Show ranges by clicking, deploying or hovering.\n'
-      .. 'Also support binding Batch Toggle key at bottom of Settings > Controls page.',
+      .. 'Also support binding "Clear Ranges" key at bottom of Settings > Controls page.',
     zh = '通过点击、部署、光标覆盖来显示各种范围。\n'
-      .. '也支持在设置 > 控制页面底部实时调整「批量切换」的键位绑定。',
+      .. '也支持在设置 > 控制页面底部实时调整「关闭显示」的键位绑定。',
     zht = '透過點擊、部署、遊標覆蓋來顯示各種範圍。\n'
-      .. '也支援在設定 > 控制頁面底部即時調整「大量切換」的鍵位綁定。',
+      .. '也支援在設定 > 控制頁面底部即時調整「關閉顯示」的鍵位綁定。',
   },
   YES = { 'Yes', zh = '是', zht = '是' },
   NO = { 'No', zh = '否', zht = '否' },

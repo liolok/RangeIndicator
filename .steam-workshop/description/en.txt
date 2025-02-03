@@ -3,8 +3,9 @@ Show ranges by clicking, deploying or hovering.
 [h2]Features[/h2]
 [list]
 [*]By default, use middle mouse button to click object to show/hide its range.
+Double click to to toggle ranges of all objects of the same kind.
 (Change to left/right/side button and/or bind modifier key if any conflict.)
-[*]By default, press F5 to quickly hide all ranges, or show most of them.
+[*]By default, press F5 to clear all ranges in your view.
 (Support binding key at bottom of Settings > Controls page)
 [*]Show range when deploy (build/plant)
 [*]Show range when inventory item hovered by cursor.
