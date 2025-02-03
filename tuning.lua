@@ -81,6 +81,8 @@ for _, prefab in ipairs({ 'oceantree', 'oceantreenut', 'winch' }) do
 end
 -- Winona's Catapult: min and max attack range
 data.winona_catapult = { { radius = 6, color = PINK }, { radius = 15, color = PINK } }
+-- Winona's Spotlight: normal and "spacious" light range
+data.winona_spotlight = { { radius = 31, color = CYAN }, { radius = 37, color = CYAN } }
 
 -- Feature: Click --------------------------------------------------------------
 
