@@ -36,8 +36,10 @@ Show ranges by clicking, deploying or hovering.
 [*]Support Pillar, Dreadstone Pillar
 [*]Anenemy: attack, block birds
 [*]Umbralla: protection (while activated on the ground)
+[*]Varg: howl and summon hounds
 [*]Great Tree Trunk, Above-Average Tree Trunk, Knobbly Tree and Nut, Pinchin' Winch: canopy shade
 [*]Winona's Catapult: min and max attack range
+[*]Winona's Spotlight: normal and "spacious" light range
 [/list]
 [h3]Build/Plant[/h3]
 [list]
