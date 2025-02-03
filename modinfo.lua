@@ -22,6 +22,16 @@ local S = { -- localized strings
   },
   YES = { 'Yes', zh = '是', zht = '是' },
   NO = { 'No', zh = '否', zht = '否' },
+  CLEAR = {
+    'Clear Ranges',
+    zh = '关闭显示',
+    zht = '關閉顯示',
+    DETAIL = {
+      'Clear all ranges in your view.',
+      zh = '关闭视野内所有的范围显示',
+      zht = '關閉視野內所有的範圍顯示',
+    },
+  },
   CLICK = {
     'Click Toggle',
     zh = '点击切换',
@@ -56,16 +66,6 @@ local S = { -- localized strings
         zh = '双击切换所有同类物体的范围显示',
         zht = '雙擊切換所有同類物體的範圍顯示',
       },
-    },
-  },
-  BATCH = {
-    'Batch Toggle',
-    zh = '批量切换',
-    zht = '大量切換',
-    DETAIL = {
-      'Hide all ranges / Show many ranges',
-      zh = '隐藏所有范围 / 显示很多范围',
-      zht = '隱藏所有範圍 / 顯示很多範圍',
     },
   },
   HOVER = {
@@ -126,6 +126,13 @@ local function H(title) return { name = T(title), options = { { description = ''
 local BOOL = { { description = T(S.YES), data = true }, { description = T(S.NO), data = false } } -- "Yes" or "No"
 
 configuration_options = {
+  {
+    label = T(S.CLEAR),
+    hover = T(S.CLEAR.DETAIL),
+    options = keys,
+    default = 'KEY_F5',
+    name = 'clear_key',
+  },
   H(S.CLICK),
   {
     label = T(S.CLICK.MODIFIER_KEY),
@@ -174,13 +181,6 @@ configuration_options = {
     },
     default = 0.5,
     name = 'double_click_speed',
-  },
-  {
-    label = T(S.BATCH),
-    hover = T(S.BATCH.DETAIL),
-    options = keys,
-    default = 'KEY_F5',
-    name = 'batch_key',
   },
   H(S.HOVER),
   { label = T(S.HOVER.BOOKS), hover = T(S.HOVER.BOOKS.DETAIL), options = BOOL, default = true, name = 'hover_books' },

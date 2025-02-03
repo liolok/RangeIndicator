@@ -57,7 +57,30 @@ local function RemoveCircles(inst)
   end
 end
 
--- Feature: Click --------------------------------------------------------------
+--------------------------------------------------------------------------------
+-- Feature: Clear
+
+local function Clear()
+  if not G.ThePlayer then return end
+  local x, y, z = G.ThePlayer.Transform:GetWorldPosition()
+  local entities = G.TheSim:FindEntities(x, y, z, 80, { 'CLASSIFIED', 'NOCLICK', 'RANGE_INDICATOR' })
+  for _, e in ipairs(entities) do
+    if e:IsValid() then
+      local parent = e.entity:GetParent()
+      if parent and parent.circles then parent.circles = nil end
+      e:Remove()
+    end
+  end
+end
+
+local handler = nil
+function KeyBind(_, key)
+  if handler then handler:Remove() end
+  handler = key and G.TheInput:AddKeyDownHandler(key, Clear) or nil
+end
+
+--------------------------------------------------------------------------------
+-- Feature: Click
 
 local waiting_for_double_click = {}
 
@@ -101,40 +124,15 @@ G.TheInput:AddMouseButtonHandler(function(button, down)
   end
 end)
 
--- Feature: Batch Toggle -------------------------------------------------------
-
-local function BatchToggle()
-  if not G.ThePlayer then return end
-  local x, y, z = G.ThePlayer.Transform:GetWorldPosition()
-  local entities = G.TheSim:FindEntities(x, y, z, 80, { 'CLASSIFIED', 'NOCLICK', 'RANGE_INDICATOR' })
-  local cleared = false
-  for _, e in ipairs(entities) do
-    if e:IsValid() then
-      local parent = e.entity:GetParent()
-      if parent and parent.circles then parent.circles = nil end
-      e:Remove()
-      cleared = true
-    end
-  end
-  if cleared then return end
-  local entities = G.TheSim:FindEntities(x, y, z, 80, nil, nil, T.BATCH.TAG)
-  for _, e in ipairs(entities) do
-    CreateCircles(e)
-  end
-end
-local handler = nil
-function KeyBind(_, key)
-  if handler then handler:Remove() end
-  handler = key and G.TheInput:AddKeyDownHandler(key, BatchToggle) or nil
-end
-
--- Feature: Deploy -------------------------------------------------------------
+--------------------------------------------------------------------------------
+-- Feature: Deploy
 
 for _, prefab in ipairs(T.DEPLOY) do
   AddPrefabPostInit(prefab, CreateCircles)
 end
 
--- Feature: Hover --------------------------------------------------------------
+--------------------------------------------------------------------------------
+-- Feature: Hover
 
 AddClassPostConstruct('widgets/hoverer', function(self)
   if not (self.text and T.HOVER.ENABLE) then return end

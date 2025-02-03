@@ -86,7 +86,8 @@ data.winona_catapult = { { radius = 6, color = PINK }, { radius = 15, color = PI
 -- Winona's Spotlight: normal and "spacious" light range
 data.winona_spotlight = { { radius = 31, color = CYAN }, { radius = 37, color = CYAN } }
 
--- Feature: Click --------------------------------------------------------------
+--------------------------------------------------------------------------------
+-- Feature: Click
 
 local modifier_key = GetModConfigData('click_modifier')
 local mouse_button = GetModConfigData('mouse_button')
@@ -100,19 +101,8 @@ end
 local auto_hide = GetModConfigData('auto_hide')
 local double_click_speed = GetModConfigData('double_click_speed')
 
--- Feature: Batch Toggle -------------------------------------------------------
-
-local batch_show_tags = { -- for search entities
-  'HASHEATER',
-  'eyeturret',
-  'lunarthrall_plant',
-  'shadecanopy',
-  'shadecanopysmall',
-  'structure',
-  'umbrella',
-}
-
--- Feature: Deploy -------------------------------------------------------------
+--------------------------------------------------------------------------------
+-- Feature: Deploy
 
 local prefab_placer = {
   'carnivalgame_wheelspin_kit', -- Cuckoo Spinwheel
@@ -131,7 +121,8 @@ for index, prefab in ipairs(prefab_placer) do
   prefab_placer[index] = prefab .. '_placer'
 end
 
--- Feature: Hover --------------------------------------------------------------
+--------------------------------------------------------------------------------
+-- Feature: Hover
 
 local enable_hover = false
 local can_hover = {} -- support for hovered inventory item prefab
@@ -181,9 +172,10 @@ if GetModConfigData('hover_other') then
   end
 end
 
--- Export ----------------------------------------------------------------------
+--------------------------------------------------------------------------------
+-- Export: create our mod namespace
 
-GLOBAL.TUNING.RANGE_INDICATOR = { -- create our mod namespace
+GLOBAL.TUNING.RANGE_INDICATOR = {
   DATA = data,
   CLICK = {
     KEY = modifier_key,
@@ -192,7 +184,6 @@ GLOBAL.TUNING.RANGE_INDICATOR = { -- create our mod namespace
     AUTO_HIDE = auto_hide,
     DOUBLE_CLICK_WAIT = double_click_speed,
   },
-  BATCH = { TAG = batch_show_tags },
   DEPLOY = prefab_placer,
   HOVER = { ENABLE = enable_hover, SUPPORT = can_hover },
 }
