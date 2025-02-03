@@ -73,6 +73,8 @@ data.support_pillar_dreadstone = data.support_pillar
 data.trap_starfish = { { radius = 1.5, color = PINK }, { radius = 4, color = YELLOW } }
 -- Umbralla: protection (while activated on the ground)
 data.voidcloth_umbrella = { { radius = 16, color = GREEN } }
+-- Varg: howl and summon hounds
+data.warg = { { radius = 30, color = WHITE } } -- SPAWN_DIST from components/hounded.lua
 -- Great Tree Trunk, Above-Average Tree Trunk, Knobbly Tree and Nut, Pinchin' Winch: canopy shade
 data.watertree_pillar = { { radius = 28, color = GREEN } }
 data.oceantree_pillar = { { radius = 22, color = GREEN } }
