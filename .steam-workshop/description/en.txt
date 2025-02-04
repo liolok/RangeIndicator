@@ -31,6 +31,7 @@ Double click to to toggle ranges of all objects of the same kind.
 [*]Mushlight, Glowcap: max light range
 [*](Superior) Communal Kelp Dish: make Merms respawn faster
 [*]Gramophone, Shell Bell: tend Farm Plants
+[*]Pig King: The area around must be clear to initiate Wrestling Match
 [*]Polar Light: cold
 [*]Dwarf Star: heat
 [*]W.O.B.O.T. / W.I.N.bot

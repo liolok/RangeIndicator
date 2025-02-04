@@ -59,6 +59,8 @@ data.phonograph = { { radius = 8, color = GREEN } }
 data.singingshell_octave3 = { { radius = 2, color = GREEN } }
 data.singingshell_octave4 = data.singingshell_octave3
 data.singingshell_octave5 = data.singingshell_octave3
+-- Pig King: The area around must be clear to initiate Wrestling Match
+data.pigking = { { radius = 12, color = WHITE } }
 -- Polar Light: cold
 data.staffcoldlight = { { radius = 8, color = BLUE } }
 -- Dwarf Star: heat
