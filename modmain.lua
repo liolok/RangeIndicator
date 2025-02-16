@@ -95,7 +95,7 @@ G.TheInput:AddMouseButtonHandler(function(button, down)
   if waiting_for_double_click[prefab] then
     waiting_for_double_click[prefab] = false
     local x, y, z = entity.Transform:GetWorldPosition()
-    local entities = G.TheSim:FindEntities(x, y, z, 80, nil, { 'FX', 'NOCLICK', 'DECOR', 'INLIMBO', '_inventoryitem' })
+    local entities = G.TheSim:FindEntities(x, y, z, 80, nil, { 'FX', 'NOCLICK', 'DECOR', 'INLIMBO' })
     for _, e in ipairs(entities) do
       if e ~= entity and e.prefab == prefab then
         if entity.circles then
