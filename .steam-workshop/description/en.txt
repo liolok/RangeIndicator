@@ -60,6 +60,8 @@ Double click to to toggle ranges of all objects of the same kind.
 [*]Gunpowder
 [*]Treeguard Idol
 [*]Gramophone
+[*]Pan Flute
+[*]Polly Roger's Hat
 [*]Shell Bell
 [*]W.O.B.O.T.
 [*]Umbralla
