@@ -156,6 +156,7 @@ if GetModConfigData('hover_other') then
   enable_hover = true
   for prefab, circles in pairs({
     panflute = { { radius = 15, color = GREEN } }, -- Pan Flute
+    polly_rogershat = { { radius = 15, color = WHITE } }, -- Polly Roger's Hat
   }) do
     can_hover[prefab] = true
     data[prefab] = circles
