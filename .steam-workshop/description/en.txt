@@ -58,6 +58,7 @@ Double click to to toggle ranges of all objects of the same kind.
 [list]
 [*]Books of Wickerbottom
 [*]Gunpowder
+[*]The Lazy Forager
 [*]Treeguard Idol
 [*]Gramophone
 [*]Pan Flute
