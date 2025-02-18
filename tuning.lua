@@ -158,6 +158,7 @@ if GetModConfigData('hover_other') then
     orangeamulet = { { radius = 4, color = WHITE } }, -- The Lazy Forager
     panflute = { { radius = 15, color = GREEN } }, -- Pan Flute
     polly_rogershat = { { radius = 15, color = WHITE } }, -- Polly Roger's Hat
+    spider_whistle = { { radius = 16, color = GREEN } }, -- Webby Whistle
   }) do
     can_hover[prefab] = true
     data[prefab] = circles

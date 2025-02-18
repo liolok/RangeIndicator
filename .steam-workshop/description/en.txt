@@ -57,12 +57,13 @@ Double click to to toggle ranges of all objects of the same kind.
 [h3]Hover[/h3]
 [list]
 [*]Books of Wickerbottom
-[*]Gunpowder
 [*]The Lazy Forager
-[*]Treeguard Idol
-[*]Gramophone
 [*]Pan Flute
 [*]Polly Roger's Hat
+[*]Webby Whistle
+[*]Gunpowder
+[*]Treeguard Idol
+[*]Gramophone
 [*]Shell Bell
 [*]W.O.B.O.T.
 [*]Umbralla
