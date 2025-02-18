@@ -88,8 +88,8 @@ local S = { -- localized strings
       zht = '其它',
       DETAIL = {
         'Show range of other items?\nSuch as Gunpowder, Pan Flute, Treeguard Idol...',
-        zh = '是否显示其它物品的范围？\n比如火药、排箫、树精雕像……',
-        zht = '是否顯示其它物品的範圍？\n如火藥、排簫、樹人雕像…',
+        zh = '是否显示其它物品的范围？\n比如火药、排箫、树精守卫雕像……',
+        zht = '是否顯示其它物品的範圍？\n如火藥、排簫、樹精守衛雕像…',
       },
     },
   },
