@@ -7,7 +7,8 @@ Double click to to toggle ranges of all objects of the same kind.
 (Change to left/right/side button and/or bind modifier key if any conflict.)
 [*]By default, press F5 to clear all ranges in your view.
 (Support binding key at bottom of Settings > Controls page)
-[*]Show range when deploy (build/plant)
+[*]Show range when deploy/build/plant.
+(Geometric Placement mod's Evergreen sapling button takes control.)
 [*]Show range when inventory item hovered by cursor.
 (This feature could be partially/completely disabled.)
 [/list]
@@ -43,7 +44,7 @@ Double click to to toggle ranges of all objects of the same kind.
 [*]Winona's Catapult: min and max attack range
 [*]Winona's Spotlight: normal and "spacious" light range
 [/list]
-[h3]Build/Plant[/h3]
+[h3]Deploy/Build/Plant[/h3]
 [list]
 [*]Cuckoo Spinwheel
 [*]Scaled Furnace
