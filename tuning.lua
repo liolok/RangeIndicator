@@ -132,7 +132,6 @@ if GetModConfigData('hover_books') then
   enable_hover = true
   for prefab, circles in pairs({
     book_birds = { { radius = 3, color = WHITE }, { radius = 11.5, color = WHITE } },
-    book_brimstone = { { radius = 3, color = PINK }, { radius = 15, color = PINK } },
     book_fire = { { radius = 16, color = WHITE } },
     book_fish = { { radius = 13, color = WHITE } }, -- 10 + 3 from prefabs/books.lua
     book_gardening = { { radius = 30, color = GREEN } },
@@ -145,7 +144,7 @@ if GetModConfigData('hover_books') then
     book_silviculture = { { radius = 30, color = WHITE } },
     book_sleep = { { radius = 30, color = GREEN } },
     book_temperature = { { radius = 16, color = GREEN } },
-    book_tentacles = { { radius = 3, color = PINK }, { radius = 8.6, color = PINK } },
+    book_tentacles = { { radius = 3, color = PINK }, { radius = 8, color = PINK } },
     book_web = { { radius = 5.5, color = WHITE } },
   }) do
     can_hover[prefab] = true
