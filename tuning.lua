@@ -148,6 +148,7 @@ if GetModConfigData('hover_books') then
     data[prefab] = circles
   end
 end
+
 if GetModConfigData('hover_other') then
   enable_hover = true
   for prefab, circles in pairs({
@@ -155,6 +156,7 @@ if GetModConfigData('hover_other') then
     panflute = { { radius = 15, color = GREEN } }, -- Pan Flute
     polly_rogershat = { { radius = 15, color = WHITE } }, -- Polly Roger's Hat
     spider_whistle = { { radius = 16, color = GREEN } }, -- Webby Whistle
+    wortox_soul = { { radius = 8, color = GREEN } }, -- Soul
   }) do
     can_hover[prefab] = true
     data[prefab] = circles

@@ -62,6 +62,7 @@ Double click to to toggle ranges of all objects of the same kind.
 [*]Pan Flute
 [*]Polly Roger's Hat
 [*]Webby Whistle
+[*]Soul
 [*]Gunpowder
 [*]Treeguard Idol
 [*]Gramophone

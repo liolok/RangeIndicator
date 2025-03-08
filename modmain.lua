@@ -134,6 +134,17 @@ end
 --------------------------------------------------------------------------------
 -- Feature: Hover
 
+local function HackData() -- dirty hack
+  local player = G.ThePlayer
+  local skill_tree = player and player.components and player.components.skilltreeupdater or nil
+  if skill_tree then
+    local heal_range = 8
+    if skill_tree:IsActivated('wortox_soulprotector_1') then heal_range = 11 end
+    if skill_tree:IsActivated('wortox_soulprotector_2') then heal_range = 14 end
+    T.DATA['wortox_soul'][1].radius = heal_range
+  end
+end
+
 AddClassPostConstruct('widgets/hoverer', function(self)
   if not (self.text and T.HOVER.ENABLE) then return end
 
@@ -143,6 +154,7 @@ AddClassPostConstruct('widgets/hoverer', function(self)
     local e = G.TheInput:GetHUDEntityUnderMouse()
     local prefab = e and e.widget and e.widget.parent and e.widget.parent.item and e.widget.parent.item.prefab or nil
     if prefab and T.HOVER.SUPPORT[prefab] then
+      if prefab == 'wortox_soul' then HackData() end
       local holding_modifier_key = not T.HOVER.KEY or G.TheInput:IsKeyDown(T.HOVER.KEY)
       if holding_modifier_key then CreateCircles(G.ThePlayer, prefab) end
     end
