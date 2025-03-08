@@ -11,6 +11,8 @@ local data = {} -- circle(s) of all possible prefab
 
 -- Cuckoo Spinwheel: block birds
 data.carnivalgame_wheelspin_station = { { radius = 4, color = YELLOW } }
+-- Cannon Tower
+data.crabking_cannontower = { { radius = 15, color = PINK } }
 -- Ice Crystaleyezer: freeze/light, generate Mini Glacier, cold
 data.deerclopseyeball_sentryward = {
   { radius = 3.5, color = CYAN },

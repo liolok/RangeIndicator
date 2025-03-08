@@ -17,6 +17,7 @@ Double click to to toggle ranges of all objects of the same kind.
 [h3]Click[/h3]
 [list]
 [*]Cuckoo Spinwheel: block birds
+[*]Cannon Tower
 [*]Ice Crystaleyezer: freeze/light, generate Mini Glacier, cold
 [*]Scaled Furnace: heat
 [*]Houndius Shootius
