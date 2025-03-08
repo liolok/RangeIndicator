@@ -10,7 +10,7 @@ Double click to to toggle ranges of all objects of the same kind.
 [*]Show range when deploy/build/plant.
 (Geometric Placement mod's Evergreen sapling button takes control.)
 [*]Show range when inventory item hovered by cursor.
-(This feature could be partially/completely disabled.)
+(Configurable modifier key, could be partially/completely disabled.)
 [/list]
 
 [h2]Compatibility[/h2]
