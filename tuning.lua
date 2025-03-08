@@ -91,7 +91,6 @@ data.winona_spotlight = { { radius = 31, color = CYAN }, { radius = 37, color = 
 --------------------------------------------------------------------------------
 -- Feature: Click
 
-local modifier_key = GetModConfigData('click_modifier')
 local mouse_button = GetModConfigData('mouse_button')
 if mouse_button == 'MOUSEBUTTON_LEFT' then mouse_button = 1000 end -- to fix backward compatibility
 if mouse_button == 'MOUSEBUTTON_RIGHT' then mouse_button = 1001 end
@@ -100,8 +99,6 @@ local can_click = {} -- support for clicked entity prefab
 for prefab, _ in pairs(data) do
   can_click[prefab] = true
 end
-local auto_hide = GetModConfigData('auto_hide')
-local double_click_speed = GetModConfigData('double_click_speed')
 
 --------------------------------------------------------------------------------
 -- Feature: Deploy
@@ -182,12 +179,16 @@ end
 GLOBAL.TUNING.RANGE_INDICATOR = {
   DATA = data,
   CLICK = {
-    KEY = modifier_key,
+    KEY = GetModConfigData('click_modifier'),
     BUTTON = mouse_button,
     SUPPORT = can_click,
-    AUTO_HIDE = auto_hide,
-    DOUBLE_CLICK_WAIT = double_click_speed,
+    AUTO_HIDE = GetModConfigData('auto_hide'),
+    DOUBLE_CLICK_WAIT = GetModConfigData('double_click_speed'),
   },
   DEPLOY = prefab_placer,
-  HOVER = { ENABLE = enable_hover, SUPPORT = can_hover },
+  HOVER = {
+    ENABLE = enable_hover,
+    SUPPORT = can_hover,
+    KEY = GetModConfigData('hover_modifier'),
+  },
 }

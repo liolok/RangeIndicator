@@ -138,12 +138,15 @@ AddClassPostConstruct('widgets/hoverer', function(self)
   if not (self.text and T.HOVER.ENABLE) then return end
 
   local OldSetString = self.text.SetString
-  self.text.SetString = function(text, str, ...)
+  self.text.SetString = function(...)
     RemoveCircles(G.ThePlayer)
     local e = G.TheInput:GetHUDEntityUnderMouse()
     local prefab = e and e.widget and e.widget.parent and e.widget.parent.item and e.widget.parent.item.prefab or nil
-    if prefab and T.HOVER.SUPPORT[prefab] then CreateCircles(G.ThePlayer, prefab) end
-    return OldSetString(text, str, ...)
+    if prefab and T.HOVER.SUPPORT[prefab] then
+      local holding_modifier_key = not T.HOVER.KEY or G.TheInput:IsKeyDown(T.HOVER.KEY)
+      if holding_modifier_key then CreateCircles(G.ThePlayer, prefab) end
+    end
+    return OldSetString(...)
   end
 
   local OldHide = self.text.Hide

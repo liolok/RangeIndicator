@@ -42,8 +42,8 @@ local S = { -- localized strings
       zht = '組合鍵',
       DETAIL = {
         'Click to toggle range only when this key pressed.',
-        zh = '按住此按键时才可以点击切换范围显示',
-        zht = '按住此按鍵時才可以點擊切換範圍顯示',
+        zh = '按住此键时才可以点击切换范围显示',
+        zht = '按住此鍵時才可以點擊切換範圍顯示',
       },
     },
     MOUSE_BUTTON = { 'Mouse Button', zh = '鼠标按键', zht = '滑鼠按鍵' },
@@ -72,6 +72,16 @@ local S = { -- localized strings
     'Hover Inventory Item',
     zh = '光标覆盖格子物品',
     zht = '遊標覆蓋格子物品',
+    MODIFIER_KEY = {
+      'Modifier Key',
+      zh = '组合键',
+      zht = '組合鍵',
+      DETAIL = {
+        'Show range only when this key pressed and hovering.',
+        zh = '按住此键且光标覆盖物品时才显示范围',
+        zht = '按住此鍵且遊標覆蓋物品時才顯示範圍',
+      },
+    },
     BOOKS = {
       'Books',
       zh = '书籍',
@@ -186,6 +196,18 @@ configuration_options = {
     name = 'double_click_speed',
   },
   H(S.HOVER),
+  {
+    label = T(S.HOVER.MODIFIER_KEY),
+    hover = T(S.HOVER.MODIFIER_KEY.DETAIL),
+    options = {
+      { data = false, description = T(S.NO) },
+      { data = 308, description = 'LAlt' },
+      { data = 306, description = 'LCtrl' },
+      { data = 304, description = 'LShift' },
+    },
+    default = false,
+    name = 'hover_modifier',
+  },
   { label = T(S.HOVER.BOOKS), hover = T(S.HOVER.BOOKS.DETAIL), options = BOOL, default = true, name = 'hover_books' },
   { label = T(S.HOVER.OTHER), hover = T(S.HOVER.OTHER.DETAIL), options = BOOL, default = true, name = 'hover_other' },
 }
