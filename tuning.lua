@@ -8,87 +8,83 @@ local YELLOW = { 1, 1, 0, 1 }
 local WHITE = { 1, 1, 1, 1 }
 
 local data = {} -- circle(s) of all possible prefab
+local function Circle(radius, color) return { radius = radius, color = color or WHITE } end
 
 -- Cuckoo Spinwheel: block birds
-data.carnivalgame_wheelspin_station = { { radius = 4, color = YELLOW } }
+data.carnivalgame_wheelspin_station = Circle(4, YELLOW)
 -- Cannon Tower
-data.crabking_cannontower = { { radius = 15, color = PINK } }
+data.crabking_cannontower = Circle(15, PINK)
 -- Ice Crystaleyezer: freeze/light, generate Mini Glacier, cold
-data.deerclopseyeball_sentryward = {
-  { radius = 3.5, color = CYAN },
-  { radius = 5, color = WHITE },
-  { radius = 12, color = WHITE },
-  { radius = 35, color = BLUE },
-}
+data.deerclopseyeball_sentryward = { Circle(3.5, CYAN), Circle(5), Circle(12), Circle(35, BLUE) }
 -- Scaled Furnace: heat
-data.dragonflyfurnace = { { radius = 9.5, color = RED } }
+data.dragonflyfurnace = Circle(9.5, RED)
 -- Houndius Shootius
-data.eyeturret = { { radius = 18, color = PINK } }
+data.eyeturret = Circle(18, PINK)
 -- Ice Flingomatic
-data.firesuppressor = { { radius = 15, color = WHITE } }
+data.firesuppressor = Circle(15)
 -- Flower, Rose, Evil Flower: simplified model of honey production range
-data.flower = { { radius = 42, color = YELLOW } }
+data.flower = Circle(42, YELLOW)
 data.flower_rose = data.flower
 data.flower_evil = data.flower
 -- Gunpowder
-data.gunpowder = { { radius = 3, color = PINK } }
+data.gunpowder = Circle(3, PINK)
 -- Magma: heat
-data.lava_pond = { { radius = 10, color = RED } }
+data.lava_pond = Circle(10, RED)
 -- Treeguard Idol
-data.leif_idol = { { radius = 10, color = GREEN } }
+data.leif_idol = Circle(10, GREEN)
 -- Lightning Rod
-data.lightning_rod = { { radius = 40, color = YELLOW } }
+data.lightning_rod = Circle(40, YELLOW)
 -- Deadly Brightshade, Grass, (Lunar) Sapling: Brightshade aggro and protect infection
-data.lunarthrall_plant = { { radius = 12, color = PINK }, { radius = 30, color = GREEN } }
-for _, prefab in ipairs({ 'grass', 'sapling', 'sapling_moon' }) do
-  data[prefab] = data.lunarthrall_plant
-end
+data.lunarthrall_plant = { Circle(12, PINK), Circle(30, GREEN) }
+data.grass = data.lunarthrall_plant
+data.sapling = data.lunarthrall_plant
+data.sapling_moon = data.lunarthrall_plant
 -- Celestial Altar/Sanctum/Tribute/Fissure: max linking distance between two Lunar Altars
-data.moon_altar = { { radius = 20, color = BLACK } }
-for _, prefab in ipairs({ 'moon_altar_astral', 'moon_altar_cosmic', 'moon_fissure' }) do
-  data[prefab] = data.moon_altar
-end
+data.moon_altar = Circle(20, BLACK)
+data.moon_altar_astral = data.moon_altar
+data.moon_altar_cosmic = data.moon_altar
+data.moon_fissure = data.moon_altar
 -- Moon Stone: cold (with a Moon Caller's Staff)
-data.moonbase = { { radius = 8, color = BLUE } }
+data.moonbase = Circle(8, BLUE)
 -- Mushlight, Glowcap: max light range
-data.mushroom_light = { { radius = 11.5, color = CYAN } }
-data.mushroom_light2 = { { radius = 10.7, color = CYAN } }
+data.mushroom_light = Circle(11.5, CYAN)
+data.mushroom_light2 = Circle(10.7, CYAN)
 -- (Superior) Communal Kelp Dish: make Merms respawn faster
-data.offering_pot = { { radius = 7, color = GREEN } }
-data.offering_pot_upgraded = data.offering_pot
+data.offering_pot = Circle(7, GREEN)
+data.offering_pot_upgraded = Circle(7, GREEN)
 -- Gramophone, Shell Bell: tend Farm Plants
-data.phonograph = { { radius = 8, color = GREEN } }
-data.singingshell_octave3 = { { radius = 2, color = GREEN } }
-data.singingshell_octave4 = data.singingshell_octave3
-data.singingshell_octave5 = data.singingshell_octave3
+data.phonograph = Circle(8, GREEN)
+data.singingshell_octave3 = Circle(2, GREEN)
+data.singingshell_octave4 = Circle(2, GREEN)
+data.singingshell_octave5 = Circle(2, GREEN)
 -- Pig King: The area around must be clear to initiate Wrestling Match
-data.pigking = { { radius = 12, color = WHITE } }
+data.pigking = Circle(12)
 -- Polar Light: cold
-data.staffcoldlight = { { radius = 8, color = BLUE } }
+data.staffcoldlight = Circle(8, BLUE)
 -- Dwarf Star: heat
-data.stafflight = { { radius = 10, color = RED } }
+data.stafflight = Circle(10, RED)
 -- W.O.B.O.T. / W.I.N.bot
-data.storage_robot = { { radius = 15, color = YELLOW } }
-data.winona_storage_robot = data.storage_robot
+data.storage_robot = Circle(15, YELLOW)
+data.winona_storage_robot = Circle(15, YELLOW)
 -- Support Pillar, Dreadstone Pillar
-data.support_pillar = { { radius = 40, color = YELLOW } }
-data.support_pillar_dreadstone = data.support_pillar
+data.support_pillar = Circle(40, YELLOW)
+data.support_pillar_dreadstone = Circle(40, YELLOW)
 -- Anenemy: attack, block birds
-data.trap_starfish = { { radius = 1.5, color = PINK }, { radius = 4, color = YELLOW } }
+data.trap_starfish = { Circle(1.5, PINK), Circle(4, YELLOW) }
 -- Umbralla: protection (while activated on the ground)
-data.voidcloth_umbrella = { { radius = 16, color = GREEN } }
+data.voidcloth_umbrella = Circle(16, GREEN)
 -- Varg: howl and summon hounds
-data.warg = { { radius = 30, color = WHITE } } -- SPAWN_DIST from components/hounded.lua
+data.warg = Circle(30) -- SPAWN_DIST from components/hounded.lua
 -- Great Tree Trunk, Above-Average Tree Trunk, Knobbly Tree and Nut, Pinchin' Winch: canopy shade
-data.watertree_pillar = { { radius = 28, color = GREEN } }
-data.oceantree_pillar = { { radius = 22, color = GREEN } }
-for _, prefab in ipairs({ 'oceantree', 'oceantreenut', 'winch' }) do
-  data[prefab] = data.oceantree_pillar
-end
+data.watertree_pillar = Circle(28, GREEN)
+data.oceantree_pillar = Circle(22, GREEN)
+data.oceantree = Circle(22, GREEN)
+data.oceantreenut = Circle(22, GREEN)
+data.winch = Circle(22, GREEN)
 -- Winona's Catapult: min and max attack range
-data.winona_catapult = { { radius = 6, color = PINK }, { radius = 15, color = PINK } }
+data.winona_catapult = { Circle(6, PINK), Circle(15, PINK) }
 -- Winona's Spotlight: normal and "spacious" light range
-data.winona_spotlight = { { radius = 31, color = CYAN }, { radius = 37, color = CYAN } }
+data.winona_spotlight = { Circle(31, CYAN), Circle(37, CYAN) }
 
 --------------------------------------------------------------------------------
 -- Feature: Click
@@ -130,21 +126,21 @@ local can_hover = {} -- support for hovered inventory item prefab
 if GetModConfigData('hover_books') then
   enable_hover = true
   for prefab, circles in pairs({
-    book_birds = { { radius = 3, color = WHITE }, { radius = 11.5, color = WHITE } },
-    book_fire = { { radius = 16, color = WHITE } },
-    book_fish = { { radius = 13, color = WHITE } }, -- 10 + 3 from prefabs/books.lua
-    book_gardening = { { radius = 30, color = GREEN } },
-    book_horticulture = { { radius = 30, color = GREEN } },
-    book_horticulture_upgraded = { { radius = 30, color = GREEN } },
-    book_light = { { radius = 3, color = CYAN } },
-    book_light_upgraded = { { radius = 3, color = CYAN } },
-    book_rain = { { radius = 4, color = GREEN } },
-    book_research_station = { { radius = 16, color = WHITE } },
-    book_silviculture = { { radius = 30, color = WHITE } },
-    book_sleep = { { radius = 30, color = GREEN } },
-    book_temperature = { { radius = 16, color = GREEN } },
-    book_tentacles = { { radius = 3, color = PINK }, { radius = 8, color = PINK } },
-    book_web = { { radius = 5.5, color = WHITE } },
+    book_birds = { Circle(3), Circle(11.5) },
+    book_fire = Circle(16, GREEN),
+    book_fish = Circle(13), -- 10 + 3 from prefabs/books.lua
+    book_gardening = Circle(30, GREEN),
+    book_horticulture = Circle(30, GREEN),
+    book_horticulture_upgraded = Circle(30, GREEN),
+    book_light = Circle(3, CYAN),
+    book_light_upgraded = Circle(3, CYAN),
+    book_rain = Circle(4, GREEN),
+    book_research_station = Circle(16, GREEN),
+    book_silviculture = Circle(30, GREEN),
+    book_sleep = Circle(30, GREEN),
+    book_temperature = Circle(16, GREEN),
+    book_tentacles = { Circle(3, PINK), Circle(8, PINK) },
+    book_web = Circle(6), -- BOOK_WEB_GROUND_RADIUS
   }) do
     can_hover[prefab] = true
     data[prefab] = circles
@@ -154,11 +150,11 @@ end
 if GetModConfigData('hover_other') then
   enable_hover = true
   for prefab, circles in pairs({
-    orangeamulet = { { radius = 4, color = WHITE } }, -- The Lazy Forager
-    panflute = { { radius = 15, color = GREEN } }, -- Pan Flute
-    polly_rogershat = { { radius = 15, color = WHITE } }, -- Polly Roger's Hat
-    spider_whistle = { { radius = 16, color = GREEN } }, -- Webby Whistle
-    wortox_soul = { { radius = 8, color = GREEN } }, -- Soul
+    orangeamulet = Circle(4), -- The Lazy Forager
+    panflute = Circle(15, GREEN), -- Pan Flute
+    polly_rogershat = Circle(15), -- Polly Roger's Hat
+    spider_whistle = Circle(16, GREEN), -- Webby Whistle
+    wortox_soul = Circle(8, GREEN), -- Soul
   }) do
     can_hover[prefab] = true
     data[prefab] = circles

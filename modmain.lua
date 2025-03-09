@@ -40,6 +40,7 @@ local function CreateCircles(inst, prefab)
   if not data then return end -- prefab not supported
   if inst.circles then return end -- circle(s) already created
   inst.circles = {}
+  if data.radius then data = { data } end -- only one circle
   for _, v in pairs(data) do
     table.insert(inst.circles, CreateCircle(inst, v.radius, v.color))
   end
@@ -137,12 +138,10 @@ end
 local function HackData() -- dirty hack
   local player = G.ThePlayer
   local skill_tree = player and player.components and player.components.skilltreeupdater or nil
-  if skill_tree then
-    local heal_range = 8
-    if skill_tree:IsActivated('wortox_soulprotector_1') then heal_range = 11 end
-    if skill_tree:IsActivated('wortox_soulprotector_2') then heal_range = 14 end
-    T.DATA['wortox_soul'][1].radius = heal_range
-  end
+  local heal_range = 8
+  if skill_tree and skill_tree:IsActivated('wortox_soulprotector_1') then heal_range = 11 end
+  if skill_tree and skill_tree:IsActivated('wortox_soulprotector_2') then heal_range = 14 end
+  T.DATA['wortox_soul'].radius = heal_range
 end
 
 AddClassPostConstruct('widgets/hoverer', function(self)
