@@ -44,8 +44,8 @@ data.moon_altar = Circle(20, BLACK)
 data.moon_altar_astral = data.moon_altar
 data.moon_altar_cosmic = data.moon_altar
 data.moon_fissure = data.moon_altar
--- Moon Stone: cold (with a Moon Caller's Staff)
-data.moonbase = Circle(8, BLUE)
+-- Moon Stone: cold (with a Moon Caller's Staff), attract Hounds and Werepigs
+data.moonbase = {Circle(8, BLUE), Circle(30)}
 -- Mushlight, Glowcap: max light range
 data.mushroom_light = Circle(11.5, CYAN)
 data.mushroom_light2 = Circle(10.7, CYAN)
