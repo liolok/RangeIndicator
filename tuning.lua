@@ -14,6 +14,9 @@ local function Circle(radius, color) return { radius = radius, color = color or 
 data.carnivalgame_wheelspin_station = Circle(4, YELLOW)
 -- Cannon Tower
 data.crabking_cannontower = Circle(15, PINK)
+-- Gem Deer: Cast magical circle
+data.deer_blue = Circle(15, BLUE) -- DEER_GEMMED_CAST_MAX_RANGE rather than 12 from DEER_GEMMED_CAST_RANGE
+data.deer_red = Circle(15, RED)
 -- Ice Crystaleyezer: freeze/light, generate Mini Glacier, cold
 data.deerclopseyeball_sentryward = { Circle(3.5, CYAN), Circle(5), Circle(12), Circle(35, BLUE) }
 -- Scaled Furnace: heat
