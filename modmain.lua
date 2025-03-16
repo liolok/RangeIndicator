@@ -99,6 +99,11 @@ G.TheInput:AddMouseButtonHandler(function(button, down)
   if not entity then return end
   local prefab = entity.prefab
   if not T.CLICK.SUPPORT[prefab] then return end
+  if prefab == 'storage_robot' or prefab == 'winona_storage_robot' then
+    if not (entity.AnimState:IsCurrentAnimation('idle') or entity.AnimState:IsCurrentAnimation('idle_off')) then
+      return
+    end
+  end
   if waiting_for_double_click[prefab] then
     waiting_for_double_click[prefab] = false
     local x, y, z = entity.Transform:GetWorldPosition()
