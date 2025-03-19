@@ -78,6 +78,8 @@ data.trap_starfish = { Circle(1.5, PINK), Circle(4, YELLOW) }
 data.voidcloth_umbrella = Circle(16, GREEN)
 -- Varg: howl and summon hounds
 data.warg = Circle(30) -- SPAWN_DIST from components/hounded.lua
+-- Killer Bee Hive
+data.wasphive = Circle(10, PINK)
 -- Great Tree Trunk, Above-Average Tree Trunk, Knobbly Tree and Nut, Pinchin' Winch: canopy shade
 data.watertree_pillar = Circle(28, GREEN)
 data.oceantree_pillar = Circle(22, GREEN)
