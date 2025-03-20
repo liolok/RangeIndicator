@@ -29,6 +29,7 @@ Double click to to toggle ranges of all objects of the same kind.
 [*]Treeguard Idol
 [*]Lightning Rod
 [*]Deadly Brightshade, Grass, (Lunar) Sapling: Brightshade aggro and protect infection
+[*]Queen of Moon Quay: Risk of Pirate Raid, Red/Yellow/Green for High/Med/Low.
 [*]Celestial Altar/Sanctum/Tribute/Fissure: max linking distance between two Lunar Altars
 [*]Moon Stone: cold (with a Moon Caller's Staff), attract Hounds and Werepigs
 [*]Mushlight, Glowcap: max light range

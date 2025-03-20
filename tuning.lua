@@ -42,6 +42,8 @@ data.lunarthrall_plant = { Circle(12, PINK), Circle(30, GREEN) }
 data.grass = data.lunarthrall_plant
 data.sapling = data.lunarthrall_plant
 data.sapling_moon = data.lunarthrall_plant
+-- Queen of Moon Quay: Risk of Pirate Raid, Red/Yellow/Green for High/Med/Low.
+data.monkeyqueen = { Circle(300, RED), Circle(600, YELLOW), Circle(800, GREEN) }
 -- Celestial Altar/Sanctum/Tribute/Fissure: max linking distance between two Lunar Altars
 data.moon_altar = Circle(20, BLACK)
 data.moon_altar_astral = data.moon_altar
