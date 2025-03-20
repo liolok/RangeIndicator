@@ -9,7 +9,7 @@ local function CreateCircle(inst, radius, color) -- CreatePlacerRing(), prefabs/
   local tf = circle.entity:AddTransform()
   local as = circle.entity:AddAnimState()
 
-  if inst.prefab == 'storage_robot' or inst.prefab == 'winona_storage_robot' then
+  if inst.prefab == 'storage_robot' or inst.prefab == 'winona_storage_robot' or inst.prefab == 'monkeyqueen' then
     local x, _, z = inst.Transform:GetWorldPosition()
     tf:SetPosition(x, 0, z)
   else
