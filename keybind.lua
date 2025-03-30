@@ -26,16 +26,15 @@ local Text = require('widgets/text')
 local TEMPLATES = require('widgets/redux/templates')
 local OptionsScreen = require('screens/redux/optionsscreen')
 
-local MOUSE = { -- mouse button emoji => code number
-  ['\238\132\130'] = 1002, -- Middle Mouse Button
-  ['\238\132\131'] = 1005, -- Mouse Button 4
-  ['\238\132\132'] = 1006, -- Mouse Button 5
-}
+local KEYBOARD = { KEY_QUOTE = 39, KEY_BACKQUOTE = 96 } -- for missing definitions in constants.lua
+
+-- emoji of Middle Mouse Button, Mouse Button 4 and 5 => code number
+local MOUSE = { ['\238\132\130'] = 1002, ['\238\132\131'] = 1005, ['\238\132\132'] = 1006 }
 
 -- "KEY_*" and mouse button emoji => code number or nil
-local function Raw(key) return MOUSE[key] or G.rawget(G, key) end
+local function Raw(key) return KEYBOARD[key] or MOUSE[key] or G.rawget(G, key) end
 
--- code number to "KEY_*" and mouse button emoji
+-- code number => "KEY_*" and mouse button emoji
 local str = {}
 for _, option in ipairs(modinfo.keys) do
   local key = option.data
@@ -61,11 +60,13 @@ for _, config in ipairs(modinfo.configuration_options) do
 end
 
 -- initialize binds
-AddGamePostInit(function()
-  for name, _ in pairs(is_keybind) do
-    KeyBind(name, Raw(GetModConfigData(name)))
+local function InitBindings()
+  for _, config in pairs(configs) do
+    KeyBind(config.name, Raw(GetModConfigData(config.name, true)))
   end
-end)
+end
+local AddInit = modinfo.client_only_mod and AddGamePostInit or AddPlayerPostInit
+AddInit(InitBindings)
 
 --------------------------------------------------------------------------------
 -- Button widget to show and change bind
@@ -257,12 +258,12 @@ end)
 -- Add mod name header and keybind entries to the list in "Options > Controls"
 AddClassPostConstruct('screens/redux/optionsscreen', function(self)
   -- rtk0c: Reusing the same list is fine, per the current logic in ScrollableList:SetList();
-  -- Don't call ScrollableList:AddItem() one by one to avoid wasting time recalcuating the list size.
+  -- Don't call ScrollableList:AddItem() one by one to avoid wasting time recalculating the list size.
   local list = self.kb_controllist
   local items = list.items
   if #configs > 0 then table.insert(items, list:AddChild(Header(modinfo.name))) end
   for _, config in ipairs(configs) do
-    _key[config] = GetModConfigData(config.name)
+    _key[config] = GetModConfigData(config.name, true)
     table.insert(items, list:AddChild(BindEntry(self, config)))
   end
   list:SetList(items, true)
@@ -285,6 +286,6 @@ function OptionsScreen:Save(...)
     KeyBind(config.name, Raw(key)) -- let mod change bind
     G.KnownModIndex:SetConfigurationOption(modname, config.name, key)
   end
-  G.KnownModIndex:SaveHostConfiguration(modname) -- save to disk
+  G.KnownModIndex:SaveConfigurationOptions(function() end, modname, modinfo.configuration_options, true) -- save to disk
   return OldSave(self, ...)
 end
