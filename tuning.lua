@@ -189,7 +189,6 @@ end
 GLOBAL.TUNING.RANGE_INDICATOR = {
   DATA = data,
   CLICK = {
-    KEY = GetModConfigData('click_modifier'),
     BUTTON = mouse_button,
     SUPPORT = can_click,
     AUTO_HIDE = GetModConfigData('auto_hide'),
@@ -199,6 +198,5 @@ GLOBAL.TUNING.RANGE_INDICATOR = {
   HOVER = {
     ENABLE = enable_hover,
     SUPPORT = can_hover,
-    KEY = GetModConfigData('hover_modifier'),
   },
 }

@@ -46,13 +46,6 @@ end
 
 local function Header(...) return { name = T(...), options = { { description = '', data = 0 } }, default = 0 } end
 
-local MODIFIER_KEY = {
-  { data = false, description = T('None', '无', '無') },
-  { data = 308, description = T('Left', '左') .. ' Alt' },
-  { data = 306, description = T('Left', '左') .. ' Ctrl' },
-  { data = 304, description = T('Left', '左') .. ' Shift' },
-}
-
 local ON = { data = true, description = T('On', '开启', '開啟') }
 local OFF = { data = false, description = T('Off', '关闭', '關閉') }
 local TOGGLE = { ON, OFF }
@@ -72,13 +65,13 @@ configuration_options = {
   Header('Click Toggle', '点击切换', '點擊切換'),
   {
     name = 'click_modifier',
-    label = T('Modifier Key', '组合键', '組合鍵'),
+    label = T('Click Modifier Key', '点击组合键', '點擊組合鍵'),
     hover = T(
       'Click to toggle range only when this key pressed.',
       '按住此键时才可以点击切换范围显示',
       '按住此鍵時才可以點擊切換範圍顯示'
     ),
-    options = MODIFIER_KEY,
+    options = keys,
     default = false,
   },
   {
@@ -124,13 +117,13 @@ configuration_options = {
   Header('Hover Inventory Item', '光标覆盖格子物品', '遊標覆蓋格子物品'),
   {
     name = 'hover_modifier',
-    label = T('Modifier Key', '组合键', '組合鍵'),
+    label = T('Hover Modifier Key', '光标覆盖组合键', '遊標覆蓋組合鍵'),
     hover = T(
       'Show range only when this key pressed and hovering.',
       '按住此键且光标覆盖物品时才显示范围',
       '按住此鍵且遊標覆蓋物品時才顯示範圍'
     ),
-    options = MODIFIER_KEY,
+    options = keys,
     default = false,
   },
   {

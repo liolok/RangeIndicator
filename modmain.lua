@@ -80,20 +80,15 @@ local function Clear()
   end
 end
 
-local handler = nil
-function KeyBind(_, key)
-  if handler then handler:Remove() end
-  handler = key and G.TheInput:AddKeyDownHandler(key, Clear) or nil
-end
-
 --------------------------------------------------------------------------------
 -- Feature: Click
 
+local is_holding_click_mod_key = false
 local waiting_for_double_click = {}
 
 G.TheInput:AddMouseButtonHandler(function(button, down)
   if not G.ThePlayer then return end
-  if T.CLICK.KEY and not G.TheInput:IsKeyDown(T.CLICK.KEY) then return end -- modifier key
+  if GetModConfigData('click_modifier') ~= 'KEY_DISABLED' and not is_holding_click_mod_key then return end -- modifier key
   if not (button == T.CLICK.BUTTON and down) then return end
   local entity = G.TheInput:GetWorldEntityUnderMouse()
   if not entity then return end
@@ -155,6 +150,8 @@ local function HackData() -- dirty hack
   T.DATA['wortox_soul'].radius = heal_range
 end
 
+local is_holding_hover_mod_key = false
+
 AddClassPostConstruct('widgets/hoverer', function(self)
   if not (self.text and T.HOVER.ENABLE) then return end
 
@@ -165,8 +162,8 @@ AddClassPostConstruct('widgets/hoverer', function(self)
     local prefab = e and e.widget and e.widget.parent and e.widget.parent.item and e.widget.parent.item.prefab or nil
     if prefab and T.HOVER.SUPPORT[prefab] then
       if prefab == 'wortox_soul' then HackData() end
-      local holding_modifier_key = not T.HOVER.KEY or G.TheInput:IsKeyDown(T.HOVER.KEY)
-      if holding_modifier_key then CreateCircles(G.ThePlayer, prefab) end
+      local modifier_disabled = GetModConfigData('hover_modifier') == 'KEY_DISABLED'
+      if modifier_disabled or is_holding_hover_mod_key then CreateCircles(G.ThePlayer, prefab) end
     end
     return OldSetString(...)
   end
@@ -177,3 +174,42 @@ AddClassPostConstruct('widgets/hoverer', function(self)
     return OldHide(...)
   end
 end)
+
+--------------------------------------------------------------------------------
+-- Key Binding
+
+local callback = {
+  clear_key = Clear,
+  click_modifier = {
+    down = function() is_holding_click_mod_key = true end,
+    up = function() is_holding_click_mod_key = false end,
+  },
+  hover_modifier = {
+    down = function() is_holding_hover_mod_key = true end,
+    up = function() is_holding_hover_mod_key = false end,
+  },
+}
+
+local handler = {} -- config name to key event handlers
+
+function KeyBind(name, key)
+  -- disable old binding
+  if handler[name] then
+    handler[name]:Remove()
+    handler[name] = nil
+  end
+
+  -- no binding
+  if not key then return end
+
+  -- new binding
+  if name:match('modifier') then
+    handler[name] = G.TheInput:AddKeyHandler(function(_key, down)
+      if _key ~= key then return end
+      local fn = down and 'down' or 'up'
+      callback[name][fn]()
+    end)
+  else
+    handler[name] = G.TheInput:AddKeyDownHandler(key, callback[name])
+  end
+end
