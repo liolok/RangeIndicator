@@ -25,6 +25,7 @@ Double click to to toggle ranges of all objects of the same kind.
 [*]Ice Flingomatic
 [*]Flower, Rose, Evil Flower: simplified model of honey production range
 [*]Gunpowder
+[*]Sign, Directional Sign: block Lunar/Shadow Rift
 [*]Magma: heat
 [*]Treeguard Idol
 [*]Lightning Rod

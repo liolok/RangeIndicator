@@ -31,6 +31,9 @@ data.flower_rose = data.flower
 data.flower_evil = data.flower
 -- Gunpowder
 data.gunpowder = Circle(3, PINK)
+-- Sign, Directional Sign: block Lunar/Shadow Rift
+data.homesign = Circle(24)
+data.arrowsign_post = Circle(24)
 -- Magma: heat
 data.lava_pond = Circle(10, RED)
 -- Treeguard Idol
