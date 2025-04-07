@@ -83,12 +83,13 @@ end
 --------------------------------------------------------------------------------
 -- Feature: Click
 
+local is_click_mod_key_enabled = false
 local is_holding_click_mod_key = false
 local waiting_for_double_click = {}
 
 G.TheInput:AddMouseButtonHandler(function(button, down)
   if not G.ThePlayer then return end
-  if GetModConfigData('click_modifier') ~= 'KEY_DISABLED' and not is_holding_click_mod_key then return end -- modifier key
+  if is_click_mod_key_enabled and not is_holding_click_mod_key then return end -- modifier key
   if not (button == T.CLICK.BUTTON and down) then return end
   local entity = G.TheInput:GetWorldEntityUnderMouse()
   if not entity then return end
@@ -150,6 +151,7 @@ local function HackData() -- dirty hack
   T.DATA['wortox_soul'].radius = heal_range
 end
 
+local is_hover_mod_key_enabled = false
 local is_holding_hover_mod_key = false
 
 AddClassPostConstruct('widgets/hoverer', function(self)
@@ -162,8 +164,7 @@ AddClassPostConstruct('widgets/hoverer', function(self)
     local prefab = e and e.widget and e.widget.parent and e.widget.parent.item and e.widget.parent.item.prefab or nil
     if prefab and T.HOVER.SUPPORT[prefab] then
       if prefab == 'wortox_soul' then HackData() end
-      local modifier_disabled = GetModConfigData('hover_modifier') == 'KEY_DISABLED'
-      if modifier_disabled or is_holding_hover_mod_key then CreateCircles(G.ThePlayer, prefab) end
+      if not is_hover_mod_key_enabled or is_holding_hover_mod_key then CreateCircles(G.ThePlayer, prefab) end
     end
     return OldSetString(...)
   end
@@ -197,6 +198,8 @@ function KeyBind(name, key)
   if handler[name] then
     handler[name]:Remove()
     handler[name] = nil
+    if name == 'hover_modifier' then is_hover_mod_key_enabled = false end
+    if name == 'click_modifier' then is_click_mod_key_enabled = false end
   end
 
   -- no binding
@@ -209,6 +212,8 @@ function KeyBind(name, key)
       local fn = down and 'down' or 'up'
       callback[name][fn]()
     end)
+    if name == 'hover_modifier' then is_hover_mod_key_enabled = true end
+    if name == 'click_modifier' then is_click_mod_key_enabled = true end
   else
     handler[name] = G.TheInput:AddKeyDownHandler(key, callback[name])
   end
