@@ -81,24 +81,22 @@ local function Clear()
 end
 
 --------------------------------------------------------------------------------
--- Feature: Click
+-- Feature: Click to Toggle
 
-local is_click_mod_key_enabled = false
-local is_holding_click_mod_key = false
+local is_toggle_mod_key_enabled = false
+local is_holding_toggle_mod_key = false
 local waiting_for_double_click = {}
 
-G.TheInput:AddMouseButtonHandler(function(button, down)
+local function Toggle()
   if not G.ThePlayer then return end
-  if is_click_mod_key_enabled and not is_holding_click_mod_key then return end -- modifier key
-  if not (button == T.CLICK.BUTTON and down) then return end
+  if is_toggle_mod_key_enabled and not is_holding_toggle_mod_key then return end -- modifier key
   local entity = G.TheInput:GetWorldEntityUnderMouse()
   if not entity then return end
   local prefab = entity.prefab
   if not T.CLICK.SUPPORT[prefab] then return end
   if prefab == 'storage_robot' or prefab == 'winona_storage_robot' then
-    if not (entity.AnimState:IsCurrentAnimation('idle') or entity.AnimState:IsCurrentAnimation('idle_off')) then
-      return
-    end
+    local as = entity.AnimState
+    if not (as:IsCurrentAnimation('idle') or as:IsCurrentAnimation('idle_off')) then return end
   end
   if waiting_for_double_click[prefab] then
     waiting_for_double_click[prefab] = false
@@ -130,7 +128,7 @@ G.TheInput:AddMouseButtonHandler(function(button, down)
       function() waiting_for_double_click[prefab] = false end
     )
   end
-end)
+end
 
 --------------------------------------------------------------------------------
 -- Feature: Deploy
@@ -181,9 +179,10 @@ end)
 
 local callback = {
   clear_key = Clear,
-  click_modifier = {
-    down = function() is_holding_click_mod_key = true end,
-    up = function() is_holding_click_mod_key = false end,
+  toggle_key = Toggle,
+  toggle_modifier = {
+    down = function() is_holding_toggle_mod_key = true end,
+    up = function() is_holding_toggle_mod_key = false end,
   },
   hover_modifier = {
     down = function() is_holding_hover_mod_key = true end,
@@ -195,26 +194,38 @@ local handler = {} -- config name to key event handlers
 
 function KeyBind(name, key)
   -- disable old binding
-  if handler[name] then
-    handler[name]:Remove()
-    handler[name] = nil
-    if name == 'hover_modifier' then is_hover_mod_key_enabled = false end
-    if name == 'click_modifier' then is_click_mod_key_enabled = false end
-  end
+  if handler[name] then handler[name]:Remove() end
+  handler[name] = nil
+  if name == 'toggle_modifier' then is_toggle_mod_key_enabled = false end
+  if name == 'hover_modifier' then is_hover_mod_key_enabled = false end
 
   -- no binding
   if not key then return end
 
   -- new binding
-  if name:match('modifier') then
-    handler[name] = G.TheInput:AddKeyHandler(function(_key, down)
-      if _key ~= key then return end
-      local fn = down and 'down' or 'up'
-      callback[name][fn]()
-    end)
-    if name == 'hover_modifier' then is_hover_mod_key_enabled = true end
-    if name == 'click_modifier' then is_click_mod_key_enabled = true end
-  else
-    handler[name] = G.TheInput:AddKeyDownHandler(key, callback[name])
+  if key >= 1000 then -- it's a mouse button
+    if name:match('modifier') then
+      handler[name] = G.TheInput:AddMouseButtonHandler(function(button, down, x, y)
+        if button ~= key then return end
+        local fn = down and 'down' or 'up'
+        callback[name][fn]()
+      end)
+    else
+      handler[name] = G.TheInput:AddMouseButtonHandler(function(button, down, x, y)
+        if button == key and down then callback[name]() end
+      end)
+    end
+  else -- it's a keyboard key
+    if name:match('modifier') then
+      handler[name] = G.TheInput:AddKeyHandler(function(_key, down)
+        if _key ~= key then return end
+        local fn = down and 'down' or 'up'
+        callback[name][fn]()
+      end)
+    else
+      handler[name] = G.TheInput:AddKeyDownHandler(key, callback[name])
+    end
   end
+  if name == 'toggle_modifier' then is_toggle_mod_key_enabled = true end
+  if name == 'hover_modifier' then is_hover_mod_key_enabled = true end
 end

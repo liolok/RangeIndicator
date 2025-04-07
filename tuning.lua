@@ -97,12 +97,8 @@ data.winona_catapult = { Circle(6, PINK), Circle(15, PINK) }
 data.winona_spotlight = { Circle(31, CYAN), Circle(37, CYAN) }
 
 --------------------------------------------------------------------------------
--- Feature: Click
+-- Feature: Click to Toggle
 
-local mouse_button = GetModConfigData('mouse_button')
-if mouse_button == 'MOUSEBUTTON_LEFT' then mouse_button = 1000 end -- to fix backward compatibility
-if mouse_button == 'MOUSEBUTTON_RIGHT' then mouse_button = 1001 end
-if mouse_button == 'MOUSEBUTTON_MIDDLE' then mouse_button = 1002 end
 local can_click = {} -- support for clicked entity prefab
 for prefab, _ in pairs(data) do
   can_click[prefab] = true
@@ -189,7 +185,6 @@ end
 GLOBAL.TUNING.RANGE_INDICATOR = {
   DATA = data,
   CLICK = {
-    BUTTON = mouse_button,
     SUPPORT = can_click,
     AUTO_HIDE = GetModConfigData('auto_hide'),
     DOUBLE_CLICK_WAIT = GetModConfigData('double_click_speed'),
