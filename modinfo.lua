@@ -72,7 +72,7 @@ configuration_options = {
       '按住此鍵時才可以點擊切換範圍顯示'
     ),
     options = keys,
-    default = false,
+    default = 'KEY_DISABLED',
   },
   {
     label = T('Mouse Button', '鼠标按键', '滑鼠按鍵'),
@@ -124,7 +124,7 @@ configuration_options = {
       '按住此鍵且遊標覆蓋物品時才顯示範圍'
     ),
     options = keys,
-    default = false,
+    default = 'KEY_DISABLED',
   },
   {
     name = 'hover_books',
