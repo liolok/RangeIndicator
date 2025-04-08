@@ -112,6 +112,8 @@ local prefab_placer = {
   'dragonflyfurnace', -- Scaled Furnace
   'dug_trap_starfish', -- Anenemy Trap
   'eyeturret_item', -- Houndius Shootius
+  'homesign', -- Sign
+  'arrowsign_post', -- Directional Sign
   'lightning_rod', -- Lightning Rod
   'mushroom_light', -- Mushlight
   'mushroom_light2', -- Glowcap

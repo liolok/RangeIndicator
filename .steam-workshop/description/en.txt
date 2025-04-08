@@ -55,6 +55,8 @@ Support binding key at bottom of Settings > Controls page.
 [*]Scaled Furnace
 [*]Anenemy Trap
 [*]Houndius Shootius
+[*]Sign
+[*]Directional Sign
 [*]Lightning Rod
 [*]Mushlight
 [*]Glowcap
