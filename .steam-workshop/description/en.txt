@@ -16,6 +16,9 @@ Support binding key at bottom of Settings > Controls page.
 [h2]Compatibility[/h2]
 [h3]Click to Toggle[/h3]
 [list]
+[*]Cactus: regrowth
+[*]Hollow Stump: regrowth
+[*]Cave Banana Tree: regrowth
 [*]Cuckoo Spinwheel: block birds
 [*]Cannon Tower
 [*]Gem Deer: Cast magical circle
@@ -24,6 +27,7 @@ Support binding key at bottom of Settings > Controls page.
 [*]Houndius Shootius
 [*]Ice Flingomatic
 [*]Flower, Rose, Evil Flower: simplified model of honey production range
+[*]Light Flower: regrowth
 [*]Gunpowder
 [*]Sign, Directional Sign: block Lunar/Shadow Rift
 [*]Magma: heat
@@ -37,6 +41,9 @@ Support binding key at bottom of Settings > Controls page.
 [*](Superior) Communal Kelp Dish: make Merms respawn faster
 [*]Gramophone, Shell Bell: tend Farm Plants
 [*]Pig King: The area around must be clear to initiate Wrestling Match
+[*]Rabbit Hole: regrowth
+[*]Red Mushroom, Green Mushroom, Blue Mushroom: regrowth
+[*]Reeds: regrowth
 [*]Polar Light: cold
 [*]Dwarf Star: heat
 [*]W.O.B.O.T. / W.I.N.bot

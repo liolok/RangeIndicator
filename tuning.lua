@@ -10,6 +10,13 @@ local WHITE = { 1, 1, 1, 1 }
 local data = {} -- circle(s) of all possible prefab
 local function Circle(radius, color) return { radius = radius, color = color or WHITE } end
 
+-- Cactus: regrowth
+data.cactus = Circle(20)
+data.oasis_cactus = Circle(20)
+-- Hollow Stump: regrowth
+data.catcoonden = Circle(20)
+-- Cave Banana Tree: regrowth
+data.cave_banana_tree = Circle(20)
 -- Cuckoo Spinwheel: block birds
 data.carnivalgame_wheelspin_station = Circle(4, YELLOW)
 -- Cannon Tower
@@ -29,6 +36,11 @@ data.firesuppressor = Circle(15)
 data.flower = Circle(42, YELLOW)
 data.flower_rose = data.flower
 data.flower_evil = data.flower
+-- Light Flower: regrowth
+data.flower_cave = Circle(20)
+data.flower_cave_double = Circle(20)
+data.flower_cave_triple = Circle(20)
+data.lightflier_flower = Circle(20)
 -- Gunpowder
 data.gunpowder = Circle(3, PINK)
 -- Sign, Directional Sign: block Lunar/Shadow Rift
@@ -67,6 +79,14 @@ data.singingshell_octave4 = Circle(2, GREEN)
 data.singingshell_octave5 = Circle(2, GREEN)
 -- Pig King: The area around must be clear to initiate Wrestling Match
 data.pigking = Circle(12)
+-- Rabbit Hole: regrowth
+data.rabbithole = Circle(20)
+-- Red Mushroom, Green Mushroom, Blue Mushroom: regrowth
+data.red_mushroom = Circle(20)
+data.green_mushroom = Circle(20)
+data.blue_mushroom = Circle(20)
+-- Reeds: regrowth
+data.reeds = Circle(20)
 -- Polar Light: cold
 data.staffcoldlight = Circle(8, BLUE)
 -- Dwarf Star: heat
