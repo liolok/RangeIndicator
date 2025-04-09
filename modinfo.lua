@@ -2,7 +2,8 @@ local function T(en, zh, zht) return ChooseTranslationTable({ en, zh = zh, zht =
 
 name = T('Range Indicator', '范围显示', '範圍顯示')
 author = T('takaoinari, adai1198, (TW)Eric, liolok', 'takaoinari、adai1198、(TW)Eric、李皓奇')
-version = '2025.04.08.1'
+local date = '2025-04-10'
+version = date .. '' -- for revision in same day
 description = T(
   'Show ranges by clicking, placing or hovering.',
   '通过点击、放置、光标覆盖来显示各种范围。',
@@ -11,7 +12,7 @@ description = T(
   'Support binding key at bottom of Settings > Controls page.',
   '支持在设置 > 控制页面底部实时调整键位绑定。',
   '支援在設定 > 控制頁面底部即時調整鍵位綁定。'
-) .. '\n󰀰 ' .. version -- Florid Postern（绚丽之门）
+) .. '\n󰀰 ' .. date -- Florid Postern（绚丽之门）
 api_version = 10
 dst_compatible = true
 client_only_mod = true
