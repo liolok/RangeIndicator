@@ -44,8 +44,8 @@ Click('carnivalgame_wheelspin_station', 4, 'yellow')
 -- Cannon Tower
 Click('crabking_cannontower', 15, 'pink')
 -- Gem Deer: Cast magical circle
-Click('deer_blue', 15, 'BLUE')
-Click('deer_red', 15, 'RED') -- DEER_GEMMED_CAST_MAX_RANGE rather than 12 from DEER_GEMMED_CAST_RANGE
+Click('deer_blue', 15, 'blue')
+Click('deer_red', 15, 'red') -- DEER_GEMMED_CAST_MAX_RANGE rather than 12 from DEER_GEMMED_CAST_RANGE
 -- Ice Crystaleyezer: freeze/light, generate Mini Glacier, cold
 Click('deerclopseyeball_sentryward', 3.5, 'cyan')
 Click('deerclopseyeball_sentryward', { 5, 12 })
