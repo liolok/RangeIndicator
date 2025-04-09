@@ -15,6 +15,7 @@ Support binding key at bottom of Settings > Controls page.
 [h2]Compatibility[/h2]
 [h3]Click to Toggle[/h3]
 [list]
+[*]Nautopilot and Nautopilot Beacon
 [*]Cactus: regrowth
 [*]Hollow Stump: regrowth
 [*]Cave Banana Tree: regrowth
@@ -57,6 +58,7 @@ Support binding key at bottom of Settings > Controls page.
 [/list]
 [h3]Place (Deploy/Build/Plant)[/h3]
 [list]
+[*]Nautopilot Kit
 [*]Cuckoo Spinwheel Kit: block birds
 [*]Scaled Furnace: heat
 [*]Anenemy Trap: attack, block birds
@@ -69,6 +71,7 @@ Support binding key at bottom of Settings > Controls page.
 [h3]Hover on Inventory Item[/h3]
 [list]
 [*]Books of Wickerbottom
+[*]Nautopilot Beacon
 [*]Gunpowder
 [*]Treeguard Idol
 [*]The Lazy Forager

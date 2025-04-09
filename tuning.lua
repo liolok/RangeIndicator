@@ -33,6 +33,8 @@ end
 
 local function Click(...) Circle('click', ...) end
 
+-- Nautopilot and Nautopilot Beacon
+Click({'boat_magnet', 'boat_magnet_beacon'}, 24, 'yellow')
 -- Cactus: regrowth
 Click({ 'cactus', 'oasis_cactus' }, 20)
 -- Hollow Stump: regrowth
@@ -128,6 +130,8 @@ Click('winona_spotlight', { 31, 37 }, 'cyan')
 
 local function Place(...) Circle('place', ...) end
 
+-- Nautopilot Kit
+Place('boat_magnet_kit', 24, 'yellow')
 -- Cuckoo Spinwheel: block birds
 Place('carnivalgame_wheelspin_kit', 4, 'yellow')
 -- Scaled Furnace: heat
@@ -170,6 +174,8 @@ if HOVER_BOOKS then
 end
 
 if HOVER_OTHER then
+  -- Nautopilot Beacon
+  Hover('boat_magnet_beacon', 24, 'yellow')
   -- Gunpowder
   Hover('gunpowder', 3, 'pink')
   -- Treeguard Idol
