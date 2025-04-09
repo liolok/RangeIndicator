@@ -34,7 +34,7 @@ end
 local function Click(...) Circle('click', ...) end
 
 -- Nautopilot and Nautopilot Beacon
-Click({'boat_magnet', 'boat_magnet_beacon'}, 24, 'yellow')
+Click({ 'boat_magnet', 'boat_magnet_beacon' }, 24, 'yellow')
 -- Cactus: regrowth
 Click({ 'cactus', 'oasis_cactus' }, 20)
 -- Hollow Stump: regrowth
