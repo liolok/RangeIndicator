@@ -41,19 +41,22 @@ local function CreateCircle(inst, radius, color) -- CreatePlacerRing(), prefabs/
   return circle
 end
 
-local function CreateCircles(inst, prefab)
-  local data = T.DATA[prefab or inst.prefab]
-  if not data then return end -- prefab not supported
-  if inst.circles then return end -- circle(s) already created
+local function CreateCircles(feature, inst, prefab)
+  local data = T.data[feature][prefab or inst.prefab]
+  if not data then return end -- no circles to create
+  if inst.circles then return end -- circles already created
   inst.circles = {}
-  if data.radius then data = { data } end -- only one circle
   for _, v in pairs(data) do
     table.insert(inst.circles, CreateCircle(inst, v.radius, v.color))
   end
 end
 
+local function Click(...) return CreateCircles('click', ...) end
+local function Place(...) return CreateCircles('place', ...) end
+local function Hover(...) return CreateCircles('hover', ...) end
+
 local function RemoveCircles(inst)
-  if not inst.circles then return end -- circle(s) not created yet
+  if not inst.circles then return end -- no circles to remove
   for _, v in ipairs(inst.circles) do
     if v:IsValid() then v:Remove() end
   end
@@ -87,13 +90,16 @@ local is_toggle_mod_key_enabled = false
 local is_holding_toggle_mod_key = false
 local waiting_for_double_click = {}
 
+local AUTO_HIDE = GetModConfigData('auto_hide')
+local DOUBLE_CLICK_WAIT = GetModConfigData('double_click_speed')
+
 local function Toggle()
   if not G.ThePlayer then return end
   if is_toggle_mod_key_enabled and not is_holding_toggle_mod_key then return end -- modifier key
   local entity = G.TheInput:GetWorldEntityUnderMouse()
   if not entity then return end
   local prefab = entity.prefab
-  if not T.CLICK.SUPPORT[prefab] then return end
+  if not T.data.click[prefab] then return end
   if prefab == 'storage_robot' or prefab == 'winona_storage_robot' then
     local as = entity.AnimState
     if not (as:IsCurrentAnimation('idle') or as:IsCurrentAnimation('idle_off')) then return end
@@ -105,10 +111,8 @@ local function Toggle()
     for _, e in ipairs(entities) do
       if e ~= entity and e.prefab == prefab then
         if entity.circles then
-          CreateCircles(e)
-          if T.CLICK.AUTO_HIDE then
-            e.remove_circles_task = e:DoTaskInTime(T.CLICK.AUTO_HIDE, function() RemoveCircles(e) end)
-          end
+          Click(e)
+          if AUTO_HIDE then e.remove_circles_task = e:DoTaskInTime(AUTO_HIDE, function() RemoveCircles(e) end) end
         else
           RemoveCircles(e)
         end
@@ -118,23 +122,23 @@ local function Toggle()
     if entity.circles then
       RemoveCircles(entity)
     else
-      CreateCircles(entity)
-      if T.CLICK.AUTO_HIDE then
-        entity.remove_circles_task = entity:DoTaskInTime(T.CLICK.AUTO_HIDE, function() RemoveCircles(entity) end)
+      Click(entity)
+      if AUTO_HIDE then
+        entity.remove_circles_task = entity:DoTaskInTime(AUTO_HIDE, function() RemoveCircles(entity) end)
       end
     end
     waiting_for_double_click[prefab] = G.ThePlayer:DoTaskInTime(
-      T.CLICK.DOUBLE_CLICK_WAIT,
+      DOUBLE_CLICK_WAIT,
       function() waiting_for_double_click[prefab] = false end
     )
   end
 end
 
 --------------------------------------------------------------------------------
--- Feature: Deploy
+-- Feature: Place
 
-for _, prefab in ipairs(T.DEPLOY) do
-  AddPrefabPostInit(prefab, CreateCircles)
+for prefab, _ in pairs(T.data.place) do
+  AddPrefabPostInit(prefab, Place)
 end
 
 --------------------------------------------------------------------------------
@@ -143,26 +147,26 @@ end
 local function HackData() -- dirty hack
   local player = G.ThePlayer
   local skill_tree = player and player.components and player.components.skilltreeupdater or nil
-  local heal_range = 8
-  if skill_tree and skill_tree:IsActivated('wortox_soulprotector_1') then heal_range = 11 end
-  if skill_tree and skill_tree:IsActivated('wortox_soulprotector_2') then heal_range = 14 end
-  T.DATA['wortox_soul'].radius = heal_range
+  local heal_radius = 8
+  if skill_tree and skill_tree:IsActivated('wortox_soulprotector_1') then heal_radius = 11 end
+  if skill_tree and skill_tree:IsActivated('wortox_soulprotector_2') then heal_radius = 14 end
+  T.data.hover.wortox_soul.heal.radius = heal_radius
 end
 
 local is_hover_mod_key_enabled = false
 local is_holding_hover_mod_key = false
 
 AddClassPostConstruct('widgets/hoverer', function(self)
-  if not (self.text and T.HOVER.ENABLE) then return end
+  if not (self.text and T.ENABLE_HOVER) then return end
 
   local OldSetString = self.text.SetString
   self.text.SetString = function(...)
     RemoveCircles(G.ThePlayer)
     local e = G.TheInput:GetHUDEntityUnderMouse()
     local prefab = e and e.widget and e.widget.parent and e.widget.parent.item and e.widget.parent.item.prefab or nil
-    if prefab and T.HOVER.SUPPORT[prefab] then
+    if prefab and T.data.hover[prefab] then
       if prefab == 'wortox_soul' then HackData() end
-      if not is_hover_mod_key_enabled or is_holding_hover_mod_key then CreateCircles(G.ThePlayer, prefab) end
+      if not is_hover_mod_key_enabled or is_holding_hover_mod_key then Hover(G.ThePlayer, prefab) end
     end
     return OldSetString(...)
   end
