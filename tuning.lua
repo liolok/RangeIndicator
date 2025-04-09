@@ -28,6 +28,9 @@ local function Circle(feature, prefabs, radius, color, name)
   end
 end
 
+TUNING.RANGE_INDICATOR.IS_STANDALONE = {}
+local function Standalone(prefab) TUNING.RANGE_INDICATOR.IS_STANDALONE[prefab] = true end
+
 --------------------------------------------------------------------------------
 -- Feature: Click to Toggle
 
@@ -79,6 +82,7 @@ Click({ 'lunarthrall_plant', 'grass', 'sapling', 'sapling_moon' }, 30, 'green')
 Click('monkeyqueen', 300, 'red')
 Click('monkeyqueen', 600, 'yellow')
 Click('monkeyqueen', 800, 'green')
+Standalone('monkeyqueen')
 -- Celestial Altar/Sanctum/Tribute/Fissure: max linking distance between two Lunar Altars
 Click({ 'moon_altar', 'moon_altar_astral', 'moon_altar_cosmic', 'moon_fissure' }, 20, 'black')
 -- Moon Stone: cold (with a Moon Caller's Staff), attract Hounds and Werepigs
@@ -106,6 +110,8 @@ Click('staffcoldlight', 8, 'blue')
 Click('stafflight', 10, 'red')
 -- W.O.B.O.T. / W.I.N.bot
 Click({ 'storage_robot', 'winona_storage_robot' }, 15, 'yellow')
+Standalone('storage_robot')
+Standalone('winona_storage_robot')
 -- Support Pillar, Dreadstone Pillar
 Click({ 'support_pillar', 'support_pillar_dreadstone' }, 40, 'yellow')
 -- Anenemy: attack, block birds
