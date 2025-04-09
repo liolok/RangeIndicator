@@ -192,3 +192,9 @@ if HOVER_OTHER then
   -- Soul: heal
   Hover('wortox_soul', 8, 'green', 'heal')
 end
+
+--------------------------------------------------------------------------------
+-- Console Commands
+
+GLOBAL.ri_click = Click
+GLOBAL.ri_hover = Hover
