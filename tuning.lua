@@ -144,7 +144,7 @@ Place('lightning_rod', 40, 'yellow')
 -- Mushlight, Glowcap: max light range
 Place('mushroom_light', 11.5, 'cyan')
 Place('mushroom_light2', 10.7, 'cyan')
--- Pinchin' Winch: canopy shade
+-- Pinchin' Winch: Above-Average Tree Trunk's canopy shade
 Place('winch', 22, 'green')
 
 --------------------------------------------------------------------------------
@@ -189,7 +189,7 @@ if HOVER_OTHER then
   Hover('storage_robot', 15, 'yellow')
   -- Umbralla: protection (while activated on the ground)
   Hover('voidcloth_umbrella', 16, 'green')
-  -- Soul: heal
+  -- Soul: heal after release
   Hover('wortox_soul', 8, 'green', 'heal')
 end
 

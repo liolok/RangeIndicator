@@ -1,4 +1,4 @@
-Show ranges by clicking, deploying or hovering.
+Show ranges by clicking, placing or hovering.
 Support binding key at bottom of Settings > Controls page.
 
 [h2]Features[/h2]
@@ -6,8 +6,7 @@ Support binding key at bottom of Settings > Controls page.
 [*]By default, use middle mouse button to click object to show/hide its range.
 (Configurable modifier key, double click to toggle ranges of all objects of the same kind.)
 [*]By default, press F5 to clear all ranges in your view.
-(Support binding key at bottom of Settings > Controls page)
-[*]Show range when deploy/build/plant.
+[*]Show range when placing (deploy/build/plant).
 (Geometric Placement mod's Evergreen sapling button takes control.)
 [*]Show range when inventory item hovered by cursor.
 (Configurable modifier key, could be partially/completely disabled.)
@@ -56,33 +55,51 @@ Support binding key at bottom of Settings > Controls page.
 [*]Winona's Catapult: min and max attack range
 [*]Winona's Spotlight: normal and "spacious" light range
 [/list]
-[h3]Deploy/Build/Plant[/h3]
+[h3]Place (Deploy/Build/Plant)[/h3]
 [list]
-[*]Cuckoo Spinwheel
-[*]Scaled Furnace
-[*]Anenemy Trap
+[*]Cuckoo Spinwheel Kit: block birds
+[*]Scaled Furnace: heat
+[*]Anenemy Trap: attack, block birds
 [*]Houndius Shootius
-[*]Sign
-[*]Directional Sign
+[*]Sign, Directional Sign: block Lunar/Shadow Rift
 [*]Lightning Rod
-[*]Mushlight
-[*]Glowcap
-[*]Pinchin' Winch
+[*]Mushlight, Glowcap: max light range
+[*]Pinchin' Winch: Above-Average Tree Trunk's canopy shade
 [/list]
-[h3]Hover[/h3]
+[h3]Hover on Inventory Item[/h3]
 [list]
 [*]Books of Wickerbottom
-[*]The Lazy Forager
-[*]Pan Flute
-[*]Polly Roger's Hat
-[*]Webby Whistle
-[*]Soul
 [*]Gunpowder
 [*]Treeguard Idol
-[*]Gramophone
-[*]Shell Bell
+[*]The Lazy Forager
+[*]Pan Flute
+[*]Gramophone, Shell Bell: tend Farm Plants
+[*]Polly Roger's Hat
+[*]Webby Whistle
 [*]W.O.B.O.T.
-[*]Umbralla
+[*]Umbralla: protection (while activated on the ground)
+[*]Soul: heal after release
+[/list]
+
+[h2]Console Commands[/h2]
+
+You can add temporary custom ranges to clicking and hovering features.
+
+[code]ri_click('tent', 4)[/code]
+
+[code]ri_hover('twig', 4)[/code]
+
+First argument is prefab; second is radius, 4 is one tile.
+Third argument is optional color defaults to white, valid values are:
+[list]
+[*]'black'
+[*]'blue' cold
+[*]'green'
+[*]'cyan' light
+[*]'red' heat
+[*]'pink' attack
+[*]'yellow'
+[*]'white' default
 [/list]
 
 [h2]Contributors[/h2]

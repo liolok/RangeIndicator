@@ -4,9 +4,9 @@ name = T('Range Indicator', '范围显示', '範圍顯示')
 author = T('takaoinari, adai1198, (TW)Eric, liolok', 'takaoinari、adai1198、(TW)Eric、李皓奇')
 version = '2025.04.08.1'
 description = T(
-  'Show ranges by clicking, deploying or hovering.',
-  '通过点击、部署、光标覆盖来显示各种范围。',
-  '透過點擊、部署、遊標覆蓋來顯示各種範圍。'
+  'Show ranges by clicking, placing or hovering.',
+  '通过点击、放置、光标覆盖来显示各种范围。',
+  '透過點擊、放置、遊標覆蓋來顯示各種範圍。'
 ) .. '\n' .. T(
   'Support binding key at bottom of Settings > Controls page.',
   '支持在设置 > 控制页面底部实时调整键位绑定。',
