@@ -75,6 +75,7 @@ Click('lava_pond', 10, 'red')
 Click('leif_idol', 10, 'green')
 -- Lightning Rod
 Click('lightning_rod', 40, 'yellow')
+Standalone('lightning_rod')
 -- Deadly Brightshade, Grass, (Lunar) Sapling: Brightshade aggro and protect infection
 Click({ 'lunarthrall_plant', 'grass', 'sapling', 'sapling_moon' }, 12, 'pink')
 Click({ 'lunarthrall_plant', 'grass', 'sapling', 'sapling_moon' }, 30, 'green')
@@ -114,6 +115,8 @@ Standalone('storage_robot')
 Standalone('winona_storage_robot')
 -- Support Pillar, Dreadstone Pillar
 Click({ 'support_pillar', 'support_pillar_dreadstone' }, 40, 'yellow')
+Standalone('support_pillar')
+Standalone('support_pillar_dreadstone')
 -- Anenemy: attack, block birds
 Click('trap_starfish', 1.5, 'pink')
 Click('trap_starfish', 4, 'yellow')
