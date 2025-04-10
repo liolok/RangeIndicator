@@ -30,6 +30,9 @@ local KEYBOARD = { KEY_QUOTE = 39, KEY_BACKQUOTE = 96 } -- for missing definitio
 
 -- emoji of Middle Mouse Button, Mouse Button 4 and 5 => code number
 local MOUSE = { ['\238\132\130'] = 1002, ['\238\132\131'] = 1005, ['\238\132\132'] = 1006 }
+MOUSE['\238\132\128'] = 1000 -- Left Mouse Button
+MOUSE['\238\132\129'] = 1001 -- Right Mouse Button
+local MOUSE_KEY = { '\238\132\128', '\238\132\129', '\238\132\130', '\238\132\131', '\238\132\132' }
 
 -- "KEY_*" and mouse button emoji => code number or nil
 local function Raw(key) return KEYBOARD[key] or MOUSE[key] or G.rawget(G, key) end
@@ -121,17 +124,17 @@ function BindButton:PopupKeyBindDialog()
     TheFrontEnd:GetSound():PlaySound('dontstarve/HUD/click_move')
   end
   local buttons = {}
-  for key, _ in pairs(MOUSE) do
+  for _, key in ipairs(MOUSE_KEY) do
     for _, option in ipairs(modinfo.keys) do
       if key == option.data then -- only add if existing in real options
-        table.insert(buttons, { text = key, cb = function() Setup(key) end })
+        table.insert(buttons, { style = 'small', text = key, cb = function() Setup(key) end })
         break
       end
     end
   end
-  table.insert(buttons, { text = S.CANCEL, cb = function() TheFrontEnd:PopScreen() end })
+  table.insert(buttons, { style = 'small', text = S.CANCEL, cb = function() TheFrontEnd:PopScreen() end })
   local text = S.CONTROL_SELECT .. '\n\n' .. string.format(S.DEFAULT_CONTROL_TEXT, Localize(self.default))
-  local dialog = PopupDialogScreen(self.title, text, buttons)
+  local dialog = PopupDialogScreen(self.title, text, buttons, 150, 'medium')
 
   dialog.OnRawKey = function(_, keycode, down)
     local key = Stringify(keycode)
