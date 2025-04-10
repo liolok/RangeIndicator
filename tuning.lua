@@ -14,16 +14,16 @@ TUNING.RANGE_INDICATOR = { data = { click = {}, place = {}, hover = {} } }
 local data = TUNING.RANGE_INDICATOR.data
 local tonumber = GLOBAL.tonumber
 local function Circle(feature, prefabs, radius, color, name)
-  local radius = tonumber(radius)
-  if not radius then return end
   local data = data[feature]
+  local prefab_suffix = feature == 'place' and '_placer' or ''
   for _, prefab in ipairs(type(prefabs) == 'table' and prefabs or { prefabs }) do
-    local prefab = prefab .. (feature == 'place' and '_placer' or '')
+    local prefab = prefab .. prefab_suffix
     if not data[prefab] then data[prefab] = {} end
     local data = data[prefab]
     local color = COLOR[color] or COLOR.white
     for _, r in ipairs(type(radius) == 'table' and radius or { radius }) do
-      data[name or (#data + 1)] = { radius = r, color = color }
+      local r = tonumber(r)
+      if r then data[name or (#data + 1)] = { radius = r, color = color } end
     end
   end
 end
