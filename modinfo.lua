@@ -32,7 +32,7 @@ local keyboard = { -- from STRINGS.UI.CONTROLSSCREEN.INPUTS[1] of strings.lua, n
 }
 local numpad = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'Period', 'Divide', 'Multiply', 'Minus', 'Plus' }
 local mouse = { '\238\132\128', '\238\132\129', '\238\132\130', '\238\132\131', '\238\132\132' } -- Mouse Button Left/Right/Middle/4/5
-local key_disabled = { description = 'Disabled', data = 'KEY_DISABLED' }
+local key_disabled = { description = T('Disabled', '禁用'), data = 'KEY_DISABLED' }
 keys = { key_disabled }
 for i = 1, #mouse do
   keys[#keys + 1] = { description = mouse[i], data = mouse[i] }
@@ -51,11 +51,8 @@ end
 
 local function Header(...) return { name = T(...), options = { { description = '', data = 0 } }, default = 0 } end
 
-local ON = { data = true, description = T('On', '开启', '開啟') }
-local OFF = { data = false, description = T('Off', '关闭', '關閉') }
-local TOGGLE = { ON, OFF }
-
 configuration_options = {
+  Header('Click to Toggle Ranges', '点击切换范围', '點擊切換範圍'),
   {
     name = 'toggle_modifier',
     label = T('Toggle Ranges Modifier Key', '切换范围组合键', '切換範組合鍵'),
