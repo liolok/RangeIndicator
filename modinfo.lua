@@ -3,7 +3,7 @@ local function T(en, zh, zht) return ChooseTranslationTable({ en, zh = zh, zht =
 name = T('Range Indicator', '范围显示', '範圍顯示')
 author = T('takaoinari, adai1198, (TW)Eric, liolok', 'takaoinari、adai1198、(TW)Eric、李皓奇')
 local date = '2025-04-11'
-version = date .. '' -- for revision in same day
+version = date .. '-1' -- for revision in same day
 description = T(
   'Show ranges by clicking, placing or hovering.',
   '通过点击、放置、光标覆盖来显示各种范围。',
