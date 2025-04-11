@@ -86,14 +86,12 @@ Support binding key at bottom of Settings > Controls page.
 
 [h2]Console Commands[/h2]
 
-You can add temporary custom ranges to clicking and hovering features.
+To show a custom range for entity under mouse or character, run command:
 
-[code]ri_click('tent', 4)[/code]
+[code]ri_show(radius, color)[/code]
 
-[code]ri_hover('twig', 4)[/code]
-
-First argument is prefab; second is radius, 4 is one tile.
-Third argument is optional color defaults to white, valid values are:
+First argument is radius, 4 is one tile.
+Second argument is optional color defaults to white, valid values are:
 [list]
 [*]'black'
 [*]'blue' cold
@@ -104,6 +102,12 @@ Third argument is optional color defaults to white, valid values are:
 [*]'yellow'
 [*]'white' default
 [/list]
+
+To hide these ranges, run command:
+
+[code]ri_hide()[/code]
+
+Or just press key bound to clear all ranges in your view.
 
 [h2]Contributors[/h2]
 冰汽, Huxi, takaoinari, adai1198, (TW)Eric, liolok

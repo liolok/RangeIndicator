@@ -9,10 +9,10 @@ local COLOR = {
   yellow = { 1, 1, 0, 1 },
   white  = { 1, 1, 1, 1 }, -- default
 }
+function GetColor(name) return GLOBAL.unpack(COLOR[name] or COLOR.white) end
 
 TUNING.RANGE_INDICATOR = { data = { click = {}, place = {}, hover = {} } }
 local data = TUNING.RANGE_INDICATOR.data
-local tonumber = GLOBAL.tonumber
 local function Circle(feature, prefabs, radius, color, name)
   local data = data[feature]
   local prefab_suffix = feature == 'place' and '_placer' or ''
@@ -20,10 +20,8 @@ local function Circle(feature, prefabs, radius, color, name)
     local prefab = prefab .. prefab_suffix
     if not data[prefab] then data[prefab] = {} end
     local data = data[prefab]
-    local color = COLOR[color] or COLOR.white
     for _, r in ipairs(type(radius) == 'table' and radius or { radius }) do
-      local r = tonumber(r)
-      if r then data[name or (#data + 1)] = { radius = r, color = color } end
+      data[name or (#data + 1)] = { radius = r, color = color }
     end
   end
 end
@@ -207,9 +205,3 @@ if HOVER_OTHER then
   -- Soul: heal after release
   Hover('wortox_soul', 8, 'green', 'heal')
 end
-
---------------------------------------------------------------------------------
--- Console Commands
-
-GLOBAL.ri_click = Click
-GLOBAL.ri_hover = Hover

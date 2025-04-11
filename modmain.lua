@@ -21,8 +21,8 @@ local function CreateCircle(inst, radius, color) -- CreatePlacerRing(), prefabs/
   as:SetScale(radius / 9.7, radius / 9.7) -- scale by catapult texture size
 
   -- credit: CarlZalph, https://forums.kleientertainment.com/forums/topic/69594-solved-how-to-make-character-glow-a-certain-color/#comment-804165
-  as:SetMultColour(G.unpack(color)) -- erase original color
-  as:SetAddColour(G.unpack(color))
+  as:SetMultColour(GetColor(color)) -- erase original color
+  as:SetAddColour(GetColor(color))
 
   circle.entity:SetCanSleep(false)
   circle.persists = false
@@ -51,10 +51,6 @@ local function CreateCircles(feature, inst, prefab)
   end
 end
 
-local function Click(...) return CreateCircles('click', ...) end
-local function Place(...) return CreateCircles('place', ...) end
-local function Hover(...) return CreateCircles('hover', ...) end
-
 local function RemoveCircles(inst)
   if not inst.circles then return end -- no circles to remove
   for _, v in ipairs(inst.circles) do
@@ -64,6 +60,26 @@ local function RemoveCircles(inst)
   if inst.remove_circles_task then
     inst.remove_circles_task:Cancel()
     inst.remove_circles_task = nil
+  end
+end
+
+--------------------------------------------------------------------------------
+-- Console Commands
+
+local circles_by_command = {}
+
+G.ri_show = function(radius, color)
+  if not (G.ThePlayer and G.TheInput) then return end
+  local entity = G.TheInput:GetWorldEntityUnderMouse() or G.ThePlayer
+  local radius = G.tonumber(radius)
+  if not radius then return end
+  table.insert(circles_by_command, CreateCircle(entity, radius, color))
+  print(string.format('[%s] Show range with radius %.1f for entity: %s', modinfo.name, radius, tostring(entity)))
+end
+
+G.ri_hide = function()
+  for _, v in ipairs(circles_by_command) do
+    if v:IsValid() then v:Remove() end
   end
 end
 
@@ -99,7 +115,7 @@ local function Toggle()
   local entity = G.TheInput:GetWorldEntityUnderMouse()
   if not entity then return end
   local prefab = entity.prefab
-  if not T.data.click[prefab] then return end
+  if not (T.data.click[prefab] or entity.circles) then return end
   if prefab == 'storage_robot' or prefab == 'winona_storage_robot' then
     local as = entity.AnimState
     if not (as:IsCurrentAnimation('idle') or as:IsCurrentAnimation('idle_off')) then return end
@@ -111,7 +127,7 @@ local function Toggle()
     for _, e in ipairs(entities) do
       if e ~= entity and e.prefab == prefab then
         if entity.circles then
-          Click(e)
+          CreateCircles('click', e)
           if AUTO_HIDE then e.remove_circles_task = e:DoTaskInTime(AUTO_HIDE, function() RemoveCircles(e) end) end
         else
           RemoveCircles(e)
@@ -122,7 +138,7 @@ local function Toggle()
     if entity.circles then
       RemoveCircles(entity)
     else
-      Click(entity)
+      CreateCircles('click', entity)
       if AUTO_HIDE then
         entity.remove_circles_task = entity:DoTaskInTime(AUTO_HIDE, function() RemoveCircles(entity) end)
       end
@@ -136,6 +152,8 @@ end
 
 --------------------------------------------------------------------------------
 -- Feature: Place
+
+local function Place(...) return CreateCircles('place', ...) end
 
 for prefab, _ in pairs(T.data.place) do
   AddPrefabPostInit(prefab, Place)
@@ -166,7 +184,7 @@ AddClassPostConstruct('widgets/hoverer', function(self)
     local prefab = e and e.widget and e.widget.parent and e.widget.parent.item and e.widget.parent.item.prefab or nil
     if prefab and T.data.hover[prefab] then
       if prefab == 'wortox_soul' then HackData() end
-      if not is_hover_mod_key_enabled or is_holding_hover_mod_key then Hover(G.ThePlayer, prefab) end
+      if not is_hover_mod_key_enabled or is_holding_hover_mod_key then CreateCircles('hover', G.ThePlayer, prefab) end
     end
     return OldSetString(...)
   end
