@@ -185,15 +185,20 @@ if HOVER_OTHER then
   Hover('boat_magnet_beacon', 24, 'yellow')
   -- Gunpowder
   Hover('gunpowder', 3, 'pink')
+  -- Beefalo Horn: gather Beefalo, tend Farm Plants
+  Hover('horn', 25, 'green')
   -- Treeguard Idol
   Hover('leif_idol', 10, 'green')
+  -- One-man Band: befriend Pigs or Bunnymen, tend Farm Plants
+  Hover('onemanband', 12, 'green')
   -- The Lazy Forager
   Hover('orangeamulet', 4)
   -- Pan Flute
   Hover('panflute', 15, 'green')
-  -- Gramophone, Shell Bell: tend Farm Plants
+  -- Gramophone, Shell Bell, Strident Trident, Gnarwail Horn: tend Farm Plants
   Hover('phonograph', 8, 'green')
   Hover({ 'singingshell_octave3', 'singingshell_octave4', 'singingshell_octave5' }, 2, 'green')
+  Hover({ 'trident', 'gnarwail_horn' }, 20, 'green')
   -- Polly Roger's Hat
   Hover('polly_rogershat', 15)
   -- Webby Whistle

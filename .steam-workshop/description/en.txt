@@ -73,10 +73,12 @@ Support binding key at bottom of Settings > Controls page.
 [*]Books of Wickerbottom
 [*]Nautopilot Beacon
 [*]Gunpowder
+[*]Beefalo Horn: gather Beefalo, tend Farm Plants
 [*]Treeguard Idol
+[*]One-man Band: befriend Pigs or Bunnymen, tend Farm Plants
 [*]The Lazy Forager
 [*]Pan Flute
-[*]Gramophone, Shell Bell: tend Farm Plants
+[*]Gramophone, Shell Bell, Strident Trident, Gnarwail Horn: tend Farm Plants
 [*]Polly Roger's Hat
 [*]Webby Whistle
 [*]W.O.B.O.T.
