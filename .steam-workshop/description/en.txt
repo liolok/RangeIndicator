@@ -28,7 +28,7 @@ Support binding key at bottom of Settings > Controls page.
 [*]Ice Flingomatic
 [*]Flower, Rose, Evil Flower: simplified model of honey production range
 [*]Light Flower: regrowth
-[*]Gunpowder
+[*]Gunpowder, Slurtle Slime: Explosion
 [*]Sign, Directional Sign: block Lunar/Shadow Rift
 [*]Magma: heat
 [*]Treeguard Idol
@@ -72,7 +72,7 @@ Support binding key at bottom of Settings > Controls page.
 [list]
 [*]Books of Wickerbottom
 [*]Nautopilot Beacon
-[*]Gunpowder
+[*]Gunpowder, Slurtle Slime: Explosion
 [*]Beefalo Horn: gather Beefalo, tend Farm Plants
 [*]Treeguard Idol
 [*]One-man Band: befriend Pigs or Bunnymen, tend Farm Plants

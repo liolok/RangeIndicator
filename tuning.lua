@@ -63,8 +63,8 @@ Click('firesuppressor', 15)
 Click({ 'flower', 'flower_rose', 'flower_evil' }, 42, 'yellow')
 -- Light Flower: regrowth
 Click({ 'flower_cave', 'flower_cave_double', 'flower_cave_triple', 'lightflier_flower' }, 20)
--- Gunpowder
-Click('gunpowder', 3, 'pink')
+-- Gunpowder, Slurtle Slime: Explosion
+Click({ 'gunpowder', 'slurtleslime' }, 3, 'pink')
 -- Sign, Directional Sign: block Lunar/Shadow Rift
 Click({ 'homesign', 'arrowsign_post' }, 24)
 -- Magma: heat
@@ -183,8 +183,8 @@ end
 if HOVER_OTHER then
   -- Nautopilot Beacon
   Hover('boat_magnet_beacon', 24, 'yellow')
-  -- Gunpowder
-  Hover('gunpowder', 3, 'pink')
+  -- Gunpowder, Slurtle Slime: Explosion
+  Hover({ 'gunpowder', 'slurtleslime' }, 3, 'pink')
   -- Beefalo Horn: gather Beefalo, tend Farm Plants
   Hover('horn', 25, 'green')
   -- Treeguard Idol
