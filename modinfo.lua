@@ -125,9 +125,23 @@ configuration_options = {
     name = 'hover_books',
     label = T('Books', '书籍', '書籍'),
     hover = T(
-      'Show range of Wickerbottom books?',
-      '是否显示薇克巴顿（老奶奶/图书管理员）书籍的范围？',
-      '是否顯示薇克巴頓（阿嬤/圖書館管理員）書籍的範圍？'
+      "Show range of Wickerbottom's Books?",
+      '是否显示薇克巴顿（老奶奶/图书管理员）的书籍范围？',
+      '是否顯示薇克巴頓（阿嬤/圖書館管理員）的書籍範圍？'
+    ),
+    options = {
+      { data = true, description = T('Show', '显示', '顯示') },
+      { data = false, description = T("Don't Show", '不显示', '不顯示') },
+    },
+    default = true,
+  },
+  {
+    name = 'hover_songs',
+    label = T('Battle Calls', '战斗号子', '戰鬥號子'),
+    hover = T(
+      "Show range of Wigfrid's Battle Calls?",
+      '是否显示薇格弗德（女武神）的战斗号子范围？',
+      '是否顯示薇格弗德（女武神）的戰鬥號子範圍？'
     ),
     options = {
       { data = true, description = T('Show', '显示', '顯示') },
@@ -141,7 +155,7 @@ configuration_options = {
     hover = T(
       'Show range of other items?\nSuch as Gunpowder, Pan Flute, Treeguard Idol...',
       '是否显示其它物品的范围？\n比如火药、排箫、树精守卫雕像……',
-      '是否顯示其它物品的範圍？\n如火藥、排簫、樹精守衛雕像……'
+      '是否顯示其它物品的範圍？\n比如火藥、排簫、樹精守衛雕像……'
     ),
     options = {
       { data = true, description = T('Show', '显示', '顯示') },

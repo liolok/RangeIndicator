@@ -162,8 +162,9 @@ Place('winch', 22, 'green')
 -- Feature: Hover
 
 local HOVER_BOOKS = GetModConfigData('hover_books')
+local HOVER_SONGS = GetModConfigData('hover_songs')
 local HOVER_OTHER = GetModConfigData('hover_other')
-TUNING.RANGE_INDICATOR.ENABLE_HOVER = HOVER_BOOKS or HOVER_OTHER
+TUNING.RANGE_INDICATOR.ENABLE_HOVER = HOVER_BOOKS or HOVER_SONGS or HOVER_OTHER
 
 local function Hover(...) Circle('hover', ...) end
 
@@ -178,6 +179,21 @@ if HOVER_BOOKS then
   Hover({ 'book_research_station', 'book_temperature' }, 16, 'green')
   Hover('book_tentacles', { 3, 8 }, 'pink')
   Hover('book_web', 6) -- BOOK_WEB_GROUND_RADIUS
+end
+
+if HOVER_SONGS then
+  Hover({
+    'battlesong_durability',
+    'battlesong_healthgain',
+    'battlesong_sanitygain',
+    'battlesong_sanityaura',
+    'battlesong_fireresistance',
+    'battlesong_shadowaligned',
+    'battlesong_lunaraligned',
+    'battlesong_instant_taunt',
+    'battlesong_instant_panic',
+    'battlesong_instant_revive',
+  }, 12, 'green')
 end
 
 if HOVER_OTHER then

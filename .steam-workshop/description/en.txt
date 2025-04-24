@@ -70,7 +70,8 @@ Support binding key at bottom of Settings > Controls page.
 [/list]
 [h3]Hover on Inventory Item[/h3]
 [list]
-[*]Books of Wickerbottom
+[*]Wickerbottom's Books
+[*]Wigfrid's Battle Calls
 [*]Nautopilot Beacon
 [*]Gunpowder, Slurtle Slime: Explosion
 [*]Beefalo Horn: gather Beefalo, tend Farm Plants
