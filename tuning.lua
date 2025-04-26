@@ -84,6 +84,9 @@ Click('monkeyqueen', 800, 'green')
 Standalone('monkeyqueen')
 -- Celestial Altar/Sanctum/Tribute/Fissure: max linking distance between two Lunar Altars
 Click({ 'moon_altar', 'moon_altar_astral', 'moon_altar_cosmic', 'moon_fissure' }, 20, 'black')
+-- Mysterious Energy, Lunar Siphonator: max range of meteors when spawning Celestial Champion
+Click('moon_altar_link', 19, 'pink')
+Click({ 'moon_device_construction1', 'moon_device_construction2', 'moon_device_construction3' }, 19, 'pink')
 -- Moon Stone: cold (with a Moon Caller's Staff), attract Hounds and Werepigs
 Click('moonbase', 8, 'blue')
 Click('moonbase', 30)
@@ -152,6 +155,8 @@ Place('eyeturret_item', 18, 'pink')
 Place({ 'homesign', 'arrowsign_post' }, 24)
 -- Lightning Rod
 Place('lightning_rod', 40, 'yellow')
+-- Incomplete Experiment: max range of meteors when spawning Celestial Champion
+Place('moon_device_construction1', 19, 'pink')
 -- Mushlight, Glowcap: max light range
 Place('mushroom_light', 11.5, 'cyan')
 Place('mushroom_light2', 10.7, 'cyan')

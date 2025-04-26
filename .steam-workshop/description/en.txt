@@ -36,6 +36,7 @@ Support binding key at bottom of Settings > Controls page.
 [*]Deadly Brightshade, Grass, (Lunar) Sapling: Brightshade aggro and protect infection
 [*]Queen of Moon Quay: Risk of Pirate Raid, Red/Yellow/Green for High/Med/Low.
 [*]Celestial Altar/Sanctum/Tribute/Fissure: max linking distance between two Lunar Altars
+[*]Mysterious Energy, Lunar Siphonator: max range of meteors when spawning Celestial Champion
 [*]Moon Stone: cold (with a Moon Caller's Staff), attract Hounds and Werepigs
 [*]Mushlight, Glowcap: max light range
 [*](Superior) Communal Kelp Dish: make Merms respawn faster
@@ -65,6 +66,7 @@ Support binding key at bottom of Settings > Controls page.
 [*]Houndius Shootius
 [*]Sign, Directional Sign: block Lunar/Shadow Rift
 [*]Lightning Rod
+[*]Incomplete Experiment: max range of meteors when spawning Celestial Champion
 [*]Mushlight, Glowcap: max light range
 [*]Pinchin' Winch: Above-Average Tree Trunk's canopy shade
 [/list]
