@@ -75,6 +75,7 @@ Support binding key at bottom of Settings > Controls page.
 [*]Wickerbottom's Books
 [*]Wigfrid's Battle Calls
 [*]Nautopilot Beacon
+[*]Luxury Fan: cool down body temperature, put out fire
 [*]Gunpowder, Slurtle Slime: Explosion
 [*]Beefalo Horn: gather Beefalo, tend Farm Plants
 [*]Treeguard Idol

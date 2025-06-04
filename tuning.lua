@@ -204,6 +204,8 @@ end
 if HOVER_OTHER then
   -- Nautopilot Beacon
   Hover('boat_magnet_beacon', 24, 'yellow')
+  -- Luxury Fan: cool down body temperature, put out fire
+  Hover('featherfan', 7, 'green')
   -- Gunpowder, Slurtle Slime: Explosion
   Hover({ 'gunpowder', 'slurtleslime' }, 3, 'pink')
   -- Beefalo Horn: gather Beefalo, tend Farm Plants
