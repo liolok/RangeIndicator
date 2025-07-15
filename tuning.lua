@@ -124,7 +124,7 @@ Click('trap_starfish', 4, 'yellow')
 -- Umbralla: protection (while activated on the ground)
 Click('voidcloth_umbrella', 16, 'green')
 -- Terramite: work
-Click('wagdrone_rolling', 20, 'green')
+Click('wagdrone_rolling', 20, 'yellow')
 Standalone('wagdrone_rolling')
 -- Varg: howl and summon hounds
 Click('warg', 30) -- SPAWN_DIST from components/hounded.lua
@@ -234,7 +234,7 @@ if HOVER_OTHER then
   -- Umbralla: protection (while activated on the ground)
   Hover('voidcloth_umbrella', 16, 'green')
   -- Terramite: work
-  Hover('wagdrone_rolling', 20, 'green')
+  Hover('wagdrone_rolling', 20, 'yellow')
   -- Soul: heal after release
   Hover('wortox_soul', 8, 'green', 'heal')
 end
