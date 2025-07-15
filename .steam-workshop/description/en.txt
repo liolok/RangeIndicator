@@ -51,6 +51,7 @@ Support binding key at bottom of Settings > Controls page.
 [*]Support Pillar, Dreadstone Pillar
 [*]Anenemy: attack, block birds
 [*]Umbralla: protection (while activated on the ground)
+[*]Terramite: work
 [*]Varg: howl and summon hounds
 [*]Killer Bee Hive
 [*]Great Tree Trunk, Above-Average Tree Trunk, Knobbly Tree and Nut, Pinchin' Winch: canopy shade
@@ -87,6 +88,7 @@ Support binding key at bottom of Settings > Controls page.
 [*]Webby Whistle
 [*]W.O.B.O.T.
 [*]Umbralla: protection (while activated on the ground)
+[*]Terramite: work
 [*]Soul: heal after release
 [/list]
 

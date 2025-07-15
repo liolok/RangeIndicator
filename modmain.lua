@@ -109,6 +109,15 @@ local waiting_for_double_click = {}
 local AUTO_HIDE = GetModConfigData('auto_hide')
 local DOUBLE_CLICK_WAIT = GetModConfigData('double_click_speed')
 
+local function IsInAnim(inst, ...)
+  local anim_state = inst and inst.AnimState
+  if not (anim_state and type(anim_state.IsCurrentAnimation) == 'function') then return end
+
+  for _, anim in ipairs({ ... }) do
+    if anim_state:IsCurrentAnimation(anim) then return true end
+  end
+end
+
 local function Toggle()
   if not G.ThePlayer then return end
   if is_toggle_mod_key_enabled and not is_holding_toggle_mod_key then return end -- modifier key
@@ -117,8 +126,10 @@ local function Toggle()
   local prefab = entity.prefab
   if not (T.data.click[prefab] or entity.circles) then return end
   if prefab == 'storage_robot' or prefab == 'winona_storage_robot' then
-    local as = entity.AnimState
-    if not (as:IsCurrentAnimation('idle') or as:IsCurrentAnimation('idle_off')) then return end
+    if not IsInAnim(entity, 'idle', 'idle_off') then return end
+  end
+  if prefab == 'wagdrone_rolling' then
+    if not IsInAnim(entity, 'turn_on', 'idle1', 'idle1_wobble') then return end
   end
   if waiting_for_double_click[prefab] then
     waiting_for_double_click[prefab] = false
