@@ -57,6 +57,8 @@ Click('deerclopseyeball_sentryward', 35, 'blue')
 Click('dragonflyfurnace', 9.5, 'red')
 -- Houndius Shootius
 Click('eyeturret', 18, 'pink')
+-- T.I.N.G.L.E. Node
+Click('fence_electric', 10, 'yellow')
 -- Ice Flingomatic
 Click('firesuppressor', 15)
 -- Flower, Rose, Evil Flower: simplified model of honey production range

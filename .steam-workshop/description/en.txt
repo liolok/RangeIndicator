@@ -25,6 +25,7 @@ Support binding key at bottom of Settings > Controls page.
 [*]Ice Crystaleyezer: freeze/light, generate Mini Glacier, cold
 [*]Scaled Furnace: heat
 [*]Houndius Shootius
+[*]T.I.N.G.L.E. Node
 [*]Ice Flingomatic
 [*]Flower, Rose, Evil Flower: simplified model of honey production range
 [*]Light Flower: regrowth
