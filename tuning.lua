@@ -120,6 +120,8 @@ Standalone('winona_storage_robot')
 Click({ 'support_pillar', 'support_pillar_dreadstone' }, 40, 'yellow')
 Standalone('support_pillar')
 Standalone('support_pillar_dreadstone')
+-- Shadow Thurible: prevent bone cage
+Click('thurible', 6, 'green')
 -- Anenemy: attack, block birds
 Click('trap_starfish', 1.5, 'pink')
 Click('trap_starfish', 4, 'yellow')
@@ -233,6 +235,8 @@ if HOVER_OTHER then
   Hover('spider_whistle', 16, 'green')
   -- W.O.B.O.T.
   Hover('storage_robot', 15, 'yellow')
+  -- Shadow Thurible: prevent bone cage
+  Hover('thurible', 6, 'green')
   -- Umbralla: protection (while activated on the ground)
   Hover('voidcloth_umbrella', 16, 'green')
   -- Terramite: work

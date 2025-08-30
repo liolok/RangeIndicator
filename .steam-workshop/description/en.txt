@@ -50,6 +50,7 @@ Support binding key at bottom of Settings > Controls page.
 [*]Dwarf Star: heat
 [*]W.O.B.O.T. / W.I.N.bot
 [*]Support Pillar, Dreadstone Pillar
+[*]Shadow Thurible: prevent bone cage
 [*]Anenemy: attack, block birds
 [*]Umbralla: protection (while activated on the ground)
 [*]Terramite: work
@@ -88,6 +89,7 @@ Support binding key at bottom of Settings > Controls page.
 [*]Polly Roger's Hat
 [*]Webby Whistle
 [*]W.O.B.O.T.
+[*]Shadow Thurible: prevent bone cage
 [*]Umbralla: protection (while activated on the ground)
 [*]Terramite: work
 [*]Soul: heal after release
