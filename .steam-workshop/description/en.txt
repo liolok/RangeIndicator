@@ -90,6 +90,7 @@ Support binding key at bottom of Settings > Controls page.
 [*]Webby Whistle
 [*]W.O.B.O.T.
 [*]Shadow Thurible: prevent bone cage
+[*]Gloomerang: Attack
 [*]Umbralla: protection (while activated on the ground)
 [*]Terramite: work
 [*]Soul: heal after release

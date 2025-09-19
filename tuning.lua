@@ -237,6 +237,8 @@ if HOVER_OTHER then
   Hover('storage_robot', 15, 'yellow')
   -- Shadow Thurible: prevent bone cage
   Hover('thurible', 6, 'green')
+  -- Gloomerang: Attack
+  Hover('voidcloth_boomerang', 10, 'pink')
   -- Umbralla: protection (while activated on the ground)
   Hover('voidcloth_umbrella', 16, 'green')
   -- Terramite: work
