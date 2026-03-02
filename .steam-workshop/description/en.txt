@@ -46,6 +46,7 @@ Support binding key at bottom of Settings > Controls page.
 [*]Rabbit Hole: regrowth
 [*]Red Mushroom, Green Mushroom, Blue Mushroom: regrowth
 [*]Reeds: regrowth
+[*]Friendly Scarecrow: replace Crow with Canary
 [*]Polar Light: cold
 [*]Dwarf Star: heat
 [*]W.O.B.O.T. / W.I.N.bot
@@ -71,6 +72,7 @@ Support binding key at bottom of Settings > Controls page.
 [*]Lightning Rod
 [*]Incomplete Experiment: max range of meteors when spawning Celestial Champion
 [*]Mushlight, Glowcap: max light range
+[*]Friendly Scarecrow: replace Crow with Canary
 [*]Pinchin' Winch: Above-Average Tree Trunk's canopy shade
 [/list]
 [h3]Hover on Inventory Item[/h3]

@@ -108,6 +108,8 @@ Click('rabbithole', 20)
 Click({ 'red_mushroom', 'green_mushroom', 'blue_mushroom' }, 20)
 -- Reeds: regrowth
 Click('reeds', 20)
+-- Friendly Scarecrow: replace Crow with Canary
+Click('scarecrow', 12)
 -- Polar Light: cold
 Click('staffcoldlight', 8, 'blue')
 -- Dwarf Star: heat
@@ -167,6 +169,8 @@ Place('moon_device_construction1', 19, 'pink')
 -- Mushlight, Glowcap: max light range
 Place('mushroom_light', 11.5, 'cyan')
 Place('mushroom_light2', 10.7, 'cyan')
+-- Friendly Scarecrow: replace Crow with Canary
+Place('scarecrow', 12)
 -- Pinchin' Winch: Above-Average Tree Trunk's canopy shade
 Place('winch', 22, 'green')
 
