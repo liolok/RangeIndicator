@@ -97,8 +97,8 @@ Click('mushroom_light', 11.5, 'cyan')
 Click('mushroom_light2', 10.7, 'cyan')
 -- (Superior) Communal Kelp Dish: make Merms respawn faster
 Click({ 'offering_pot', 'offering_pot_upgraded' }, 7, 'green')
--- Gramophone, Shell Bell: tend Farm Plants
-Click('phonograph', 8, 'green')
+-- Gramophone, B.U.D.D.Y., Shell Bell: tend Farm Plants
+Click({ 'phonograph', 'w_radio' }, 8, 'green')
 Click({ 'singingshell_octave3', 'singingshell_octave4', 'singingshell_octave5' }, 2, 'green')
 -- Pig King: The area around must be clear to initiate Wrestling Match
 Click('pigking', 12)
@@ -229,8 +229,8 @@ if HOVER_OTHER then
   Hover('orangeamulet', 4)
   -- Pan Flute
   Hover('panflute', 15, 'green')
-  -- Gramophone, Shell Bell, Strident Trident, Gnarwail Horn: tend Farm Plants
-  Hover('phonograph', 8, 'green')
+  -- Gramophone, B.U.D.D.Y., Shell Bell, Strident Trident, Gnarwail Horn: tend Farm Plants
+  Hover({ 'phonograph', 'w_radio' }, 8, 'green')
   Hover({ 'singingshell_octave3', 'singingshell_octave4', 'singingshell_octave5' }, 2, 'green')
   Hover({ 'trident', 'gnarwail_horn' }, 20, 'green')
   -- Polly Roger's Hat

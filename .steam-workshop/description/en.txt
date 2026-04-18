@@ -41,7 +41,7 @@ Support binding key at bottom of Settings > Controls page.
 [*]Moon Stone: cold (with a Moon Caller's Staff), attract Hounds and Werepigs
 [*]Mushlight, Glowcap: max light range
 [*](Superior) Communal Kelp Dish: make Merms respawn faster
-[*]Gramophone, Shell Bell: tend Farm Plants
+[*]Gramophone, B.U.D.D.Y., Shell Bell: tend Farm Plants
 [*]Pig King: The area around must be clear to initiate Wrestling Match
 [*]Rabbit Hole: regrowth
 [*]Red Mushroom, Green Mushroom, Blue Mushroom: regrowth
@@ -87,7 +87,7 @@ Support binding key at bottom of Settings > Controls page.
 [*]One-man Band: befriend Pigs or Bunnymen, tend Farm Plants
 [*]The Lazy Forager
 [*]Pan Flute
-[*]Gramophone, Shell Bell, Strident Trident, Gnarwail Horn: tend Farm Plants
+[*]Gramophone, B.U.D.D.Y., Shell Bell, Strident Trident, Gnarwail Horn: tend Farm Plants
 [*]Polly Roger's Hat
 [*]Webby Whistle
 [*]W.O.B.O.T.
