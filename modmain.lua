@@ -4,6 +4,22 @@ modimport('tuning') -- load data and config
 local G = GLOBAL
 local T = TUNING.RANGE_INDICATOR
 
+-- shortcut for code like `ThePlayer and ThePlayer.replica and ThePlayer.replica.inventory`
+local function Get(head_node, ...)
+  local current_node = head_node
+  for _, key in ipairs({ ... }) do
+    if not current_node then return end
+
+    local next_node = current_node[key]
+    if type(next_node) == 'function' then -- for code like `ThePlayer.replica.inventory:GetActiveItem()`
+      current_node = next_node(current_node) -- this could be `false`/`nil` so avoid assigning with `and or`
+    else
+      current_node = next_node
+    end
+  end
+  return current_node
+end
+
 local function CreateCircle(inst, radius, color) -- CreatePlacerRing(), prefabs/winona_catapult.lua
   local circle = G.CreateEntity()
   local tf = circle.entity:AddTransform()
@@ -191,8 +207,9 @@ AddClassPostConstruct('widgets/hoverer', function(self)
   local OldSetString = self.text.SetString
   self.text.SetString = function(...)
     RemoveCircles(G.ThePlayer)
-    local e = G.TheInput:GetHUDEntityUnderMouse()
-    local prefab = e and e.widget and e.widget.parent and e.widget.parent.item and e.widget.parent.item.prefab or nil
+    local item_slot = Get(G, 'TheInput', 'GetHUDEntityUnderMouse', 'widget', 'parent', 'parent')
+    local item_hovered = Get(item_slot, 'tile', 'item') or Get(item_slot, 'item')
+    local prefab = Get(item_hovered, 'prefab')
     if prefab and T.data.hover[prefab] then
       if prefab == 'wortox_soul' then HackData() end
       if not is_hover_mod_key_enabled or is_holding_hover_mod_key then CreateCircles('hover', G.ThePlayer, prefab) end
