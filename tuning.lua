@@ -65,6 +65,8 @@ Click('firesuppressor', 15)
 Click({ 'flower', 'flower_rose', 'flower_evil' }, 42, 'yellow')
 -- Light Flower: regrowth
 Click({ 'flower_cave', 'flower_cave_double', 'flower_cave_triple', 'lightflier_flower' }, 20)
+-- Icker Preserve with Scorching Sunfish: keep warm in range of Ice Crystaleyezer
+Click('gelblob_storage', 9.2582, 'red')
 -- Gunpowder, Slurtle Slime: Explosion
 Click({ 'gunpowder', 'slurtleslime' }, 3, 'pink')
 -- Sign, Directional Sign: block Lunar/Shadow Rift
@@ -160,6 +162,8 @@ Place('dug_trap_starfish', 1.5, 'pink')
 Place('dug_trap_starfish', 4, 'yellow')
 -- Houndius Shootius
 Place('eyeturret_item', 18, 'pink')
+-- Icker Preserve with Scorching Sunfish: keep warm in range of Ice Crystaleyezer
+Place('gelblob_storage_kit', 9.2582, 'red')
 -- Sign, Directional Sign: block Lunar/Shadow Rift
 Place({ 'homesign', 'arrowsign_post' }, 24)
 -- Lightning Rod

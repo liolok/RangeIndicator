@@ -29,6 +29,7 @@ Support binding key at bottom of Settings > Controls page.
 [*]Ice Flingomatic
 [*]Flower, Rose, Evil Flower: simplified model of honey production range
 [*]Light Flower: regrowth
+[*]Icker Preserve with Scorching Sunfish: keep warm in range of Ice Crystaleyezer
 [*]Gunpowder, Slurtle Slime: Explosion
 [*]Sign, Directional Sign: block Lunar/Shadow Rift
 [*]Magma: heat
@@ -67,6 +68,7 @@ Support binding key at bottom of Settings > Controls page.
 [*]Cuckoo Spinwheel Kit: block birds
 [*]Scaled Furnace: heat
 [*]Anenemy Trap: attack, block birds
+[*]Icker Preserve with Scorching Sunfish: keep warm in range of Ice Crystaleyezer
 [*]Houndius Shootius
 [*]Sign, Directional Sign: block Lunar/Shadow Rift
 [*]Lightning Rod
