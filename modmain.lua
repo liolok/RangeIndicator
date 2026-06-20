@@ -8,7 +8,7 @@ local T = TUNING.RANGE_INDICATOR
 local function Get(head_node, ...)
   local current_node = head_node
   for _, key in ipairs({ ... }) do
-    if type(current_node) ~= 'table' then return end
+    if type(current_node) ~= 'table' and type(current_node) ~= 'userdata' then return end
 
     local next_node = current_node[key]
     if type(next_node) == 'function' then -- for code like `ThePlayer.replica.inventory:GetActiveItem()`
