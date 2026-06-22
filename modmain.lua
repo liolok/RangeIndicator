@@ -51,7 +51,7 @@ local function CreateCircle(inst, radius, color) -- CreatePlacerRing(), prefabs/
   as:Hide('inner')
   as:SetLightOverride(1)
   as:SetOrientation(G.ANIM_ORIENTATION.OnGround)
-  as:SetLayer(G.LAYER_BACKGROUND)
+  as:SetLayer(G.LAYER_WORLD)
   as:SetSortOrder(1)
 
   return circle
