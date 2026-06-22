@@ -58,7 +58,8 @@ Support binding key at bottom of Settings > Controls page.
 [*]Terramite: work
 [*]Varg: howl and summon hounds
 [*]Killer Bee Hive
-[*]Great Tree Trunk, Above-Average Tree Trunk, Knobbly Tree and Nut, Pinchin' Winch: canopy shade
+[*]Great Tree Trunk, Above-Average Tree Trunk, Knobbly Tree and Nut: canopy shade
+[*]Pinchin' Winch: salvage, Above-Average Tree Trunk's canopy shade
 [*]Winona's Catapult: min and max attack range
 [*]Winona's Spotlight: normal and "spacious" light range
 [/list]
@@ -75,7 +76,7 @@ Support binding key at bottom of Settings > Controls page.
 [*]Incomplete Experiment: max range of meteors when spawning Celestial Champion
 [*]Mushlight, Glowcap: max light range
 [*]Friendly Scarecrow: replace Crow with Canary
-[*]Pinchin' Winch: Above-Average Tree Trunk's canopy shade
+[*]Pinchin' Winch: salvage, Above-Average Tree Trunk's canopy shade
 [/list]
 [h3]Hover on Inventory Item[/h3]
 [list]

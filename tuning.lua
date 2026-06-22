@@ -138,9 +138,11 @@ Standalone('wagdrone_rolling')
 Click('warg', 30) -- SPAWN_DIST from components/hounded.lua
 -- Killer Bee Hive
 Click('wasphive', 10, 'pink')
--- Great Tree Trunk, Above-Average Tree Trunk, Knobbly Tree and Nut, Pinchin' Winch: canopy shade
+-- Great Tree Trunk, Above-Average Tree Trunk, Knobbly Tree and Nut: canopy shade
 Click('watertree_pillar', 28, 'green')
-Click({ 'oceantree_pillar', 'oceantree', 'oceantreenut', 'winch' }, 22, 'green')
+Click({ 'oceantree_pillar', 'oceantree', 'oceantreenut' }, 22, 'green')
+-- Pinchin' Winch: salvage, Above-Average Tree Trunk's canopy shade
+Click('winch', { 2, 22 }, 'green')
 -- Winona's Catapult: min and max attack range
 Click('winona_catapult', { 6, 15 }, 'pink')
 -- Winona's Spotlight: normal and "spacious" light range
@@ -175,8 +177,8 @@ Place('mushroom_light', 11.5, 'cyan')
 Place('mushroom_light2', 10.7, 'cyan')
 -- Friendly Scarecrow: replace Crow with Canary
 Place('scarecrow', 12)
--- Pinchin' Winch: Above-Average Tree Trunk's canopy shade
-Place('winch', 22, 'green')
+-- Pinchin' Winch: salvage, Above-Average Tree Trunk's canopy shade
+Place('winch', { 2, 22 }, 'green')
 
 --------------------------------------------------------------------------------
 -- Feature: Hover
