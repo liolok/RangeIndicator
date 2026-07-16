@@ -81,6 +81,8 @@ Standalone('lightning_rod')
 -- Deadly Brightshade, Grass, (Lunar) Sapling: Brightshade aggro and protect infection
 Click({ 'lunarthrall_plant', 'grass', 'sapling', 'sapling_moon' }, 12, 'pink')
 Click({ 'lunarthrall_plant', 'grass', 'sapling', 'sapling_moon' }, 30, 'green')
+-- Lureplant: Attract Wild Fire
+Click('lureplant', 25)
 -- Queen of Moon Quay: Risk of Pirate Raid, Red/Yellow/Green for High/Med/Low.
 Click('monkeyqueen', 300, 'red')
 Click('monkeyqueen', 600, 'yellow')
@@ -170,6 +172,8 @@ Place('gelblob_storage_kit', 9, 'red')
 Place({ 'homesign', 'arrowsign_post' }, 24)
 -- Lightning Rod
 Place('lightning_rod', 40, 'yellow')
+-- Lureplant: Attract Wild Fire
+Place('lureplantbulb', 25)
 -- Incomplete Experiment: max range of meteors when spawning Celestial Champion
 Place('moon_device_construction1', 19, 'pink')
 -- Mushlight, Glowcap: max light range

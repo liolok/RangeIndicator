@@ -36,6 +36,7 @@ Support binding key at bottom of Settings > Controls page.
 [*]Treeguard Idol
 [*]Lightning Rod
 [*]Deadly Brightshade, Grass, (Lunar) Sapling: Brightshade aggro and protect infection
+[*]Lureplant: Attract Wild Fire
 [*]Queen of Moon Quay: Risk of Pirate Raid, Red/Yellow/Green for High/Med/Low.
 [*]Celestial Altar/Sanctum/Tribute/Fissure: max linking distance between two Lunar Altars
 [*]Mysterious Energy, Lunar Siphonator: max range of meteors when spawning Celestial Champion
@@ -73,6 +74,7 @@ Support binding key at bottom of Settings > Controls page.
 [*]Houndius Shootius
 [*]Sign, Directional Sign: block Lunar/Shadow Rift
 [*]Lightning Rod
+[*]Lureplant: Attract Wild Fire
 [*]Incomplete Experiment: max range of meteors when spawning Celestial Champion
 [*]Mushlight, Glowcap: max light range
 [*]Friendly Scarecrow: replace Crow with Canary
