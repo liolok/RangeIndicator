@@ -49,6 +49,7 @@ Support binding key at bottom of Settings > Controls page.
 [*]Red Mushroom, Green Mushroom, Blue Mushroom: regrowth
 [*]Reeds: regrowth
 [*]Friendly Scarecrow: replace Crow with Canary
+[*]Spider Den (Tier 3): Attack back (other seasons and Spring), spawn Spider Queen with player nearby.
 [*]Polar Light: cold
 [*]Dwarf Star: heat
 [*]W.O.B.O.T. / W.I.N.bot

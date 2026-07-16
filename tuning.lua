@@ -114,6 +114,8 @@ Click({ 'red_mushroom', 'green_mushroom', 'blue_mushroom' }, 20)
 Click('reeds', 20)
 -- Friendly Scarecrow: replace Crow with Canary
 Click('scarecrow', 12)
+-- Spider Den (Tier 3): Attack back (other seasons and Spring), spawn Spider Queen with player nearby.
+Click('spiderden_3', { 12, 16, 30 })
 -- Polar Light: cold
 Click('staffcoldlight', 8, 'blue')
 -- Dwarf Star: heat
