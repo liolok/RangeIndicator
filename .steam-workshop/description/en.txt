@@ -57,7 +57,7 @@ Support binding key at bottom of Settings > Controls page.
 [*]Anenemy: attack, block birds
 [*]Umbralla: protection (while activated on the ground)
 [*]Terramite: work
-[*]Varg: howl and summon hounds
+[*]Varg， Possessed Varg: howl and summon hounds
 [*]Killer Bee Hive
 [*]Great Tree Trunk, Above-Average Tree Trunk, Knobbly Tree and Nut: canopy shade
 [*]Pinchin' Winch: salvage, Above-Average Tree Trunk's canopy shade

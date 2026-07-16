@@ -136,8 +136,8 @@ Click('voidcloth_umbrella', 16, 'green')
 -- Terramite: work
 Click('wagdrone_rolling', 20, 'yellow')
 Standalone('wagdrone_rolling')
--- Varg: howl and summon hounds
-Click('warg', 30) -- SPAWN_DIST from components/hounded.lua
+-- Varg， Possessed Varg: howl and summon hounds
+Click({ 'warg', 'mutatedwarg' }, 30) -- SPAWN_DIST from components/hounded.lua
 -- Killer Bee Hive
 Click('wasphive', 10, 'pink')
 -- Great Tree Trunk, Above-Average Tree Trunk, Knobbly Tree and Nut: canopy shade
