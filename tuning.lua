@@ -130,6 +130,8 @@ Standalone('winona_storage_robot')
 Click({ 'support_pillar', 'support_pillar_dreadstone' }, 40, 'yellow')
 Standalone('support_pillar')
 Standalone('support_pillar_dreadstone')
+-- Tentacle: pop up, attack
+Click('tentacle', { 4, 4.5 }, 'pink')
 -- Shadow Thurible: prevent bone cage
 Click('thurible', 6, 'green')
 -- Anenemy: attack, block birds

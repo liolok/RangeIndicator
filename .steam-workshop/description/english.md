@@ -54,6 +54,7 @@ Support binding key at bottom of Settings > Controls page.
 - Dwarf Star: heat
 - W.O.B.O.T. / W.I.N.bot
 - Support Pillar, Dreadstone Pillar
+- Tentacle: pop up, attack
 - Shadow Thurible: prevent bone cage
 - Anenemy: attack, block birds
 - Umbralla: protection (while activated on the ground)
