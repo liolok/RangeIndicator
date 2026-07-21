@@ -27,7 +27,7 @@ Support binding key at bottom of Settings > Controls page.
 - Houndius Shootius
 - T.I.N.G.L.E. Node
 - Ice Flingomatic
-- Flower, Rose, Evil Flower: simplified model of honey production range
+- Flower, Rose, Evil Flower: Butterfly spawn range, simplified model of honey production range
 - Light Flower: regrowth
 - Icker Preserve with Scorching Sunfish: keep warm in range of Ice Crystaleyezer
 - Gunpowder, Slurtle Slime: Explosion

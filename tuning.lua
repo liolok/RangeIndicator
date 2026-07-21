@@ -61,7 +61,8 @@ Click('eyeturret', 18, 'pink')
 Click('fence_electric', 10, 'yellow')
 -- Ice Flingomatic
 Click('firesuppressor', 15)
--- Flower, Rose, Evil Flower: simplified model of honey production range
+-- Flower, Rose, Evil Flower: Butterfly spawn range, simplified model of honey production range
+Click({ 'flower', 'flower_rose', 'flower_evil' }, { 6, 25 }, 'green')
 Click({ 'flower', 'flower_rose', 'flower_evil' }, 42, 'yellow')
 -- Light Flower: regrowth
 Click({ 'flower_cave', 'flower_cave_double', 'flower_cave_triple', 'lightflier_flower' }, 20)
