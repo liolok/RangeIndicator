@@ -124,6 +124,12 @@ Second argument is optional color defaults to white, valid values are:
 - 'yellow'
 - 'white' default
 
+To show custom ranges for all of the same kind of entity under mouse, run command:
+
+```
+ri_show_all(radius, color)
+```
+
 To hide these ranges, run command:
 
 ```

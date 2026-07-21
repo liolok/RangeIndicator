@@ -124,6 +124,12 @@ ri_show(radius, color)
 - 'yellow'
 - 'white' 預設
 
+想要給遊標下方物體所有同類顯示自訂範圍，可以使用指令：
+
+```
+ri_show_all(radius, color)
+```
+
 想要隱藏這些範圍，可以使用指令：
 
 ```

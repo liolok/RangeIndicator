@@ -124,6 +124,12 @@ ri_show(radius, color)
 - 'yellow'
 - 'white' 默认
 
+想要给光标下方物体所有同类显示自定义范围，可以使用指令：
+
+```
+ri_show_all(radius, color)
+```
+
 想要隐藏这些范围，可以使用指令：
 
 ```

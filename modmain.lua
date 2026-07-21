@@ -90,7 +90,19 @@ G.ri_show = function(radius, color)
   local radius = G.tonumber(radius)
   if not radius then return end
   table.insert(circles_by_command, CreateCircle(entity, radius, color))
-  print(string.format('[%s] Show range with radius %.1f for entity: %s', modinfo.name, radius, tostring(entity)))
+  print(string.format('[%s] Show range with radius %.2f for entity: %s', modinfo.name, radius, tostring(entity)))
+end
+
+G.ri_show_all = function(radius, color)
+  local entity = G.TheInput and G.TheInput:GetWorldEntityUnderMouse()
+  local prefab = entity and entity.prefab
+  local radius = G.tonumber(radius)
+  if not (prefab and radius) then return end
+  local entities = G.TheSim and G.TheSim:FindEntities(x, y, z, 80, nil, { 'FX', 'NOCLICK', 'DECOR', 'INLIMBO' })
+  for _, e in ipairs(entities) do
+    if e and e.prefab == prefab then table.insert(circles_by_command, CreateCircle(e, radius, color)) end
+  end
+  print(string.format('[%s] Show ranges with radius %.2f for prefab %s', modinfo.name, radius, prefab))
 end
 
 G.ri_hide = function()
