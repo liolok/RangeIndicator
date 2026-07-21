@@ -32,7 +32,7 @@ Support binding key at bottom of Settings > Controls page.
 - Icker Preserve with Scorching Sunfish: keep warm in range of Ice Crystaleyezer
 - Gunpowder, Slurtle Slime: Explosion
 - Sign, Directional Sign: block Lunar/Shadow Rift
-- Magma: heat
+- Magma: burn, heat
 - Treeguard Idol
 - Lightning Rod
 - Deadly Brightshade, Grass, (Lunar) Sapling: Brightshade aggro and protect infection

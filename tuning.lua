@@ -72,7 +72,8 @@ Click('gelblob_storage', 9, 'red')
 Click({ 'gunpowder', 'slurtleslime' }, 3, 'pink')
 -- Sign, Directional Sign: block Lunar/Shadow Rift
 Click({ 'homesign', 'arrowsign_post' }, 24)
--- Magma: heat
+-- Magma: burn, heat
+Click('lava_pond', 3.25, 'pink')
 Click('lava_pond', 10, 'red')
 -- Treeguard Idol
 Click('leif_idol', 10, 'green')
